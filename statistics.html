@@ -1,0 +1,1742 @@
+---
+layout: statistics
+title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
+---
+
+<style>
+    /* ── UR Brand Palette ────────────────────────────────────────
+       Primary:   #001E5F (Navy), #FFD82B (Dandelion Yellow)
+       Secondary: #021BC3 (Meliora Blue), #0066FD (Arpeggio Azure)
+                  #B7D3FF (Wondrous Sky), #FFC200 (Yellowjacket Gold)
+       Tertiary:  #707070 (Charcoal), #E8E8E8 (Meridian Silver)
+    ──────────────────────────────────────────────────────────── */
+    :root {
+      --navy:       #001E5F;
+      --dandelion:  #FFD82B;
+      --meliora:    #021BC3;
+      --azure:      #0066FD;
+      --sky:        #B7D3FF;
+      --gold:       #FFC200;
+      --lemon:      #FFE95F;
+      --butter:     #FFF3B1;
+      --charcoal:   #707070;
+      --silver:     #E8E8E8;
+      --white:      #FFFFFF;
+
+      --bar-h: 58px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', Aptos, Arial, sans-serif;
+      background: var(--white);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* ── FIXED TOP BAR ─────────────────────────────────────────── */
+    .top-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--bar-h);
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      padding: 0 28px;
+      gap: 20px;
+      z-index: 200;
+      border-bottom: 4px solid var(--dandelion);
+    }
+
+    .top-bar .back-link {
+      color: var(--dandelion);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .top-bar .back-link:hover { text-decoration: underline; }
+
+    .top-bar .bar-title {
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 700;
+      flex: 1;
+    }
+
+    /* Section nav dots — one per section, top-right */
+    .section-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .section-dots a {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      display: block;
+      transition: background 0.2s;
+    }
+    .section-dots a.active,
+    .section-dots a:hover { background: var(--dandelion); }
+
+    /* Gold progress bar */
+    .progress-bar {
+      position: fixed;
+      top: var(--bar-h);
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--dandelion);
+      z-index: 201;
+      transition: width 0.08s linear;
+    }
+
+    /* ── HERO ──────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: calc(var(--bar-h) + 40px) 40px 60px;
+    }
+
+    .hero .eyebrow {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dandelion);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.15;
+      max-width: 800px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      color: var(--dandelion);
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--sky);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .hero .scroll-hint {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .scroll-hint .arrow {
+      width: 24px;
+      height: 24px;
+      border-right: 2px solid rgba(255,255,255,0.3);
+      border-bottom: 2px solid rgba(255,255,255,0.3);
+      transform: rotate(45deg);
+      animation: bounce 1.6s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50%       { transform: rotate(45deg) translateY(6px); }
+    }
+
+    /* ── INTRO OVERLAY ─────────────────────────────────────────── */
+    .intro-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+      z-index: 150;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    body.has-scrolled .intro-overlay {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .intro-overlay h1 {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.15;
+      max-width: 800px;
+      margin-bottom: 32px;
+    }
+
+    .intro-overlay h1 span {
+      color: var(--dandelion);
+    }
+
+    .intro-overlay .intro-hint {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    .intro-hint .arrow {
+      width: 28px;
+      height: 28px;
+      border-right: 2px solid rgba(255,255,255,0.4);
+      border-bottom: 2px solid rgba(255,255,255,0.4);
+      transform: rotate(45deg);
+      animation: bounce 1.6s ease-in-out infinite;
+    }
+
+    /* ── MEASUREMENT SCENE (pencil + ruler) ─────────────────────── */
+    .measurement-scene {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .pencil-image, .ruler-image {
+      position: absolute;
+      object-fit: contain;
+    }
+
+    .pencil-image {
+      height: 380px;
+      left: -200px;
+      bottom: -80px;
+      animation: pencil-scroll 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .ruler-image {
+      height: 480px;
+      right: -240px;
+      bottom: -100px;
+      animation: ruler-scroll 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation-delay: 0.14s;
+    }
+
+    @keyframes pencil-scroll {
+      from { left: -200px; opacity: 0; }
+      to   { left: -40px; opacity: 1; }
+    }
+
+    @keyframes ruler-scroll {
+      from { right: -240px; opacity: 0; }
+      to   { right: -60px; opacity: 1; }
+    }
+
+    /* Ruler jiggle at pencil measurement point */
+    .ruler-image.jiggle {
+      animation: ruler-jiggle 0.4s ease-in-out infinite;
+    }
+
+    @keyframes ruler-jiggle {
+      0%, 100% { transform: translateX(0); }
+      50%      { transform: translateX(2px); }
+    }
+
+    /* ── FIXED BACKGROUND STAGE ────────────────────────────────────
+       The stage sits behind everything and never moves.
+       Cards float above it and animate as the user scrolls.
+       Background color transitions as the user scrolls through sections.
+    ──────────────────────────────────────────────────────────── */
+    .stage {
+      position: fixed;
+      inset: 0;
+      background: #0d1a3a;   /* default: deep navy */
+      z-index: 0;
+      transition: background-color 0.6s ease;
+    }
+
+    /* Section-specific background colors */
+    .stage.bg-sec-why  { background: #0d1a3a; }  /* Section 1 (Why): deep navy */
+    .stage.bg-sec-temp { background: #1a2a5a; }  /* Section 2 (Temperature): brighter blue */
+    .stage.bg-sec-grav { background: #051030; }  /* Section 3 (Gravity): very dark navy */
+    .stage.bg-sec-meas { background: #253060; }  /* Section 4 (Measurement): medium blue-navy */
+    .stage.bg-sec-acc  { background: #1a1f4a; }  /* Section 5 (Accuracy): cool deep blue */
+    .stage.bg-sec-dist { background: #0d2a4a; }  /* Section 6 (Distribution): slate blue */
+    .stage.bg-sec-std  { background: #1a2840; }  /* Section 7 (Std Dev): indigo blue */
+    .stage.bg-sec-sem  { background: #0f1f35; }  /* Section 8 (SEM): deep slate blue */
+    .stage.bg-sec-prop { background: #2a1a4a; }  /* Section 9 (Propagation): purple-navy */
+    .stage.bg-sec-summary { background: #0d1f35; }  /* Section 10 (Summary): cool slate blue */
+    .stage.bg-sec-poisson { background: #1a2535; }  /* Section 11 (Poisson): muted navy-blue */
+
+    /* Subtle radial glow in the center of the stage */
+    .stage::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%,
+                    rgba(0,102,253,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── SCROLL STOP ────────────────────────────────────────────────
+       Each stop is a tall scroll container (300vh).
+       The inner .sticky-frame pins to the viewport for the middle
+       200vh of that scroll, giving plenty of time to see the cards
+       before they exit.
+
+       How the exit works: JS reads how far past the "hold zone"
+       the user has scrolled, then applies scale() + opacity to
+       .card-pair, shrinking the cards into the distance.
+    ──────────────────────────────────────────────────────────── */
+    .stop {
+      position: relative;
+      height: 300vh;          /* tall enough to scroll through */
+      z-index: 1;
+    }
+
+    .sticky-frame {
+      position: sticky;
+      top: var(--bar-h);
+      height: calc(100vh - var(--bar-h));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;       /* clips cards during slide-in */
+      pointer-events: none;   /* let scroll pass through to the stop */
+    }
+
+    /* The pair of cards — JS drives scale + opacity on exit */
+    .card-pair {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      width: 100%;
+      max-width: 1100px;
+      padding: 0 48px;
+      pointer-events: all;
+      /* transform-origin center so scale() shrinks toward the middle */
+      transform-origin: center center;
+      transition: transform 0.08s linear, opacity 0.08s linear;
+    }
+
+    /* ── CARDS ──────────────────────────────────────────────────────
+       Each card is a floating rectangle with rounded corners and a
+       layered shadow — close tight shadow for depth, far diffuse
+       shadow for the hover/lift illusion.
+    ──────────────────────────────────────────────────────────── */
+    .panel {
+      flex: 1;
+      max-width: 460px;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 48px 44px;
+      border-radius: 20px;
+      box-shadow:
+        0  4px  16px rgba(0,  0,  0, 0.25),
+        0 28px  60px rgba(0,  0,  0, 0.40);
+
+      /* Entry animation — JS adds .stop-active to the .stop,
+         which triggers the transition below */
+      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity  0.9s ease;
+    }
+
+    /* Cards start off-screen left/right, opacity 0 */
+    .panel-left  { transform: translateX(-120px); opacity: 0; }
+    .panel-right { transform: translateX( 120px); opacity: 0; }
+
+    /* When the stop becomes active, cards slide to center */
+    .stop-active .panel-left,
+    .stop-active .panel-right {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    /* Right card follows left with a slight delay */
+    .stop-active .panel-right { transition-delay: 0.14s; }
+
+    /* ── CARD COLOR VARIANTS ────────────────────────────────────── */
+    .panel.navy      { background: var(--navy);      color: var(--white); }
+    .panel.dandelion { background: var(--dandelion);  color: var(--navy); }
+    .panel.sky       { background: var(--sky);        color: var(--navy); }
+    .panel.butter    { background: var(--butter);     color: var(--navy); }
+    .panel.white     { background: var(--white);      color: var(--navy); }
+    .panel.meliora   { background: var(--meliora);    color: var(--white); }
+
+    /* ── PANEL TYPOGRAPHY ──────────────────────────────────────── */
+    .panel .section-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 16px;
+    }
+
+    .panel h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .panel .headline-stat {
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 20px;
+    }
+
+    .panel p {
+      font-size: 1rem;
+      line-height: 1.75;
+      opacity: 0.88;
+      max-width: 480px;
+    }
+
+    .panel p + p { margin-top: 12px; }
+
+    /* Accent bar above heading */
+    .panel .accent-bar {
+      width: 48px;
+      height: 5px;
+      border-radius: 3px;
+      margin-bottom: 20px;
+    }
+
+    .panel.navy .accent-bar      { background: var(--dandelion); }
+    .panel.dandelion .accent-bar { background: var(--navy); }
+    .panel.sky .accent-bar       { background: var(--navy); }
+    .panel.butter .accent-bar    { background: var(--navy); }
+    .panel.silver .accent-bar    { background: var(--navy); }
+    .panel.white .accent-bar     { background: var(--azure); }
+    .panel.meliora .accent-bar   { background: var(--dandelion); }
+
+    /* ── GRAPHIC PANEL ─────────────────────────────────────────── */
+    /*
+      The "picture" side. Contains SVG illustrations drawn inline.
+      Centered, with enough padding to breathe.
+    */
+    .panel.graphic {
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .panel.graphic svg {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+    }
+
+    /* ── NEWSPAPER CLIPPING style for poll example ─────────────── */
+    .clipping {
+      background: var(--white);
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 24px 28px;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.08);
+      max-width: 380px;
+    }
+
+    .clipping .paper-name {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      border-bottom: 2px solid var(--navy);
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+
+    .clipping .headline {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.3;
+      margin-bottom: 14px;
+    }
+
+    /* Poll bars */
+    .poll-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 0.88rem;
+    }
+
+    .poll-label { width: 60px; font-weight: 600; color: var(--navy); }
+
+    .poll-bar-wrap {
+      flex: 1;
+      height: 22px;
+      background: var(--silver);
+      border-radius: 3px;
+      overflow: visible;
+      position: relative;
+    }
+
+    .poll-bar {
+      height: 100%;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--white);
+      position: relative;
+    }
+
+    /* Error bar overlay */
+    .poll-bar::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 140%;
+      background: var(--charcoal);
+    }
+
+    /* Horizontal error whiskers */
+    .poll-bar::before {
+      content: '';
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 2px;
+      background: var(--charcoal);
+    }
+
+    .clipping .caption {
+      font-size: 0.75rem;
+      color: var(--charcoal);
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    .clipping .verdict {
+      margin-top: 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--meliora);
+      background: var(--sky);
+      border-radius: 3px;
+      padding: 6px 10px;
+    }
+
+    /* ── TEMPERATURE graphic ───────────────────────────────────── */
+    .temp-graphic {
+      background: var(--white);
+      border-radius: 6px;
+      padding: 20px 24px;
+      max-width: 380px;
+      box-shadow: 0 2px 16px rgba(0,30,95,0.1);
+    }
+
+    .temp-graphic .tg-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+
+    .temp-bar-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .temp-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+    }
+
+    .temp-year { width: 36px; font-weight: 700; color: var(--navy); }
+
+    .temp-bar {
+      height: 24px;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--white);
+      position: relative;
+      transition: width 0.6s ease;
+    }
+
+    /* ── MOBILE ────────────────────────────────────────────────── */
+    @media (max-width: 720px) {
+      /* On mobile the sticky + tall-scroll effect is too awkward;
+         fall back to a simple stacked scroll */
+      .stop        { height: auto; }
+      .sticky-frame {
+        position: relative;
+        top: auto;
+        height: auto;
+        flex-direction: column;
+        padding: 48px 20px;
+        gap: 24px;
+        overflow: visible;
+      }
+      .card-pair {
+        flex-direction: column;
+        padding: 0;
+        gap: 24px;
+      }
+      .panel {
+        max-width: 100%;
+        padding: 36px 28px;
+      }
+      .panel-left, .panel-right {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      .stop-active .panel-left,
+      .stop-active .panel-right {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</style>
+
+
+  <!-- ── Intro overlay (fades on scroll) ──────────────────────── -->
+  <div class="intro-overlay" id="intro">
+    <h1>Statistics<br>&amp; <span>Error Analysis</span></h1>
+    <div class="intro-hint">
+      <span>Scroll to explore</span>
+      <div class="arrow"></div>
+    </div>
+  </div>
+
+  <!-- ── Fixed top bar ──────────────────────────────────────────── -->
+  <div class="top-bar">
+    <a class="back-link" href="index.html">← Physics Labs</a>
+    <span class="bar-title">Error Analysis &amp; Statistics</span>
+    <nav class="section-dots" aria-label="Jump to section">
+      <a href="#hero"       title="Introduction"></a>
+      <a href="#sec-why"    title="Why it matters"></a>
+      <a href="#sec-temp"   title="Temperature"></a>
+      <a href="#sec-grav"   title="Gravity"></a>
+      <a href="#sec-meas"   title="Measurement Basics"></a>
+      <a href="#sec-acc"    title="Accuracy vs. Precision"></a>
+      <a href="#sec-dist"   title="Distributions & Mean"></a>
+      <a href="#sec-std"    title="Standard Deviation"></a>
+      <a href="#sec-sem"    title="Error in the Mean"></a>
+      <a href="#sec-prop"   title="Error Propagation"></a>
+      <a href="#sec-summary" title="Summary"></a>
+      <a href="#sec-poisson" title="Poisson Statistics"></a>
+    </nav>
+  </div>
+  <div class="progress-bar" id="progress"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <p class="eyebrow">PHY 113 · 114 · 121 · 123 · 181</p>
+    <h1>Error Analysis<br>&amp; <span>Statistics</span></h1>
+    <p>Every measurement you make has an uncertainty.
+       Understanding that uncertainty is what separates
+       a result from a guess.</p>
+    <div class="scroll-hint">
+      <span>Scroll to explore</span>
+      <div class="arrow"></div>
+    </div>
+  </section>
+
+  <!-- Fixed background stage — stays put while everything scrolls -->
+  <div class="stage"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       STOP 1 — Poll example
+       Structure:
+         .stop          — tall scroll container (300vh)
+           .sticky-frame  — pins to viewport while scrolling through
+             .card-pair   — the two floating cards side by side
+               .panel-left  — slides in from the left
+               .panel-right — slides in from the right
+
+       JS drives two things:
+         1. Adds .stop-active when the stop enters view → cards fly in
+         2. As the user scrolls past, shrinks + fades .card-pair
+            via scale() and opacity so cards appear to recede into
+            the distance before the next stop arrives.
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="stop" id="sec-why">
+    <div class="sticky-frame">
+      <div class="card-pair">
+
+        <!-- LEFT: newspaper clipping graphic -->
+        <div class="panel graphic sky panel-left">
+          <div class="clipping">
+            <div class="paper-name">Daily Polling Report &mdash; October 2024</div>
+            <div class="headline">"Harris surges ahead of Trump in new national poll!"</div>
+            <div class="poll-row">
+              <span class="poll-label">Harris</span>
+              <div class="poll-bar-wrap">
+                <div class="poll-bar" style="width:49%; background:var(--meliora);">49%</div>
+              </div>
+            </div>
+            <div class="poll-row">
+              <span class="poll-label">Trump</span>
+              <div class="poll-bar-wrap">
+                <div class="poll-bar" style="width:46%; background:var(--charcoal);">46%</div>
+              </div>
+            </div>
+            <p class="caption">Each bar carries a ±3% margin of error</p>
+            <p class="verdict">⚠ The difference (3%) equals the margin of error — this "surge" is statistically meaningless.</p>
+          </div>
+        </div>
+
+        <!-- RIGHT: text -->
+        <div class="panel navy panel-right">
+          <div class="accent-bar"></div>
+          <p class="section-tag">Why It Matters</p>
+          <h2>Headlines lie.<br>Errors don't.</h2>
+          <p>A poll shows Harris at $49\% \pm 3\%$ and Trump at $46\% \pm 3\%$.
+             The headline screams a "surge" — but the two numbers
+             overlap completely within their uncertainties.</p>
+          <p>Without understanding <em>error</em>, you cannot tell
+             signal from noise. This applies in politics, climate
+             science, medicine — and every physics lab you will ever do.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       STOP 2 — Temperature example
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="stop" id="sec-temp">
+    <div class="sticky-frame">
+      <div class="card-pair">
+
+        <!-- LEFT: text -->
+        <div class="panel white panel-left">
+          <div class="accent-bar"></div>
+          <p class="section-tag">Why It Matters</p>
+          <h2>Is 2024 really the hottest year on record?</h2>
+          <p>Global average temperature in 2024 was reported as
+             $+1.60^\text{o}\text{C}$ above pre-industrial levels — about $0.12^\text{o}\text{C}$
+             warmer than the previous record set in 2023.</p>
+          <p>But the instrumental uncertainty in global temperature
+             averages is roughly $\pm0.10^\text{o}\text{C}$. That $0.12^\text{o}\text{C}$ difference
+             barely exceeds the measurement error.</p>
+          <p>The record is likely real — but quantifying uncertainty
+             is precisely how science makes that claim responsibly.</p>
+        </div>
+
+        <!-- RIGHT: temperature bar graphic -->
+        <div class="panel graphic dandelion panel-right">
+          <div class="temp-graphic">
+            <div class="tg-label">Global temperature anomaly (°C above pre-industrial)</div>
+            <div class="temp-bar-wrap">
+              <div class="temp-row">
+                <span class="temp-year">2021</span>
+                <div class="temp-bar" style="width:72%; background:var(--azure);">+1.12 °C</div>
+              </div>
+              <div class="temp-row">
+                <span class="temp-year">2022</span>
+                <div class="temp-bar" style="width:75%; background:var(--azure);">+1.15 °C</div>
+              </div>
+              <div class="temp-row">
+                <span class="temp-year">2023</span>
+                <div class="temp-bar" style="width:90%; background:var(--meliora);">+1.48 °C</div>
+              </div>
+              <div class="temp-row">
+                <span class="temp-year">2024</span>
+                <div class="temp-bar" style="width:100%; background:var(--navy);">+1.60 ± 0.10 °C</div>
+              </div>
+            </div>
+            <p style="font-size:0.72rem; color:var(--charcoal); margin-top:10px;">
+              Source: Copernicus Climate Change Service, 2025
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       STOP 3 — Gravity measurement / error bars
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="stop" id="sec-grav">
+    <div class="sticky-frame">
+      <div class="card-pair">
+
+        <!-- LEFT: SVG error bar diagram -->
+        <div class="panel graphic butter panel-left">
+          <svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg"
+               aria-label="Two measurements of g with overlapping error bars">
+            <line x1="60" y1="220" x2="300" y2="220" stroke="#001E5F" stroke-width="2"/>
+            <text x="80"  y="238" font-size="11" fill="#001E5F" text-anchor="middle">9.6</text>
+            <text x="140" y="238" font-size="11" fill="#001E5F" text-anchor="middle">9.7</text>
+            <text x="200" y="238" font-size="11" fill="#001E5F" text-anchor="middle">9.8</text>
+            <text x="260" y="238" font-size="11" fill="#001E5F" text-anchor="middle">9.9</text>
+            <text x="180" y="252" font-size="10" fill="#707070" text-anchor="middle">g (m/s²)</text>
+            <line x1="80"  y1="218" x2="80"  y2="222" stroke="#001E5F" stroke-width="1.5"/>
+            <line x1="140" y1="218" x2="140" y2="222" stroke="#001E5F" stroke-width="1.5"/>
+            <line x1="200" y1="218" x2="200" y2="222" stroke="#001E5F" stroke-width="1.5"/>
+            <line x1="260" y1="218" x2="260" y2="222" stroke="#001E5F" stroke-width="1.5"/>
+            <line x1="208" y1="30" x2="208" y2="220" stroke="#021BC3" stroke-width="1"
+                  stroke-dasharray="5,4" opacity="0.5"/>
+            <text x="212" y="44" font-size="10" fill="#021BC3" opacity="0.8">g = 9.81 (true)</text>
+            <!-- Student A: 9.85 ± 0.20 → cx=230, span 110–295 -->
+            <line x1="110" y1="100" x2="295" y2="100" stroke="#0066FD" stroke-width="2.5"/>
+            <line x1="110" y1="88"  x2="110" y2="112" stroke="#0066FD" stroke-width="2.5"/>
+            <line x1="295" y1="88"  x2="295" y2="112" stroke="#0066FD" stroke-width="2.5"/>
+            <circle cx="230" cy="100" r="7" fill="#0066FD"/>
+            <text x="48" y="104" font-size="10" fill="#001E5F" font-weight="600" text-anchor="middle">A</text>
+            <text x="48" y="116" font-size="9"  fill="#707070" text-anchor="middle">9.85±0.20</text>
+            <!-- Student B: 9.75 ± 0.15 → cx=170, span 80–260 -->
+            <line x1="80"  y1="155" x2="260" y2="155" stroke="#021BC3" stroke-width="2.5"/>
+            <line x1="80"  y1="143" x2="80"  y2="167" stroke="#021BC3" stroke-width="2.5"/>
+            <line x1="260" y1="143" x2="260" y2="167" stroke="#021BC3" stroke-width="2.5"/>
+            <circle cx="170" cy="155" r="7" fill="#021BC3"/>
+            <text x="48" y="159" font-size="10" fill="#001E5F" font-weight="600" text-anchor="middle">B</text>
+            <text x="48" y="171" font-size="9"  fill="#707070" text-anchor="middle">9.75±0.15</text>
+            <!-- Overlap highlight -->
+            <rect x="110" y="85" width="150" height="85" fill="#FFD82B" opacity="0.18" rx="3"/>
+            <text x="183" y="78" font-size="9.5" fill="#001E5F" text-anchor="middle"
+                  font-style="italic">ranges overlap</text>
+          </svg>
+        </div>
+
+        <!-- RIGHT: text -->
+        <div class="panel navy panel-right">
+          <div class="accent-bar"></div>
+          <p class="section-tag">Why It Matters</p>
+          <h2>Do these two measurements disagree?</h2>
+          <p>Student A measures \(g = 9.85 \pm 0.20 \ \text{m/s}^2\).
+             Student B measures \(g = 9.75 \pm 0.15 \ \text{m/s}^2\).</p>
+          <p>The central values differ by 0.10 m/s² — but their
+             uncertainty ranges overlap substantially. Both are
+             <em>consistent</em> with the true value
+             \(g = 9.81 \ \text{m/s}^2\).</p>
+          <p>Knowing the error is what lets you make that judgment.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       STOP 4 — Measurement Basics (repeated measurements)
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="stop" id="sec-meas">
+    <div class="sticky-frame">
+      <div class="card-pair">
+
+        <!-- LEFT: scatter plot -->
+        <div class="panel graphic sky panel-left">
+          <!-- Scatter plot -->
+          <svg viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg"
+               aria-label="Repeated measurements of pencil length showing scatter"
+               style="position: relative; z-index: 1; width: 100%; height: 100%;">
+            <!-- Title -->
+            <text x="180" y="24" font-size="13" fill="#001E5F" font-weight="700" text-anchor="middle">
+              Measuring a pencil: 10 trials
+            </text>
+
+            <!-- Axis -->
+            <line x1="60" y1="240" x2="320" y2="240" stroke="#001E5F" stroke-width="2"/>
+            <text x="190" y="265" font-size="11" fill="#707070" text-anchor="middle">Pencil length (cm)</text>
+
+            <!-- Tick marks and labels -->
+            <line x1="60"  y1="238" x2="60"  y2="242" stroke="#001E5F" stroke-width="1.5"/>
+            <text x="60"  y="255" font-size="10" fill="#001E5F" text-anchor="middle">12.2</text>
+
+            <line x1="110" y1="238" x2="110" y2="242" stroke="#001E5F" stroke-width="1.5"/>
+            <text x="110" y="255" font-size="10" fill="#001E5F" text-anchor="middle">12.4</text>
+
+            <line x1="160" y1="238" x2="160" y2="242" stroke="#001E5F" stroke-width="1.5"/>
+            <text x="160" y="255" font-size="10" fill="#001E5F" text-anchor="middle">12.6</text>
+
+            <line x1="210" y1="238" x2="210" y2="242" stroke="#001E5F" stroke-width="1.5"/>
+            <text x="210" y="255" font-size="10" fill="#001E5F" text-anchor="middle">12.8</text>
+
+            <line x1="260" y1="238" x2="260" y2="242" stroke="#001E5F" stroke-width="1.5"/>
+            <text x="260" y="255" font-size="10" fill="#001E5F" text-anchor="middle">13.0</text>
+
+            <line x1="310" y1="238" x2="310" y2="242" stroke="#001E5F" stroke-width="1.5"/>
+            <text x="310" y="255" font-size="10" fill="#001E5F" text-anchor="middle">13.2</text>
+
+            <!-- Data points (each trial represented as a dot) -->
+            <!-- All measurements scatter around ~12.7 cm -->
+            <circle cx="145" cy="180" r="5" fill="#0066FD" opacity="0.8"/>
+            <circle cx="165" cy="170" r="5" fill="#0066FD" opacity="0.8"/>
+            <circle cx="190" cy="160" r="5" fill="#0066FD" opacity="0.8"/>
+            <circle cx="215" cy="175" r="5" fill="#0066FD" opacity="0.8"/>
+            <circle cx="240" cy="165" r="5" fill="#0066FD" opacity="0.8"/>
+            <circle cx="185" cy="185" r="5" fill="#0066FD" opacity="0.8"/>
+            <circle cx="210" cy="170" r="5" fill="#0066FD" opacity="0.8"/>
+            <circle cx="160" cy="190" r="5" fill="#0066FD" opacity="0.8"/>
+            <circle cx="235" cy="180" r="5" fill="#0066FD" opacity="0.8"/>
+            <circle cx="195" cy="175" r="5" fill="#0066FD" opacity="0.8"/>
+
+            <!-- Mean line (vertical) -->
+            <line x1="195" y1="90" x2="195" y2="240" stroke="#021BC3" stroke-width="2" stroke-dasharray="6,4"/>
+            <text x="195" y="75" font-size="10" fill="#021BC3" font-weight="600" text-anchor="middle">12.7 cm±0.5 cm</text>
+
+            <!-- Spread indicator (with ± label) -->
+            <g opacity="0.5">
+              <line x1="145" y1="115" x2="245" y2="115" stroke="#FFD82B" stroke-width="2"/>
+              <line x1="145" y1="105" x2="145" y2="125" stroke="#FFD82B" stroke-width="1.5"/>
+              <line x1="245" y1="105" x2="245" y2="125" stroke="#FFD82B" stroke-width="1.5"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- RIGHT: text -->
+        <div class="panel white panel-right">
+          <div class="accent-bar"></div>
+          <p class="section-tag">Measurement Basics</p>
+          <h2>Why don't<br>measurements repeat?</h2>
+          <p>When you measure the same pencil $10$ times with a ruler,
+             you don't get $12.7$ cm every time. You get $12.5$, $12.8$, $12.6$,
+             $12.9$, etc.</p>
+          <p>This scatter isn't "bad" — it's <em>data</em>. It tells you
+             about the limits of your measurement tool and technique.</p>
+          <p><strong>Random error:</strong> ruler markings are discrete,
+             your eye position varies, you press differently each time.</p>
+          <p><strong>Systematic error:</strong> a bent ruler always reads
+             high; a cold ruler contracts; parallax bias from one direction.</p>
+          <p>Both shape your result. Understanding which is which helps
+             you improve.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       STOP 5 — Accuracy vs. Precision (dartboard 2×2 grid)
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="stop" id="sec-acc">
+    <div class="sticky-frame">
+      <div class="card-pair">
+
+        <!-- LEFT: 2×2 dartboard grid -->
+        <div class="panel graphic meliora panel-left">
+          <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg"
+               aria-label="Accuracy vs. Precision: 2x2 dartboard grid">
+
+            <!-- Title -->
+            <text x="210" y="24" font-size="14" fill="#FFFFFF" font-weight="700" text-anchor="middle">
+              Accuracy vs. Precision
+            </text>
+
+            <!-- Horizontal divider -->
+            <line x1="30" y1="210" x2="390" y2="210" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+            <!-- Vertical divider -->
+            <line x1="210" y1="40" x2="210" y2="400" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+
+            <!-- TOP LEFT: High Accuracy, High Precision -->
+            <g id="quad-ha-hp">
+              <circle cx="105" cy="105" r="60" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <circle cx="105" cy="105" r="40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <circle cx="105" cy="105" r="20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <circle cx="105" cy="105" r="6" fill="#FFD82B"/>
+              <!-- Darts clustered at center -->
+              <circle cx="104" cy="106" r="3.5" fill="#FFFFFF"/>
+              <circle cx="106" cy="103" r="3.5" fill="#FFFFFF"/>
+              <circle cx="102" cy="105" r="3.5" fill="#FFFFFF"/>
+              <circle cx="107" cy="108" r="3.5" fill="#FFFFFF"/>
+              <circle cx="103" cy="102" r="3.5" fill="#FFFFFF"/>
+              <text x="105" y="155" font-size="10" fill="#FFFFFF" font-weight="600" text-anchor="middle">High Accuracy</text>
+              <text x="105" y="170" font-size="10" fill="#FFFFFF" font-weight="600" text-anchor="middle">High Precision</text>
+            </g>
+
+            <!-- TOP RIGHT: Low Accuracy, High Precision -->
+            <g id="quad-la-hp">
+              <circle cx="315" cy="105" r="60" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <circle cx="315" cy="105" r="40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <circle cx="315" cy="105" r="20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <circle cx="315" cy="105" r="6" fill="#FFD82B"/>
+              <!-- Darts clustered off-center (upper left of center) -->
+              <circle cx="285" cy="85" r="3.5" fill="#FFFFFF"/>
+              <circle cx="287" cy="82" r="3.5" fill="#FFFFFF"/>
+              <circle cx="283" cy="85" r="3.5" fill="#FFFFFF"/>
+              <circle cx="288" cy="88" r="3.5" fill="#FFFFFF"/>
+              <circle cx="284" cy="82" r="3.5" fill="#FFFFFF"/>
+              <text x="315" y="155" font-size="10" fill="#FFFFFF" font-weight="600" text-anchor="middle">Low Accuracy</text>
+              <text x="315" y="170" font-size="10" fill="#FFFFFF" font-weight="600" text-anchor="middle">High Precision</text>
+            </g>
+
+            <!-- BOTTOM LEFT: High Accuracy, Low Precision -->
+            <g id="quad-ha-lp">
+              <circle cx="105" cy="315" r="60" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <circle cx="105" cy="315" r="40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <circle cx="105" cy="315" r="20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <circle cx="105" cy="315" r="6" fill="#FFD82B"/>
+              <!-- Darts scattered around center -->
+              <circle cx="98" cy="310" r="3.5" fill="#FFFFFF"/>
+              <circle cx="115" cy="325" r="3.5" fill="#FFFFFF"/>
+              <circle cx="105" cy="340" r="3.5" fill="#FFFFFF"/>
+              <circle cx="92" cy="320" r="3.5" fill="#FFFFFF"/>
+              <circle cx="120" cy="305" r="3.5" fill="#FFFFFF"/>
+              <text x="105" y="365" font-size="10" fill="#FFFFFF" font-weight="600" text-anchor="middle">High Accuracy</text>
+              <text x="105" y="380" font-size="10" fill="#FFFFFF" font-weight="600" text-anchor="middle">Low Precision</text>
+            </g>
+
+            <!-- BOTTOM RIGHT: Low Accuracy, Low Precision -->
+            <g id="quad-la-lp">
+              <circle cx="315" cy="315" r="60" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <circle cx="315" cy="315" r="40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <circle cx="315" cy="315" r="20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <circle cx="315" cy="315" r="6" fill="#FFD82B"/>
+              <!-- Darts scattered everywhere -->
+              <circle cx="295" cy="295" r="3.5" fill="#FFFFFF"/>
+              <circle cx="335" cy="340" r="3.5" fill="#FFFFFF"/>
+              <circle cx="310" cy="360" r="3.5" fill="#FFFFFF"/>
+              <circle cx="285" cy="315" r="3.5" fill="#FFFFFF"/>
+              <circle cx="340" cy="280" r="3.5" fill="#FFFFFF"/>
+              <text x="315" y="365" font-size="10" fill="#FFFFFF" font-weight="600" text-anchor="middle">Low Accuracy</text>
+              <text x="315" y="380" font-size="10" fill="#FFFFFF" font-weight="600" text-anchor="middle">Low Precision</text>
+            </g>
+
+            <!-- Legend at bottom -->
+            <text x="210" y="405" font-size="9" fill="rgba(255,255,255,0.6)" text-anchor="middle">
+              ● = target center  ○ = darts
+            </text>
+          </svg>
+        </div>
+
+        <!-- RIGHT: text -->
+        <div class="panel white panel-right">
+          <div class="accent-bar"></div>
+          <p class="section-tag">Accuracy vs. Precision</p>
+          <h2>Two different<br>kinds of error</h2>
+          <p><strong>Accuracy</strong> tells you how close your measurements
+             are to the true value. An accurate measurement is <em>right on target</em>.</p>
+          <p><strong>Precision</strong> tells you how reproducible your measurements
+             are. A precise measurement is <em>tightly clustered</em>.</p>
+          <p>You can be precise but inaccurate (a broken clock is precise but
+             usually wrong). You can be accurate but imprecise (lucky guesses).
+             The goal is both: tight clusters at the true value.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       STOP 6 — Distributions & Mean (histogram with bell curve)
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="stop" id="sec-dist">
+    <div class="sticky-frame">
+      <div class="card-pair">
+
+        <!-- LEFT: histogram with bell curve overlay -->
+        <div class="panel graphic sky panel-left">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"
+               aria-label="Distribution of pendulum period measurements with normal curve">
+
+            <!-- Title -->
+            <text x="200" y="22" font-size="14" fill="#001E5F" font-weight="700" text-anchor="middle">
+              50 measurements of pendulum period
+            </text>
+
+            <!-- Axes -->
+            <line x1="50" y1="240" x2="360" y2="240" stroke="#001E5F" stroke-width="2"/>
+            <line x1="50" y1="40" x2="50" y2="240" stroke="#001E5F" stroke-width="2"/>
+
+            <!-- X-axis labels -->
+            <text x="50" y="260" font-size="12" fill="#001E5F" text-anchor="middle">1.90</text>
+            <text x="125" y="260" font-size="12" fill="#001E5F" text-anchor="middle">1.95</text>
+            <text x="200" y="260" font-size="12" fill="#001E5F" text-anchor="middle">2.00</text>
+            <text x="275" y="260" font-size="12" fill="#001E5F" text-anchor="middle">2.05</text>
+            <text x="350" y="260" font-size="12" fill="#001E5F" text-anchor="middle">2.10</text>
+
+            <!-- Y-axis labels -->
+            <text x="44" y="247" font-size="11" fill="#001E5F" text-anchor="end">0</text>
+            <text x="44" y="197" font-size="11" fill="#001E5F" text-anchor="end">5</text>
+            <text x="44" y="147" font-size="11" fill="#001E5F" text-anchor="end">10</text>
+            <text x="44" y="97" font-size="11" fill="#001E5F" text-anchor="end">15</text>
+
+            <!-- Histogram bars with σ ≈ 0.035, aligned with Gaussian -->
+            <!-- 1.935–1.960: 2 counts -->
+            <rect x="104.3" y="216.0" width="38.7" height="24.0" fill="#0066FD" opacity="0.7"/>
+            <!-- 1.960–1.980: 4 counts -->
+            <rect x="143.0" y="192.0" width="31.0" height="48.0" fill="#0066FD" opacity="0.7"/>
+            <!-- 1.980–2.000: 14 counts -->
+            <rect x="174.0" y="72.0" width="31.0" height="168.0" fill="#0066FD" opacity="0.7"/>
+            <!-- 2.000–2.020: 15 counts (peak) -->
+            <rect x="205.0" y="60.0" width="31.0" height="180.0" fill="#0066FD" opacity="0.7"/>
+            <!-- 2.020–2.040: 9 counts -->
+            <rect x="236.0" y="132.0" width="31.0" height="108.0" fill="#0066FD" opacity="0.7"/>
+            <!-- 2.040–2.060: 4 counts -->
+            <rect x="267.0" y="192.0" width="31.0" height="48.0" fill="#0066FD" opacity="0.7"/>
+            <!-- 2.060–2.080: 1 count -->
+            <rect x="298.0" y="228.0" width="31.0" height="12.0" fill="#0066FD" opacity="0.7"/>
+            <!-- 2.080–2.095: 1 count -->
+            <rect x="329.0" y="228.0" width="23.3" height="12.0" fill="#0066FD" opacity="0.7"/>
+
+            <!-- Smooth normal distribution curve (Gaussian) overlaid -->
+            <!-- Centered at 2.00s, σ=0.035, scaled to match histogram -->
+            <path d="M 50.0 237.4 L 53.1 236.9 L 56.2 236.4 L 59.3 235.8 L 62.4 235.1 L 65.5 234.3 L 68.6 233.4 L 71.7 232.4 L 74.8 231.2 L 77.9 230.0 L 81.0 228.6 L 84.1 227.0 L 87.2 225.2 L 90.3 223.3 L 93.4 221.2 L 96.5 218.9 L 99.6 216.4 L 102.7 213.6 L 105.8 210.7 L 108.9 207.5 L 112.0 204.1 L 115.1 200.5 L 118.2 196.6 L 121.3 192.6 L 124.4 188.3 L 127.5 183.8 L 130.6 179.1 L 133.7 174.2 L 136.8 169.2 L 139.9 164.1 L 143.0 158.8 L 146.1 153.5 L 149.2 148.1 L 152.3 142.7 L 155.4 137.3 L 158.5 132.0 L 161.6 126.7 L 164.7 121.6 L 167.8 116.7 L 170.9 112.0 L 174.0 107.5 L 177.1 103.3 L 180.2 99.5 L 183.3 96.0 L 186.4 92.9 L 189.5 90.2 L 192.6 88.0 L 195.7 86.3 L 198.8 85.0 L 201.9 84.3 L 205.0 84.0 L 208.1 84.3 L 211.2 85.0 L 214.3 86.3 L 217.4 88.0 L 220.5 90.2 L 223.6 92.9 L 226.7 96.0 L 229.8 99.5 L 232.9 103.3 L 236.0 107.5 L 239.1 112.0 L 242.2 116.7 L 245.3 121.6 L 248.4 126.7 L 251.5 132.0 L 254.6 137.3 L 257.7 142.7 L 260.8 148.1 L 263.9 153.5 L 267.0 158.8 L 270.1 164.1 L 273.2 169.2 L 276.3 174.2 L 279.4 179.1 L 282.5 183.8 L 285.6 188.3 L 288.7 192.6 L 291.8 196.6 L 294.9 200.5 L 298.0 204.1 L 301.1 207.5 L 304.2 210.7 L 307.3 213.6 L 310.4 216.4 L 313.5 218.9 L 316.6 221.2 L 319.7 223.3 L 322.8 225.2 L 325.9 227.0 L 329.0 228.6 L 332.1 230.0 L 335.2 231.2 L 338.3 232.4 L 341.4 233.4 L 344.5 234.3 L 347.6 235.1 L 350.7 235.8 L 353.8 236.4 L 356.9 236.9 L 360.0 237.4"
+                  fill="none" stroke="#021BC3" stroke-width="2.5" opacity="0.9"/>
+
+            <!-- Population mean line (vertical) at x = 2.00 s -->
+            <line x1="200" y1="40" x2="200" y2="240" stroke="#FFD82B" stroke-width="2.5" stroke-dasharray="5,4"/>
+            <text x="185" y="53" font-size="13" fill="#FFD82B" font-weight="700" text-anchor="end">μ = 2.00 s</text>
+
+            <!-- Sample mean line (vertical) at x ≈ 216 (≈2.018 s) -->
+            <line x1="216" y1="40" x2="216" y2="240" stroke="#FFC200" stroke-width="2" stroke-dasharray="4,3"/>
+            <text x="235" y="53" font-size="13" fill="#FFC200" font-weight="700" text-anchor="start">x̄ ≈ 2.018 s</text>
+
+            <!-- Axis labels -->
+            <text x="200" y="285" font-size="12" fill="#707070" text-anchor="middle">Period (seconds)</text>
+            <text x="18" y="140" font-size="12" fill="#707070" text-anchor="middle" transform="rotate(-90 18 140)">
+              Count
+            </text>
+
+            <!-- Legend -->
+            <rect x="250" y="68" width="12" height="12" fill="#0066FD" opacity="0.7"/>
+            <text x="270" y="77" font-size="11" fill="#001E5F">Data (50 measurements)</text>
+
+            <line x1="250" y1="90" x2="262" y2="90" stroke="#021BC3" stroke-width="2.5"/>
+            <text x="270" y="98" font-size="11" fill="#001E5F">Population distribution</text>
+          </svg>
+        </div>
+
+        <!-- RIGHT: text -->
+        <div class="panel white panel-right">
+          <div class="accent-bar"></div>
+          <p class="section-tag">Distributions & Mean</p>
+          <h2>Why the mean is your best estimate</h2>
+          <p>Measure a pendulum's period $N=50$ times. Each measurement has random
+             error. Plot all values as a histogram — they cluster around
+             $2.018$ seconds in a bell-shaped (normal) distribution.</p>
+          <p><strong>The population mean $μ$</strong> is the true period
+             (unknown). <strong>The sample mean $\bar{x}$</strong> is what you calculate
+             from your N measurements:</p>
+          <p style="text-align: center;">
+             $\bar{x} = \dfrac{1}{N} \sum_{i=1}^{N} x_i$
+          </p>
+          <p>The more measurements you take, the closer $\bar{x}$ gets to $\mu$.
+             The bell curve shape is universal: most measurements cluster
+             near the true value, with fewer far away. This fact is known as the <strong> central limit theorem</strong></p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       STOP 7 — Standard Deviation (bell curve with σ regions)
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="stop" id="sec-std">
+    <div class="sticky-frame">
+      <div class="card-pair">
+
+        <!-- LEFT: bell curve with standard deviation regions -->
+        <div class="panel graphic sky panel-left">
+          <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg"
+               aria-label="Normal distribution with standard deviation regions">
+
+            <!-- Title -->
+            <text x="210" y="24" font-size="14" fill="#001E5F" font-weight="700" text-anchor="middle">
+              The empirical rule: 68–95–99.7
+            </text>
+
+            <!-- Background shading for regions -->
+            <!-- ±3σ region (lightest) -->
+            <rect x="50" y="60" width="320" height="180" fill="#0066FD" opacity="0.05"/>
+            <!-- ±2σ region (lighter) -->
+            <rect x="100" y="60" width="220" height="180" fill="#0066FD" opacity="0.08"/>
+            <!-- ±1σ region (light) -->
+            <rect x="150" y="60" width="120" height="180" fill="#0066FD" opacity="0.12"/>
+
+            <!-- Bell curve (proper Gaussian) -->
+            <path d="M 50 240.0 L 52 240.0 L 54 240.0 L 56 240.0 L 58 239.9 L 60 239.9 L 62 239.9 L 64 239.9 L 66 239.9 L 68 239.9 L 70 239.8 L 72 239.8 L 74 239.8 L 76 239.7 L 78 239.7 L 80 239.6 L 82 239.6 L 84 239.5 L 86 239.4 L 88 239.3 L 90 239.2 L 92 239.1 L 94 238.9 L 96 238.8 L 98 238.6 L 100 238.4 L 102 238.1 L 104 237.9 L 106 237.6 L 108 237.2 L 110 236.8 L 112 236.4 L 114 236.0 L 116 235.5 L 118 234.9 L 120 234.3 L 122 233.6 L 124 232.9 L 126 232.1 L 128 231.2 L 130 230.3 L 132 229.3 L 134 228.2 L 136 227.0 L 138 225.8 L 140 224.5 L 142 223.1 L 144 221.6 L 146 220.0 L 148 218.4 L 150 216.7 L 152 214.9 L 154 213.0 L 156 211.1 L 158 209.2 L 160 207.1 L 162 205.0 L 164 202.9 L 166 200.8 L 168 198.6 L 170 196.4 L 172 194.3 L 174 192.1 L 176 190.0 L 178 187.9 L 180 185.8 L 182 183.8 L 184 181.9 L 186 180.0 L 188 178.3 L 190 176.6 L 192 175.1 L 194 173.7 L 196 172.5 L 198 171.4 L 200 170.4 L 202 169.6 L 204 169.0 L 206 168.5 L 208 168.3 L 210 168.2 L 212 168.3 L 214 168.5 L 216 169.0 L 218 169.6 L 220 170.4 L 222 171.4 L 224 172.5 L 226 173.7 L 228 175.1 L 230 176.6 L 232 178.3 L 234 180.0 L 236 181.9 L 238 183.8 L 240 185.8 L 242 187.9 L 244 190.0 L 246 192.1 L 248 194.3 L 250 196.4 L 252 198.6 L 254 200.8 L 256 202.9 L 258 205.0 L 260 207.1 L 262 209.2 L 264 211.1 L 266 213.0 L 268 214.9 L 270 216.7 L 272 218.4 L 274 220.0 L 276 221.6 L 278 223.1 L 280 224.5 L 282 225.8 L 284 227.0 L 286 228.2 L 288 229.3 L 290 230.3 L 292 231.2 L 294 232.1 L 296 232.9 L 298 233.6 L 300 234.3 L 302 234.9 L 304 235.5 L 306 236.0 L 308 236.4 L 310 236.8 L 312 237.2 L 314 237.6 L 316 237.9 L 318 238.1 L 320 238.4 L 322 238.6 L 324 238.8 L 326 238.9 L 328 239.1 L 330 239.2 L 332 239.3 L 334 239.4 L 336 239.5 L 338 239.6 L 340 239.6 L 342 239.7 L 344 239.7 L 346 239.8 L 348 239.8 L 350 239.8 L 352 239.9 L 354 239.9 L 356 239.9 L 358 239.9 L 360 239.9 L 362 239.9 L 364 240.0 L 366 240.0 L 368 240.0 L 370 240.0"
+                  fill="none" stroke="#021BC3" stroke-width="2.5"/>
+
+            <!-- Mean line -->
+            <line x1="210" y1="60" x2="210" y2="240" stroke="#FFD82B" stroke-width="2" stroke-dasharray="4,2"/>
+            <text x="210" y="50" font-size="11" fill="#FFD82B" font-weight="700" text-anchor="middle">μ</text>
+
+            <!-- ±1σ markers and labels -->
+            <line x1="150" y1="238" x2="150" y2="245" stroke="#001E5F" stroke-width="2"/>
+            <line x1="270" y1="238" x2="270" y2="245" stroke="#001E5F" stroke-width="2"/>
+            <text x="150" y="260" font-size="10" fill="#001E5F" text-anchor="middle">μ−σ</text>
+            <text x="270" y="260" font-size="10" fill="#001E5F" text-anchor="middle">μ+σ</text>
+            <text x="210" y="160" font-size="12" fill="#0066FD" font-weight="700" text-anchor="middle">68%</text>
+
+            <!-- ±2σ markers and labels -->
+            <line x1="100" y1="238" x2="100" y2="243" stroke="#707070" stroke-width="1.5"/>
+            <line x1="320" y1="238" x2="320" y2="243" stroke="#707070" stroke-width="1.5"/>
+            <text x="100" y="262" font-size="9" fill="#707070" text-anchor="middle">μ−2σ</text>
+            <text x="320" y="262" font-size="9" fill="#707070" text-anchor="middle">μ+2σ</text>
+            <text x="210" y="120" font-size="11" fill="#021BC3" font-weight="600" text-anchor="middle">95%</text>
+
+            <!-- ±3σ markers and labels -->
+            <line x1="50" y1="238" x2="50" y2="242" stroke="#B7D3FF" stroke-width="1"/>
+            <line x1="370" y1="238" x2="370" y2="242" stroke="#B7D3FF" stroke-width="1"/>
+            <text x="50" y="263" font-size="8" fill="#B7D3FF" text-anchor="middle">−3σ</text>
+            <text x="370" y="263" font-size="8" fill="#B7D3FF" text-anchor="middle">+3σ</text>
+            <text x="210" y="85" font-size="10" fill="#B7D3FF" font-weight="600" text-anchor="middle">99.7%</text>
+
+            <!-- X-axis -->
+            <line x1="40" y1="240" x2="380" y2="240" stroke="#001E5F" stroke-width="2"/>
+          </svg>
+        </div>
+
+        <!-- RIGHT: text -->
+        <div class="panel white panel-right">
+          <div class="accent-bar"></div>
+          <p class="section-tag">Standard Deviation</p>
+          <h2>Measuring spread:<br>σ and the empirical rule</h2>
+          <p>Standard deviation σ tells you how spread out your data is around
+             the mean. It's calculated as:</p>
+          <p style="text-align: center;">
+             \(\sigma = \sqrt{\frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2}\)
+          </p>
+          <p>For a normal distribution, a beautiful pattern emerges:</p>
+          <ul style="margin-left: 20px; line-height: 1.8;">
+            <li>68% of data falls within ±1σ</li>
+            <li>95% falls within ±2σ</li>
+            <li>99.7% falls within ±3σ</li>
+          </ul>
+          <p>This empirical rule works for almost any bell-shaped dataset.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       STOP 8 — Error in the Mean (multiple samples & standard error)
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="stop" id="sec-sem">
+    <div class="sticky-frame">
+      <div class="card-pair">
+
+        <!-- LEFT: multiple sample distributions -->
+        <div class="panel graphic sky panel-left">
+          <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg"
+               aria-label="Standard error: means of multiple samples cluster tighter than individual measurements">
+
+            <!-- Title -->
+            <text x="200" y="22" font-size="14" fill="#001E5F" font-weight="700" text-anchor="middle">
+              Means of 5 samples (N=10 each)
+            </text>
+
+            <!-- Three bell curves representing individual measurements in each sample -->
+            <!-- Sample 1 mean at x=80 -->
+            <path d="M 40 200 Q 60 170, 80 120, 100 200"
+                  fill="none" stroke="#0066FD" stroke-width="1.5" opacity="0.5"/>
+            <circle cx="80" cy="200" r="4" fill="#0066FD"/>
+            <text x="80" y="220" font-size="10" fill="#001E5F" text-anchor="middle">2.001</text>
+
+            <!-- Sample 2 mean at x=130 -->
+            <path d="M 90 200 Q 110 170, 130 120, 150 200"
+                  fill="none" stroke="#0066FD" stroke-width="1.5" opacity="0.5"/>
+            <circle cx="130" cy="200" r="4" fill="#0066FD"/>
+            <text x="130" y="220" font-size="10" fill="#001E5F" text-anchor="middle">2.009</text>
+
+            <!-- Sample 3 mean at x=200 (true mean) -->
+            <path d="M 160 200 Q 180 170, 200 120, 220 200"
+                  fill="none" stroke="#0066FD" stroke-width="1.5" opacity="0.5"/>
+            <circle cx="200" cy="200" r="4" fill="#0066FD"/>
+            <text x="200" y="220" font-size="10" fill="#001E5F" text-anchor="middle">2.000</text>
+
+            <!-- Sample 4 mean at x=270 -->
+            <path d="M 230 200 Q 250 170, 270 120, 290 200"
+                  fill="none" stroke="#0066FD" stroke-width="1.5" opacity="0.5"/>
+            <circle cx="270" cy="200" r="4" fill="#0066FD"/>
+            <text x="270" y="220" font-size="10" fill="#001E5F" text-anchor="middle">1.995</text>
+
+            <!-- Sample 5 mean at x=320 -->
+            <path d="M 280 200 Q 300 170, 320 120, 340 200"
+                  fill="none" stroke="#0066FD" stroke-width="1.5" opacity="0.5"/>
+            <circle cx="320" cy="200" r="4" fill="#0066FD"/>
+            <text x="320" y="220" font-size="10" fill="#001E5F" text-anchor="middle">2.006</text>
+
+            <!-- Distribution of the means (narrower curve) -->
+            <path d="M 60 280 Q 130 250, 200 210, 270 250, 340 280"
+                  fill="none" stroke="#FFD82B" stroke-width="3"/>
+            <text x="200" y="300" font-size="11" fill="#FFD82B" font-weight="700" text-anchor="middle">
+              Distribution of sample means (much tighter!)
+            </text>
+
+            <!-- Population mean line -->
+            <line x1="200" y1="110" x2="200" y2="290" stroke="#021BC3" stroke-width="2" stroke-dasharray="3,3"/>
+            <text x="200" y="105" font-size="10" fill="#021BC3" font-weight="600" text-anchor="middle">μ</text>
+
+            <!-- Legend -->
+            <text x="50" y="35" font-size="10" fill="#0066FD" font-weight="600">Individual measurements</text>
+            <text x="50" y="50" font-size="10" fill="#FFD82B" font-weight="600">Sample means</text>
+          </svg>
+        </div>
+
+        <!-- RIGHT: text -->
+        <div class="panel white panel-right">
+          <div class="accent-bar"></div>
+          <p class="section-tag">Error in the Mean</p>
+          <h2>Why averaging<br>reduces error</h2>
+          <p>Individual measurements scatter with standard deviation σ.
+             But the <em>means</em> of repeated samples cluster much tighter!</p>
+          <p>The standard error of the mean (SEM) is:</p>
+          <p style="text-align: center;">
+             \(\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{N}}\)
+          </p>
+          <p>Each time you double N, the error shrinks by √2. Taking 10 measurements
+             reduces error by √10 ≈ 3.16×. This is why experiments repeat measurements:
+             averaging is powerful.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       STOP 9 — Poisson Statistics (counting experiments)
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="stop" id="sec-poisson">
+    <div class="sticky-frame">
+      <div class="card-pair">
+
+        <!-- LEFT: histogram of counts from counting experiments -->
+        <div class="panel graphic sky panel-left">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"
+               aria-label="Counting experiment results: radioactive decays in 10-second intervals">
+
+            <!-- Title -->
+            <text x="200" y="22" font-size="14" fill="#001E5F" font-weight="700" text-anchor="middle">
+              Radioactive decay counts (50 trials)
+            </text>
+
+            <!-- Axes -->
+            <line x1="50" y1="240" x2="360" y2="240" stroke="#001E5F" stroke-width="2"/>
+            <line x1="50" y1="40" x2="50" y2="240" stroke="#001E5F" stroke-width="2"/>
+
+            <!-- X-axis labels -->
+            <text x="70" y="260" font-size="11" fill="#001E5F" text-anchor="middle">5</text>
+            <text x="120" y="260" font-size="11" fill="#001E5F" text-anchor="middle">10</text>
+            <text x="170" y="260" font-size="11" fill="#001E5F" text-anchor="middle">15</text>
+            <text x="220" y="260" font-size="11" fill="#001E5F" text-anchor="middle">20</text>
+            <text x="270" y="260" font-size="11" fill="#001E5F" text-anchor="middle">25</text>
+            <text x="320" y="260" font-size="11" fill="#001E5F" text-anchor="middle">30</text>
+
+            <!-- Y-axis labels -->
+            <text x="44" y="247" font-size="10" fill="#001E5F" text-anchor="end">0</text>
+            <text x="44" y="197" font-size="10" fill="#001E5F" text-anchor="end">5</text>
+            <text x="44" y="147" font-size="10" fill="#001E5F" text-anchor="end">10</text>
+
+            <!-- Histogram bars (Poisson distribution with λ≈15) -->
+            <!-- Count 5: 1 occurrence -->
+            <rect x="60" y="220" width="18" height="20" fill="#0066FD" opacity="0.7"/>
+            <!-- Count 10: 5 occurrences -->
+            <rect x="108" y="180" width="18" height="60" fill="#0066FD" opacity="0.7"/>
+            <!-- Count 13: 7 occurrences -->
+            <rect x="156" y="160" width="18" height="80" fill="#0066FD" opacity="0.7"/>
+            <!-- Count 15: 9 occurrences (peak) -->
+            <rect x="204" y="140" width="18" height="100" fill="#0066FD" opacity="0.7"/>
+            <!-- Count 17: 10 occurrences -->
+            <rect x="252" y="135" width="18" height="105" fill="#0066FD" opacity="0.7"/>
+            <!-- Count 20: 8 occurrences -->
+            <rect x="300" y="155" width="18" height="85" fill="#0066FD" opacity="0.7"/>
+            <!-- Count 25: 6 occurrences -->
+            <rect x="348" y="175" width="18" height="65" fill="#0066FD" opacity="0.7"/>
+
+            <!-- Smooth Poisson curve overlay -->
+            <path d="M 60 220 L 80 200 L 100 175 L 120 155 L 140 145 L 160 140 L 180 142 L 200 150 L 220 160 L 240 170 L 260 175 L 280 170 L 300 160 L 320 145 L 340 130 L 360 220"
+                  fill="none" stroke="#021BC3" stroke-width="2" opacity="0.7"/>
+
+            <!-- Mean and σ lines -->
+            <line x1="204" y1="40" x2="204" y2="240" stroke="#FFD82B" stroke-width="2" stroke-dasharray="4,2"/>
+            <text x="204" y="30" font-size="10" fill="#FFD82B" font-weight="700" text-anchor="middle">λ ≈ 15</text>
+
+            <!-- Axis labels -->
+            <text x="200" y="285" font-size="11" fill="#707070" text-anchor="middle">Counts per trial</text>
+            <text x="20" y="140" font-size="11" fill="#707070" text-anchor="middle" transform="rotate(-90 20 140)">
+              Frequency
+            </text>
+          </svg>
+        </div>
+
+        <!-- RIGHT: text -->
+        <div class="panel white panel-right">
+          <div class="accent-bar"></div>
+          <p class="section-tag">Poisson Statistics</p>
+          <h2>Counting has its<br>own special rule</h2>
+          <p>When you count discrete events (radioactive decays, photons, particles),
+             the results follow a Poisson distribution with a unique property:</p>
+          <p style="text-align: center;">
+             \(\sigma = \sqrt{\lambda} = \sqrt{N}\)
+          </p>
+          <p>The standard deviation equals the square root of the count itself.
+             If you observe 100 decays, σ ≈ 10. If you observe 10,000, σ ≈ 100.</p>
+          <p>This is <em>not</em> a coincidence — it emerges naturally from the random
+             process of counting independent events. Poisson statistics apply whenever
+             you're counting things with random, constant rates.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       STOP 8 — Error Propagation (using measured quantities)
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="stop" id="sec-prop">
+    <div class="sticky-frame">
+      <div class="card-pair">
+
+        <!-- LEFT: diagram of input measurement flowing through function to output -->
+        <div class="panel graphic dandelion panel-left">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"
+               aria-label="Error propagation: measuring radius with uncertainty and computing area">
+
+            <!-- Title -->
+            <text x="200" y="22" font-size="14" fill="#001E5F" font-weight="700" text-anchor="middle">
+              From measurement to result
+            </text>
+
+            <!-- INPUT SIDE: radius measurement with error band -->
+            <text x="70" y="50" font-size="11" fill="#001E5F" font-weight="700">Input</text>
+
+            <!-- Measurement label -->
+            <text x="70" y="80" font-size="10" fill="#001E5F" text-anchor="middle">radius r</text>
+
+            <!-- Central radius value line -->
+            <line x1="70" y1="95" x2="70" y2="175" stroke="#001E5F" stroke-width="2"/>
+
+            <!-- Uncertainty band (light blue) -->
+            <rect x="50" y="95" width="40" height="80" fill="#B7D3FF" opacity="0.4"/>
+
+            <!-- Label for uncertainty -->
+            <text x="70" y="200" font-size="9" fill="#001E5F" text-anchor="middle">r ± σ_r</text>
+
+            <!-- Arrow from input to formula -->
+            <path d="M 110 135 L 150 135" stroke="#707070" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+            <!-- Formula in middle -->
+            <rect x="150" y="110" width="100" height="50" fill="#FFF3B1" stroke="#001E5F" stroke-width="1.5" rx="4"/>
+            <text x="200" y="140" font-size="12" fill="#001E5F" font-weight="700" text-anchor="middle">A = πr²</text>
+
+            <!-- Arrow from formula to output -->
+            <path d="M 250 135 L 290 135" stroke="#707070" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+            <!-- OUTPUT SIDE: area with propagated error band -->
+            <text x="330" y="50" font-size="11" fill="#001E5F" font-weight="700">Output</text>
+
+            <!-- Area label -->
+            <text x="330" y="80" font-size="10" fill="#001E5F" text-anchor="middle">area A</text>
+
+            <!-- Central area value (wider because of nonlinearity) -->
+            <line x1="330" y1="95" x2="330" y2="175" stroke="#001E5F" stroke-width="2"/>
+
+            <!-- Expanded uncertainty band (sky blue) -->
+            <rect x="310" y="85" width="40" height="100" fill="#0066FD" opacity="0.3"/>
+
+            <!-- Label for propagated uncertainty -->
+            <text x="330" y="200" font-size="9" fill="#001E5F" text-anchor="middle">A ± σ_A</text>
+
+            <!-- Arrow marker definition -->
+            <defs>
+              <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="#707070"/>
+              </marker>
+            </defs>
+
+            <!-- Key insight: the output band is wider -->
+            <text x="200" y="260" font-size="10" fill="#707070" text-anchor="middle" font-style="italic">
+              Nonlinear functions stretch errors unevenly
+            </text>
+
+          </svg>
+        </div>
+
+        <!-- RIGHT: text explanation -->
+        <div class="panel navy panel-right">
+          <div class="accent-bar"></div>
+          <p class="section-tag">Error Propagation</p>
+          <h2>How errors flow<br>through calculations</h2>
+          <p>Once you've measured something with uncertainty, what happens when you use that measurement in a formula?</p>
+          <p>For a small uncertainty δx in your measurement, the uncertainty in the result is:</p>
+          <p style="text-align: center;">
+            \(\sigma_f \approx \left| \frac{df}{dx} \right| \sigma_x\)
+          </p>
+          <p>The derivative <span style="font-style: italic;">amplifies</span> or <span style="font-style: italic;">dampens</span> the input error.
+             If the derivative is small, errors shrink. If it's large, errors grow.</p>
+          <p>This is why careful measurement at the right scale matters: a small error in radius becomes
+             a <em>larger</em> relative error in area, because area depends on r².</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       STOP 9 — Summary of Equations (quick reference)
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="stop" id="sec-summary">
+    <div class="sticky-frame">
+      <div class="card-pair">
+
+        <!-- LEFT: Graphical summary card showing all formulas in a grid -->
+        <div class="panel graphic sky panel-left">
+          <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg"
+               aria-label="Quick reference card for all error analysis formulas">
+
+            <!-- Title -->
+            <text x="200" y="28" font-size="16" fill="#001E5F" font-weight="700" text-anchor="middle">
+              Equation Reference
+            </text>
+
+            <!-- Divider -->
+            <line x1="40" y1="38" x2="360" y2="38" stroke="#001E5F" stroke-width="1"/>
+
+            <!-- Row 1: Mean -->
+            <text x="40" y="65" font-size="11" fill="#001E5F" font-weight="700">Sample Mean:</text>
+            <rect x="40" y="72" width="320" height="22" fill="#B7D3FF" opacity="0.3" rx="3"/>
+            <text x="200" y="88" font-size="10" fill="#001E5F" text-anchor="middle" font-family="monospace">
+              x̄ = (1/N) Σ xᵢ
+            </text>
+
+            <!-- Row 2: Standard Deviation -->
+            <text x="40" y="115" font-size="11" fill="#001E5F" font-weight="700">Standard Deviation:</text>
+            <rect x="40" y="122" width="320" height="22" fill="#B7D3FF" opacity="0.3" rx="3"/>
+            <text x="200" y="138" font-size="10" fill="#001E5F" text-anchor="middle" font-family="monospace">
+              σ = √[ (1/N) Σ(xᵢ - x̄)² ]
+            </text>
+
+            <!-- Row 3: Standard Error of the Mean -->
+            <text x="40" y="165" font-size="11" fill="#001E5F" font-weight="700">Standard Error (SEM):</text>
+            <rect x="40" y="172" width="320" height="22" fill="#B7D3FF" opacity="0.3" rx="3"/>
+            <text x="200" y="188" font-size="10" fill="#001E5F" text-anchor="middle" font-family="monospace">
+              σ_x̄ = σ / √N
+            </text>
+
+            <!-- Row 4: Poisson -->
+            <text x="40" y="215" font-size="11" fill="#001E5F" font-weight="700">Poisson Statistics:</text>
+            <rect x="40" y="222" width="320" height="22" fill="#B7D3FF" opacity="0.3" rx="3"/>
+            <text x="200" y="238" font-size="10" fill="#001E5F" text-anchor="middle" font-family="monospace">
+              σ = √N  (for counting)
+            </text>
+
+            <!-- Row 5: Error Propagation -->
+            <text x="40" y="265" font-size="11" fill="#001E5F" font-weight="700">Error Propagation:</text>
+            <rect x="40" y="272" width="320" height="22" fill="#B7D3FF" opacity="0.3" rx="3"/>
+            <text x="200" y="288" font-size="10" fill="#001E5F" text-anchor="middle" font-family="monospace">
+              σ_f ≈ |df/dx| σ_x
+            </text>
+
+            <!-- Footer -->
+            <text x="200" y="315" font-size="9" fill="#707070" text-anchor="middle" font-style="italic">
+              Keep these formulas close when designing experiments
+            </text>
+
+          </svg>
+        </div>
+
+        <!-- RIGHT: text wrap-up -->
+        <div class="panel navy panel-right">
+          <div class="accent-bar"></div>
+          <p class="section-tag">Summary</p>
+          <h2>You now have<br>the tools</h2>
+          <p>This is your toolkit for understanding and quantifying measurement uncertainty.</p>
+          <p><strong>Always ask:</strong> How big is my error? Does my measurement answer the question? Do my results agree with others?</p>
+          <p>Error analysis turns raw data into reliable conclusions. When you report a result, report its uncertainty too. That's how science works.</p>
+          <p style="margin-top: 28px; font-size: 0.95rem; opacity: 0.7;">
+            <em>Ready to measure?</em>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SCROLL SCRIPT
+       For each .stop:
+         1. IntersectionObserver adds .stop-active when the stop
+            enters the viewport → CSS transition slides cards in.
+         2. On every scroll event, for each stop that is currently
+            "past" (user has scrolled beyond its midpoint), compute
+            an exit fraction and apply scale() + opacity to the
+            .card-pair, making cards shrink into the distance.
+  ═══════════════════════════════════════════════════════════════ -->
+  <script>
+    const progressBar = document.getElementById('progress');
+    const stage = document.querySelector('.stage');
+    const stops = Array.from(document.querySelectorAll('.stop'));
+
+    // ── Progress bar + scroll hint fade + background color ──────
+    let hasScrolled = false;
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    function onScroll() {
+      const scrolled = window.scrollY;
+      const maxScroll = document.body.scrollHeight - window.innerHeight;
+      progressBar.style.width = (scrolled / maxScroll * 100) + '%';
+      updateCards(scrolled);
+
+      // Hide scroll hint after any scroll
+      if (!hasScrolled && scrolled > 10) {
+        hasScrolled = true;
+        document.body.classList.add('has-scrolled');
+      }
+
+      // Change stage background based on active stop
+      updateStageBackground(scrolled);
+    }
+
+    function updateStageBackground(scrollY) {
+      // Determine which stop is currently in view
+      let activeClass = 'bg-sec-why';  // default to first section
+
+      stops.forEach(stop => {
+        // If we've scrolled past this stop's top, mark it as the active one
+        if (scrollY >= stop.offsetTop) {
+          activeClass = 'bg-' + stop.id;
+        }
+      });
+
+      // Update stage classes
+      if (stage) {
+        stage.className = 'stage ' + activeClass;
+      }
+    }
+
+    // ── Activate stops (slide cards in) ───────────────────────
+    // Each stop is 300vh tall. Cards fly in when the top of the
+    // stop reaches the viewport (i.e. scrollY >= stop.offsetTop).
+    // We give a small buffer (100px) so the entrance feels natural.
+    const activateObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('stop-active');
+      });
+    }, { threshold: 0.08 });
+
+    stops.forEach(s => activateObserver.observe(s));
+
+    // ── Exit animation (shrink into distance) ─────────────────
+    // For each stop, the "hold zone" is the middle 100vh of its
+    // 300vh height. Before the hold zone: cards are entering.
+    // After the hold zone: cards exit by scaling down + fading.
+    function updateCards(scrollY) {
+      stops.forEach(stop => {
+        const pair = stop.querySelector('.card-pair');
+        if (!pair) return;
+
+        const rect   = stop.getBoundingClientRect();
+        const stopH  = stop.offsetHeight;          // 300vh
+        const holdH  = window.innerHeight;         // hold zone = 1 viewport height
+        // exitStart: when the bottom of the hold zone leaves the top of the viewport
+        // i.e. when scrollY = stop.offsetTop + holdH
+        const exitStart = stop.offsetTop + holdH;
+        const exitEnd   = stop.offsetTop + stopH - window.innerHeight;
+
+        if (scrollY <= exitStart) {
+          // Within or before hold zone — full size, full opacity
+          pair.style.transform = 'scale(1)';
+          pair.style.opacity   = '1';
+        } else if (scrollY >= exitEnd) {
+          // Past the stop entirely — hide
+          pair.style.transform = 'scale(0.7)';
+          pair.style.opacity   = '0';
+        } else {
+          // In the exit zone — interpolate
+          const t = (scrollY - exitStart) / (exitEnd - exitStart); // 0→1
+          const scale   = 1 - 0.3 * t;          // 1.0 → 0.7
+          const opacity = 1 - t;                 // 1.0 → 0.0
+          pair.style.transform = `scale(${scale.toFixed(3)})`;
+          pair.style.opacity   = opacity.toFixed(3);
+        }
+      });
+    }
+
+    // Run once on load to set initial state
+    updateCards(window.scrollY);
+
+    // ── Ruler jiggle animation trigger ──────────────────────────
+    // Once measurement scene becomes active, start the jiggle
+    const rulerImg = document.getElementById('ruler-img');
+    const measStop = document.getElementById('sec-meas');
+    if (rulerImg && measStop) {
+      const rulerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            rulerImg.classList.add('jiggle');
+          } else {
+            rulerImg.classList.remove('jiggle');
+          }
+        });
+      }, { threshold: 0.3 });
+      rulerObserver.observe(measStop);
+    }
+
+    // ── Dot nav highlighting ───────────────────────────────────
+    const dots = document.querySelectorAll('.section-dots a');
+    const dotIds = ['hero', 'sec-why', 'sec-temp', 'sec-grav', 'sec-meas', 'sec-acc', 'sec-dist', 'sec-std', 'sec-sem', 'sec-prop', 'sec-summary', 'sec-poisson'];
+    const dotObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const idx = dotIds.indexOf(e.target.id);
+          dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        }
+      });
+    }, { threshold: 0.3 });
+    dotIds.forEach(id => { const el = document.getElementById(id); if (el) dotObserver.observe(el); });
+
+    // Trigger MathJax to process the page after loading
+    window.addEventListener('load', function() {
+      if (window.MathJax) {
+        MathJax.contentDocument = document;
+        MathJax.typesetPromise().catch(err => console.log(err));
+      }
+    });
+  </script>
+

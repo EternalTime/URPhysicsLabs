@@ -1,0 +1,319 @@
+/* ── Brand tokens ──────────────────────────────────────────── */
+:root {
+  --ur-navy:   #001E5F;
+  --ur-gold:   #FFD100;
+  --ur-light:  #F4F4F4;
+  --ur-text:   #222222;
+  --ur-link:   #005EB8;
+  --max-width: 980px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', Aptos, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ur-text);
+  background: #fff;
+}
+
+a { color: var(--ur-link); text-decoration: underline; }
+a:hover { color: var(--ur-navy); }
+
+/* ── MASTHEAD ───────────────────────────────────────────────── */
+.masthead {
+  background: var(--ur-navy);
+  padding: 10px 20px;
+}
+
+.masthead-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.masthead-inner .ur-logo {
+  height: 44px;
+  width: auto;
+}
+
+/* ── NAMEPLATE ──────────────────────────────────────────────── */
+.nameplate {
+  background: var(--ur-navy);
+  border-bottom: 4px solid var(--ur-gold);
+  padding: 12px 20px 14px;
+}
+
+.nameplate-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.nameplate-inner .dept-name {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.nameplate-inner .site-title {
+  display: block;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+/* ── NAV BAR ────────────────────────────────────────────────── */
+nav {
+  background: #fff;
+  border-bottom: 2px solid var(--ur-navy);
+  position: relative;
+  z-index: 100;
+}
+
+nav > ul {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+  list-style: none;
+  display: flex;
+  gap: 0;
+}
+
+nav > ul > li > a {
+  display: block;
+  padding: 12px 20px;
+  color: var(--ur-navy);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+nav > ul > li > a:hover,
+nav > ul > li > a.active {
+  border-bottom-color: var(--ur-gold);
+  color: var(--ur-navy);
+}
+
+/* ── DROPDOWN ───────────────────────────────────────────────── */
+nav > ul > li {
+  position: relative;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-top: 3px solid var(--ur-navy);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  list-style: none;
+  z-index: 200;
+}
+
+nav > ul > li:hover .dropdown {
+  display: block;
+}
+
+.dropdown li a {
+  display: block;
+  padding: 10px 18px;
+  color: var(--ur-navy);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+  border-left: 3px solid transparent;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.dropdown li a:hover {
+  background: var(--ur-light);
+  border-left-color: var(--ur-gold);
+}
+
+.has-dropdown > a::after {
+  content: " ▾";
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* ── MAIN CONTENT ───────────────────────────────────────────── */
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+}
+
+.intro {
+  background: var(--ur-light);
+  border-left: 5px solid var(--ur-navy);
+  padding: 18px 22px;
+  margin-bottom: 28px;
+  font-size: 1.02rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ur-navy);
+  border-left: 5px solid var(--ur-gold);
+  padding-left: 12px;
+  margin: 40px 0 16px;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ur-navy);
+  margin: 24px 0 8px;
+}
+
+p { margin-bottom: 1em; }
+
+ul.content-list {
+  padding-left: 1.4em;
+  margin-bottom: 1em;
+}
+
+ul.content-list li { margin-bottom: 0.35em; }
+
+/* ── Two-column layout ──────────────────────────────────────── */
+.general-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 0 36px;
+  align-items: start;
+}
+
+.general-main  { min-width: 0; }
+
+.general-sidebar {
+  position: sticky;
+  top: 20px;
+}
+
+.general-sidebar h3 { margin-top: 0; }
+
+@media (max-width: 680px) {
+  .general-layout {
+    grid-template-columns: 1fr;
+  }
+  .general-sidebar {
+    position: static;
+  }
+}
+
+/* ── Calendar ───────────────────────────────────────────────── */
+.lab-calendar {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 12px 0 0;
+  font-size: 0.88rem;
+}
+
+.lab-calendar caption {
+  font-weight: 700;
+  text-align: left;
+  color: var(--ur-navy);
+  caption-side: top;
+  padding-bottom: 6px;
+}
+
+.lab-calendar th {
+  background: var(--ur-navy);
+  color: #fff;
+  padding: 6px 8px;
+  text-align: center;
+}
+
+.lab-calendar td {
+  padding: 5px 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.lab-calendar tr:nth-child(even) td { background: var(--ur-light); }
+
+.lab-calendar tr.break td {
+  background: #d4edda;
+  font-style: italic;
+  color: #4a6741;
+}
+
+/* ── Manual lists ───────────────────────────────────────────── */
+.manual-course { margin-bottom: 30px; }
+
+.manual-course ul {
+  list-style: none;
+  padding: 0;
+}
+
+.manual-course ul li {
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.manual-course ul li .exp-name {
+  min-width: 130px;
+  font-weight: 600;
+  color: var(--ur-navy);
+}
+
+.manual-course ul li a { font-size: 0.88rem; white-space: nowrap; }
+
+/* ── FAQ ────────────────────────────────────────────────────── */
+details.faq-item { border-bottom: 1px solid #ddd; }
+
+details.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 11px 4px;
+  font-weight: 600;
+  color: var(--ur-navy);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+details.faq-item summary::before { content: "►"; font-size: 0.7rem; }
+details.faq-item[open] summary::before { content: "▼"; }
+
+details.faq-item .faq-body { padding: 6px 24px 14px; }
+
+/* ── FOOTER ─────────────────────────────────────────────────── */
+footer {
+  background: var(--ur-navy);
+  color: rgba(255,255,255,0.7);
+  font-size: 0.85rem;
+  padding: 28px 20px 24px;
+  text-align: center;
+}
+
+footer img.footer-logo {
+  height: 36px;
+  width: auto;
+  display: block;
+  margin: 0 auto 16px;
+  opacity: 0.9;
+}
+
+footer a { color: var(--ur-gold); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+footer p + p { margin-top: 6px; }

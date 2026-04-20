@@ -1,0 +1,21 @@
+<nav aria-label="Main navigation">
+  <ul>
+    <li><a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active"{% endif %}>Home</a></li>
+    <li><a href="{{ '/' | relative_url }}#general">General Info</a></li>
+    <li class="has-dropdown">
+      <a href="{{ '/' | relative_url }}#manuals">Documents</a>
+      <ul class="dropdown" aria-label="Course documents">
+        <li><a href="{{ '/' | relative_url }}#phy113">PHY 113 — Mechanics I</a></li>
+        <li><a href="{{ '/' | relative_url }}#phy114">PHY 114 — Electricity &amp; Magnetism</a></li>
+        <li><a href="{{ '/' | relative_url }}#phy121">PHY 121 — Mechanics</a></li>
+        <li><a href="{{ '/' | relative_url }}#phy122">PHY 122 — Electricity &amp; Magnetism</a></li>
+        <li><a href="{{ '/' | relative_url }}#phy123">PHY 123 — Modern Physics</a></li>
+        <li><a href="{{ '/' | relative_url }}#phy141">PHY 141 — Mechanics</a></li>
+        <li><a href="{{ '/' | relative_url }}#phy142">PHY 142 — Electricity &amp; Magnetism</a></li>
+        <li><a href="{{ '/' | relative_url }}#phy143">PHY 143 — Modern Physics</a></li>
+      </ul>
+    </li>
+    <li><a href="{{ '/' | relative_url }}#faq">FAQ</a></li>
+    <li><a href="{{ '/' | relative_url }}#ta">For TAs/TIs</a></li>
+  </ul>
+</nav>
