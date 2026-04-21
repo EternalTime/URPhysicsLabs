@@ -1,0 +1,24 @@
+\begin{circuitikz}
+    \draw (0,0) coordinate (A)
+          to[battery2, invert, l^=$V_s$] ++(0,5)
+          to[short] ++(2.5,0) coordinate (B)
+          to[R, l^=$R_1$] ++(0,-2.5) coordinate (C)
+          to[R, l^=$R_2$] ++(0,-2.5) coordinate (D)
+          to[rmeter, t=A] (A);
+    % Draw currents
+    \draw[red, -latex]
+          ($ (A) + (0.75,2)$) -- node[midway, right] {$I_s$} ++(0,1);
+    \draw[red, -latex]
+          ($ (B) - (0.5,0.75)$) -- node[midway, left] {$I_1$} ++(0,-1);
+    \draw[red, -latex]
+          ($ (C) - (0.5,0.75)$) -- node[midway, left] {$I_2$} ++(0,-1);
+    % Draw leads to voltmeters measuring V1 and V2
+    \draw[gray] ($ (B) - (0,0.25)$)
+          to[short, *-] ++(1.5,0)
+          to[short] node[pos=0.5,fill=white] {$V_1$} ++(0,-2)
+          to[short, -*] ++(-1.5,0);
+    \draw[gray] ($ (C) - (0,0.25)$)
+          to[short, *-] ++(1.5,0)
+          to[short] node[pos=0.5,fill=white] {$V_2$} ++(0,-2)
+          to[short, -*] ++(-1.5,0);
+\end{circuitikz}

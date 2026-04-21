@@ -1,0 +1,73 @@
+% Draw the rotary table time series.
+
+\scalebox{0.65}{
+\begin{tikzpicture}
+    %%% First row
+    \draw (0,1.5) node {\large\bf 1. Equilibrium};
+    \filldraw[color=black, fill=gray!10, very thick](0,0) node {Table} circle (1);
+    \draw[color=black, very thick] (-0.07,-1.4) node[below left] {Photogate} rectangle (0.07,-1);
+    \draw[color=black, very thick, densely dotted] (-0.07,-1) rectangle (0.07,-0.6);
+    \draw[color=black, fill=black, rotate around={45:(0,0)}] (-0.1,-1.3) node[right, xshift=1mm] {Trigger} rectangle (0.1,-1);
+    \draw[fill=black, rotate around={340:(0,0)}] (-0.1,1) rectangle (0.1,1.15) node[right] {Stopper};
+    %
+    \draw ({0+6},1.5) node {\large\bf 2. Spring compressed};
+    \filldraw[color=black, fill=gray!10, very thick]({0+6},0) node {Table} circle (1);
+    \draw[color=black, very thick] ({-0.07+6},-1.4) rectangle ({0.07+6},-1); % photogate
+    \draw[color=black, very thick, densely dotted] ({-0.07+6},-1) rectangle ({0.07+6},-0.6);
+    \draw[color=black, fill=black, rotate around={145:({0+6},0)}] ({-0.1+6},-1.3) rectangle ({0.1+6},-1); % trigger
+    \draw[fill=black, rotate around={340:({0+6},0)}] ({-0.1+6},1) rectangle ({0.1+6},1.15); % stopper
+    \draw[thick, -Latex] ({1.25*cos(30)+6}, {0-1.25*sin(30)}) arc (-30:30:1.25);
+    %
+    \draw ({0+12},1.5) node {\large\bf 3. Spring released};
+    \filldraw[color=black, fill=gray!10, very thick]({0+12},0) node {Table} circle (1);
+    \draw[color=black, very thick] ({-0.07+12},-1.4) rectangle ({0.07+12},-1); % photogate
+    \draw[color=black, very thick, densely dotted] ({-0.07+12},-1) rectangle ({0.07+12},-0.6);
+    \draw[color=black, fill=black, rotate around={45:({0+12},0)}] ({-0.1+12},-1.3) rectangle ({0.1+12},-1); % trigger
+    \draw[fill=black, rotate around={340:({0+12},0)}] ({-0.1+12},1) rectangle ({0.1+12},1.15); % stopper
+    \draw[thick, Latex-] ({1.25*cos(30)+12}, {-1.25*sin(30)}) arc (-30:30:1.25);
+    \draw[thick, red, -Latex] (13, -1) -- node[midway,xshift=3mm,yshift=-2mm] {\Large $v$} ({13-cos(45)}, {-1-sin(45)});
+    %
+    \draw ({0+18},1.5) node[align=center, yshift=3mm] {\large\bf 4. Trigger passes\\ \large\bf photogate (1st time)};
+    \filldraw[color=black, fill=gray!10, very thick]({0+18},0) node {Table} circle (1);
+    \draw[color=black, very thick] ({-0.07+18},-1.4) rectangle ({0.07+18},-1); % photogate
+    \draw[color=black, very thick, densely dotted] ({-0.07+18},-1) rectangle ({0.07+18},-0.6);
+    \draw[color=black, fill=black, rotate around={0:({0+18},0)}] ({-0.1+18},-1.3) rectangle ({0.1+18},-1); % trigger
+    \draw[fill=black, rotate around={340:({0+18},0)}] ({-0.1+18},1) rectangle ({0.1+18},1.15); % stopper
+    \draw[thick, Latex-] ({1.25*cos(70)+18}, {-1.25*sin(70)}) arc (-70:-10:1.25);
+    \draw[thick, red, -Latex] (18, -1.5) -- (17, -1.5) node[left] {\Large $v$};
+    %
+    %%% Second row
+    \draw (0,{1.5-5}) node[align=center, yshift=3mm] {\large\bf 5. Trigger at\\ \large\bf max displacement};
+    \filldraw[color=black, fill=gray!10, very thick](0,{0-5}) node {Table} circle (1);
+    \draw[color=black, very thick] (-0.07,{-1.4-5}) rectangle (0.07,{-1-5}); % photogate
+    \draw[color=black, very thick, densely dotted] (-0.07,{-1-5}) rectangle (0.07,{-0.6-5});
+    \draw[color=black, fill=black, rotate around={215:(0,{0-5})}] (-0.1,{-1.3-5}) rectangle (0.1,{-1-5}); % trigger
+    \draw[fill=black, rotate around={340:(0,{0-5})}] (-0.1,{1-5}) rectangle (0.1,{1.15-5}); % stopper
+    \draw[thick, -Latex] ({1.25*cos(145)}, {-1.25*sin(145) - 5}) arc (-145:-205:1.25);
+    %
+    \draw ({0+6},{1.5-5}) node[align=center, yshift=3mm] {\large\bf 6. Trigger passes\\ \large\bf photogate (2nd time)};
+    \filldraw[color=black, fill=gray!10, very thick]({0+6},{0-5}) node {Table} circle (1);
+    \draw[color=black, very thick] ({-0.07+6},{-1.4-5}) rectangle ({0.07+6},{-1-5}); % photogate
+    \draw[color=black, very thick, densely dotted] ({-0.07+6},{-1-5}) rectangle ({0.07+6},{-0.6-5});
+    \draw[color=black, fill=black, rotate around={0:({0+6},{0-5})}] ({-0.1+6},{-1.3-5}) rectangle ({0.1+6},{-1-5}); % trigger
+    \draw[fill=black, rotate around={340:({0+6},{0-5})}] ({-0.1+6},{1-5}) rectangle ({0.1+6},{1.15-5}); % stopper
+    \draw[thick, -Latex] ({1.25*cos(170)+6}, {-1.25*sin(170)-5}) arc (-170:-110:1.25);
+    \draw[thick, red, -Latex] (6, {-1.5-5}) -- (7, {-1.5-5}) node[right] {\Large $v$};
+    %
+    \draw ({0+12},{1.5-5}) node[align=center, yshift=3mm] {\large\bf 7. Trigger at\\ \large\bf min displacement};
+    \filldraw[color=black, fill=gray!10, very thick]({0+12},{0-5}) node {Table} circle (1);
+    \draw[color=black, very thick] ({-0.07+12},{-1.4-5}) rectangle ({0.07+12},{-1-5}); % photogate
+    \draw[color=black, very thick, densely dotted] ({-0.07+12},{-1-5}) rectangle ({0.07+12},{-0.6-5});
+    \draw[color=black, fill=black, rotate around={145:({0+12},{0-5})}] ({-0.1+12},{-1.3-5}) rectangle ({0.1+12},{-1-5}); % trigger
+    \draw[fill=black, rotate around={340:({0+12},{0-5})}] ({-0.1+12},{1-5}) rectangle ({0.1+12},{1.15-5}); % stopper
+    \draw[thick, -Latex] ({1.25*cos(30)+12}, {0-1.25*sin(30)-5}) arc (-30:30:1.25);
+    %
+    \draw ({0+18},{1.5-5}) node[align=center, yshift=3mm] {\large\bf 8. Trigger passes\\ \large\bf photogate (3rd time)};
+    \filldraw[color=black, fill=gray!10, very thick]({0+18},{0-5}) node {Table} circle (1);
+    \draw[color=black, very thick] ({-0.07+18},{-1.4-5}) rectangle ({0.07+18},{-1-5}); % photogate
+    \draw[color=black, very thick, densely dotted] ({-0.07+18},{-1-5}) rectangle ({0.07+18},{-0.6-5});
+    \draw[color=black, fill=black, rotate around={0:({0+18},{0-5})}] ({-0.1+18},{-1.3-5}) rectangle ({0.1+18},{-1-5}); % trigger
+    \draw[fill=black, rotate around={340:({0+18},{0-5})}] ({-0.1+18},{1-5}) rectangle ({0.1+18},{1.15-5}); % stopper
+    \draw[thick, Latex-] ({1.25*cos(70)+18}, {-1.25*sin(70)-5}) arc (-70:-10:1.25);
+    \draw[thick, red, -Latex] (18, {-1.5-5}) -- (17, {-1.5-5}) node[left] {\Large $v$};
+\end{tikzpicture}}

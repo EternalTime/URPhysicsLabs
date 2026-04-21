@@ -1,0 +1,114 @@
+% Diagram of single-slit diffraction setup with an inset closeup of the slit.
+% Based on https://tikz.net/optics_diffraction/, with some cosmetic adaptations.
+\begin{tikzpicture}
+
+    % Closeup view of the single slit
+    \begin{scope}[shift={(-7,0)}, scale=1.2]
+        \def\L{6.15}      % distance between walls
+        \def\l{4.0}       % path length
+        \def\H{4.3}       % total wall height
+        \def\f{0.9}       % fractional height of projection point
+        \def\t{0.15}      % wall thickness
+        \def\a{2.5}       % slit distance
+        \def\ang{26}      % angle
+        \coordinate (T) at (0,\a/2);
+        \coordinate (B) at (0,-\a/2);
+        \coordinate (L) at (0,0);
+        \coordinate (R) at (\L,0);
+        \coordinate (I) at ({\a/2/tan(\ang)},0);
+
+        % LINES
+        \draw[photon] (T) --++ (\ang:.8*\l) coordinate (PT); 
+        %node[midway,below=1,above left=-2] {$r_1$};
+        \draw[photon] (B) --++ (\ang:\l) coordinate (PB); %node[midway,left=2,below right=-1] {$r_2$};
+        \draw[photon] (L) --++ (\ang:.9*\l) coordinate (PR);
+        \draw[dashed] (T) -- (B);
+        \draw[RocBlue,dashed] (T) -- ($(L)!(T)!(PR)$) coordinate (M);
+        %\draw[black!60,dashed] (T) --++ (.20*\L,0) coordinate (TR);
+        \draw[black!60,dashed] (L) --++ (.6*\L,0) coordinate (LR);
+        %\draw[black!60,dashed] (B) --++ (.20*\L,0) coordinate (BR);
+
+        % LINE END
+        \lineend{PT}{\ang+70}
+        \lineend{PR}{\ang+70}
+        \lineend{PB}{\ang+70}
+
+        % ANGLES
+        \draw pic[-latex,"$\theta$",RocBlue,draw=RocBlue,angle radius=20,angle eccentricity=1.3]
+          {angle = B--T--M}; %\contour{white}{}
+        \draw pic[-latex,"$\theta$",RocBlue,draw=RocBlue,angle radius=24,angle eccentricity=1.2]
+          {angle = LR--L--PR};
+        \draw pic[-latex,"$\theta$",RocBlue,draw=RocBlue,angle radius=24,angle eccentricity=1.2]
+          {angle = LR--I--PB};
+        \rightAngle{T}{M}{PR}{0.3}
+
+        % MEASURES
+        \draw[latex-latex,black] (-2.1*\t,0) --++ (0,\a/2) node[midway,fill=white,inner sep=0.1] {$a/2$};
+        \draw[latex-latex,black] (-2.1*\t,0) --++ (0,-\a/2) node[midway,fill=white,inner sep=0.1] {$a/2$};
+        \draw[latex-latex,black] ([shift={({\ang-90}:0.1)}]L) -- ([shift={({\ang-90}:0.1)}]M)
+          node[midway,left=5,below right=-1]{$\displaystyle{\frac{a}{2}\!\sin\theta}$};
+
+        % WALL
+        \fill[gray]
+          (0,\a/2) rectangle (-\t,\H/2)
+          (0,-\a/2) rectangle (-\t,-\H/2);
+  \end{scope}
+
+    % Single slit diagram showing the screen
+    \begin{scope}
+        \def\L{9}         % distance between walls
+        \def\H{4.3}       % total wall height
+        \def\f{0.95}      % fractional height of projection point
+        \def\ang{atan((\f*\H+\a/2)/\L/2)} % theta
+        \def\t{0.15}      % wall thickness
+        \def\a{2.5}       % slit distance
+        \coordinate (T) at (0,\a/2);
+        \coordinate (B) at (0,-\a/2);
+        \coordinate (L) at (0,0);
+        \coordinate (R) at (\L,0);
+        \coordinate (P) at (\L,\f*\H/2);
+        \coordinate (M) at ($(L)!(T)!(P)$);
+
+        % LINES
+        \draw[photon] (T) -- (P); %node[midway,above=-1] {$r_1$};
+        \draw[photon] (B) -- (P); %node[midway,below=3,right=6] {$r_2$}; %right=6,below right=-4
+        \draw[photon] (L) -- (P);
+        \draw[dashed] (T) -- (B);
+        \draw[dashed,black!60] (L) -- (R);
+        \draw[RocBlue,dashed] (M) -- (T);
+
+        % ANGLES
+        \draw pic[-,"\footnotesize$\theta$",RocBlue,draw=RocBlue,angle radius=25,angle eccentricity=1.2]
+          {angle = B--T--M};
+        \draw pic[-,"\footnotesize$\theta$",RocBlue,draw=RocBlue,angle radius=31,angle eccentricity=1.14]
+          {angle = R--L--P};
+        \rightAngle{T}{M}{P}{0.3}
+
+        % MEASURES
+        \draw[latex-latex,black] (0,-0.47*\H) --++ (\L,0) node[midway,fill=white,inner sep=1] {$L$};
+        \draw[latex-latex,black] (-2.1*\t,0) --++ (0,\a/2) node[midway,fill=white,inner sep=0.1] {$a/2$};
+        \draw[latex-latex,black] (-2.1*\t,0) --++ (0,-\a/2) node[midway,fill=white,inner sep=0.1] {$a/2$};
+        \draw[|-|,black] ([shift={({\ang-100}:0.1)}]L) -- ([shift={({\ang-100}:0.1)}]M)
+          node[midway,left=3,below right]{\footnotesize $\displaystyle{\frac{a}{2}\sin\theta}$};
+        \draw[latex-latex,black] ([shift={(2.1*\t,0)}]P) -- ([shift={(2.1*\t,0)}]R)
+          node[midway,fill=white,inner sep=1]{$y$};
+
+        % WALL
+        \fill[gray]
+          (0,\a/2) rectangle (-\t,\H/2)
+          (0,-\a/2) rectangle (-\t,-\H/2)
+          (\L,-\H/2) rectangle (\L+\t,\H/2);
+        \draw[YellowOrange!80!black, fill=white] (P) circle (0.4*\t) node[above left] {$P$};
+%        \fill[YellowOrange!80!black] (P) circle (0.3*\t) node[right=1,above left=-1] {P};
+    \end{scope}
+
+    % Draw a bounding box around part of the scene:
+    \draw[densely dotted] (-0.75,-2.25) rectangle (1.75,2.25);
+
+    % Draw a bounding box around the closeup with connections to the larger
+    % drawing to show the inset:
+    \draw[densely dotted] (-7.75,-2.75) rectangle (-2.5,3.5);
+    \draw[densely dotted] (-2.5,-2.75) -- (1.75,-2.25);
+    \draw[densely dotted] (-2.5,3.5) -- (1.75,2.25);
+
+\end{tikzpicture}

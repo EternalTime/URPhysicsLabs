@@ -1,0 +1,438 @@
+\documentclass[addpoints]{physlabs}
+
+\labtitle{Electron Beams and the Electron Charge-to-Mass Ratio}
+\labnum{8}
+\labnumroman{VIII}
+\course{PHYSICS 122 - 142 - 182}
+\coursesubtitle{Electricity and Magnetism}
+\date{\today}
+
+% Check mark and X mark
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}
+
+\begin{document}
+
+\maketitle
+
+% PRELAB SECTION
+\begin{prelab}
+
+    \filbreak
+    \question[1] Name the two forces that are equated in order to derive the charge-to-mass ratio of a charged particle.
+    %
+    \begin{solution}[4cm]
+        
+    \end{solution}
+
+    \filbreak
+    \question[1] Describe or make a rough sketch of the path of an electron traveling into a region with a constant $B$ field. Assume the $B$ field is out of the page and the initial velocity of the electron is perpendicular to the field. In this experiment, what provides the B-field?{\color{red} (Hint: an electron has negative charge.)}
+    %
+    \begin{solution}[4cm]
+        
+    \end{solution}
+    
+\end{prelab}
+
+% LAB SECTION
+\begin{labsection}
+
+\begin{objective}
+    To explore the effects of magnetic fields on charged particle beams and to measure $e/m_e$, the charge-to-mass ratio of the electron.
+\end{objective}
+
+\begin{theory} 
+
+    A particle with charge $q$ moving with velocity $\mathbf{v}$ through a region with an electric and magnetic fields $\mathbf{E}$ and $\mathbf{B}$ will experience a force
+    %
+    \begin{equation}\label{eq: lorentz force}
+        \mathbf{F} = q(\mathbf{E} + \mathbf{v}\times\mathbf{B}).
+    \end{equation}
+    %
+    The force in eq.~\ref{eq: lorentz force}, known as the \textbf{Lorentz force}, is parallel to $\mathbf{E}$ and perpendicular to both $\mathbf{v}$ and $\mathbf{B}$.
+
+    Suppose that we have a beam of electrons, so that $q=e\approx\qty{1.602e-19}{\coulomb}${\color{red} (should be negative. So figure 1 has wrong direction. I suggest not showing figure 1 because it's exactly the prelab question 2)}, and we inject the beam into a region with no electric field and a uniform magnetic field oriented perpendicular to the beam. In this case, eq.~\ref{eq: lorentz force} will reduce to
+    %
+    \begin{align}\label{eq: evB force}
+        \mathbf{F} &= e\mathbf{v}\times\mathbf{B}, {\color{red} (minus\,sign)}
+        &
+        |\mathbf{F}| = F = evB.
+    \end{align}
+    %
+    Due to the vector product, the force will always be perpendicular to $\mathbf{v}$, causing the beam to bend into a circular path of radius $r$. This makes $F$ a centripetal force:
+    %
+    \begin{equation}\label{eq: electron centripetal force}
+        m_e\frac{v^2}{r} = evB.
+    \end{equation}
+
+    \begin{figure}[ht]
+        \centering
+        \input{Lab 08: Electron Beams/electron-beam-deflection}
+        \caption{An electron is accelerated from rest by a constant electric field $\mathbf{E}$ and passes into a region with a uniform magnetic field $\mathbf{B}$, which produces a centripetal force given by eq.~\ref{eq: electron centripetal force}.}
+        \label{fig: e beam deflection}
+    \end{figure}
+
+    To precisely control $v$, imagine two conducting plates with a potential difference (or voltage) $V$ between them. An electron starting at rest at one plate is accelerated to energy $eV$ by the uniform $\mathbf{E}$ field between the plates. Thus, the electron's kinetic energy when it leaves the region of the $\mathbf{E}$ field is
+    %
+    \begin{equation}
+        \frac{1}{2}m_ev^2 = eV,
+    \end{equation}
+    %
+    and therefore its velocity once it leaves the region between the plates is
+    %
+    \begin{equation}\label{eq: electron velocity}
+        v = \sqrt{\frac{2eV}{m_e}}.
+    \end{equation}
+    %
+    Combining eqs.~\ref{eq: electron centripetal force} and \ref{eq: electron velocity} gives the charge-to-mass ratio
+    %
+    \begin{equation}\label{eq: em ratio}
+        \frac{e}{m_e} = \frac{2V}{(rB)^2}.
+    \end{equation}
+    %
+    In summary, we can control the velocity of the electron by setting the voltage $V$. If we set up an external uniform field $B$ and measure the radius of curvature of the electron as it enters the region with the $B$ field, we will observe the electron beam curving due to the force in eq.~\ref{eq: electron centripetal force}. By measuring the radius of curvature of the path, we can estimate $e/m_e$, the ratio of two fundamental properties of the electron: its charge $e$ and its mass $m_e$.
+    
+\end{theory}
+
+\begin{experiment}
+
+    In this experiment, we will use the apparatus shown in Figure~\ref{fig: helmholtz coil and CRT} to carry out the measurement sketched out in Figure~\ref{fig: e beam deflection}.
+
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[width=\linewidth]{Lab 08: Electron Beams/ElectronApparatus.png}
+        \caption{The vacuum tube and Helmholtz coil used to measure $e/m_e$ in this experiment.}
+        \label{fig: helmholtz coil and CRT}
+    \end{figure}
+
+    The apparatus consists of two major components. First, a \textbf{vacuum tube} containing a heated filament at one end provides a source of electrons. The electrons are accelerated by an applied voltage $V$ which sets up an $\mathbf{E}$ field, and the resulting electron beam is collected on an electrode at the other end side of the vacuum tube.
+
+    Second, outside the vacuum tube is a \textbf{Helmholtz coil}, which establishes a uniform $\mathbf{B}$ field in the tube. The Helmholtz coil is made of two coaxial circular electromagnets of radius $R$ separated by a length $\ell=R$. If each electromagnet has $N$ windings of magnet wire carrying current $I$, then the magnitude of the field inside the coil is given by
+    %
+    \begin{equation}\label{eq: field magnitude}
+        B = \left(\frac{4}{5}\right)^{3/2} \frac{\mu_0 NI}{R}.
+    \end{equation}
+    %
+    Given $N=130$ windings per coil, the permeability of free space $\mu_0=4\pi\times10^{-7}~\text{H/m} \approx \qty{1.26e-6}{\henry/\meter}$, and assuming $R=\qty{15}{\centi\meter}=\qty{0.15}{\meter}$, the field magnitude can be expressed in terms of coil current $I$ as
+    %
+    \begin{equation}\label{eq: magnetic field}
+        B = 0.77\cdot I~\qty{}{\milli\tesla}
+          = (7.7\times10^{-4})\cdot I~\qty{}{\tesla}
+    \end{equation}
+    
+    % current $I$ in the coil, we can compute the strength of the magnetic field at the center using the constants
+    % %
+    % \begin{align*}
+    %     \mu_0 &= 4\pi\times10^{-7}~\text{H/m} \approx \qty{1.26e-6}{\henry/\meter}, & &\text{permeability of free space},
+    %     \\
+    %     N &= 130 & &\text{windings per coil},
+    %     \\
+    %     R &= \qty{0.15}{\meter} & &\text{coil radius}.
+    % \end{align*}
+
+    The apparatus allows you to adjust the applied voltage $V$ and the current $I$, from which you may compute $B$ using eq.~\ref{eq: magnetic field}.{\color{red} (Add reminder: you will measure the $R$ and recalibrate it later)} Referring to eq.~\ref{eq: em ratio}, the final measurement needed to estimate $e/m_e$ is the electron beam's radius of curvature $r$. The tube is filled with a trace amount of He gas, and when the electron beam moves through it, the gas fluoresces with blue light {\color{red} (green light)}, allowing you to see its circular path. A scale inside the tube lets you read off the diameter of the circular path. Dividing by 2 gives the radius of curvature.
+
+    \subsection*{Procedure}
+
+    \begin{center}
+    \setlength{\fboxsep}{6pt}%
+    \setlength{\fboxrule}{2pt}%
+    \fbox{\begin{minipage}{\textwidth}
+        \color{OrangeRed}
+        Note to TAs: If the electron gun in the vacuum tube is not pointed downward, the electron beam will travel on a spiral path. To correct this, loosen the mounting screws of the vacuum tube and rotate the tube a little until the electron gun is in the proper orientation and the beam is circular. This adjustment should be done by a laboratory technician before the laboratory session and should not be left to the student. 
+    \end{minipage}}
+    \end{center}
+
+    \begin{enumerate}
+        \item  Set the apparatus on a level table. The room light should not be too bright, or the electron beam will be hard to see. You may wish to use the ``box'' with the viewing window to reduce glare (see Fig.~\ref{fig: helmholtz coil and CRT}).
+        
+        \item To minimize the effect of Earth's magnetic field on your measurement, use a compass to locate magnetic North and align the Helmholtz coil axis to be perpendicular to the needle.
+        
+        Note that the influence of the geomagnetic field or other sources of magnetic fields can be observed via the deflection of the circular motion of the electron beam while the apparatus is rotated. The magnitude of this deflection is greater when a small current is flowing through the coils.
+        
+        \item With the power switched off, make sure the apparatus is plugged in. Turn on the power switch. The unit will perform a 30-second self-test, indicated by the digital display changing values rapidly. 
+        
+        During the self-test, the controls are locked out to allow the cathode to heat to the proper operating temperature. When the self-test is complete, the display will stabilize and show ``000.'' A further 5-10 minute warm-up time is recommended before starting your measurements.
+
+        \item After 5-10 minutes have elapsed, turn the \textbf{Voltage Adjust} control up to \qty{200}{\volt} {\color{red} (In practice, electrons can be "trapped" in the corner if the voltage is too low. I don't know why. But it turns out that we can see the normal circular path if we use high voltage. My suggestion is using \qty{350}{\volt}, \qty{400}{\volt} and \qty{450}{\volt} for this experiment.)}and observe the bottom of the electron gun. You should see a bluish beam traveling straight down to the envelope of the tube.
+        
+        Note: the Voltage and Current outputs are controlled by an onboard microprocessor that automatically locks out the controls at both the minimum and maximum settings. As a result, when the knob reaches the minimum or maximum setting, it will still turn, but the value shown on the corresponding display will not change. This feature prevents excessive loads from being placed on the tube and provides a smooth, jitter-free display.
+
+        \item Turn the \textbf{Current Adjust} control up and observe the circular deflection of the beam. When the current is high enough, the beam will form a complete circle within the envelope of the vacuum tube. The diameter of the circular beam can be measured using the internal centimeter scale inside the tube. To help you read the correct diameter, the scale numbers fluoresce when struck by the beam. \label{step: current adjust}
+
+        \item With the accelerating voltage set to \qty{200}{\volt}{\color{red}  (Again, can be \qty{350}{\volt})}, measure the beam diameter $d$ for 9 coil current settings and record your results in Data Table~\ref{data: emratio 200V} in the Postlab exercises. \label{step: current measurement}
+        
+        \item Set the accelerating voltage to \qty{300}{\volt}{\color{red}  (can be \qty{400}{\volt})}, repeat the procedure in Steps \ref{step: current adjust} and \ref{step: current measurement}, and measure the beam diameter $d$ for 9 coil current settings. Record your results in Data Table~\ref{data: emratio 300V}.
+        
+        \item Repeat the measurements in Steps \ref{step: current adjust} and \ref{step: current measurement} for one additional accelerating voltage of your choice, recording your data in Data Table~\ref{data: emratio user V}.
+        
+        \item If a small ceramic magnet is available, move it close to the tube and observe the deflection of the beam. It is easy to see how properly designed magnets can be used to focus and steer an electron beam.
+        
+        \item Reset both controls to zero and switch off the apparatus.
+        
+        \item Measure the internal and external diameter of the Helmholtz coils at several different locations and record your results in Data Table~\ref{data: helmholtz coil dimensions}. They may not be quite round, and the two coils may not be quite the same. Using eq.~\ref{eq: field magnitude}, with proper units, recalculate the coefficient in eq.~\ref{eq: magnetic field} using your measured radius $R$, and use this coefficient in your analysis when you convert $I$ to $B$.
+
+        \item Average your measurements and determine the standard error, so that you will be able to decide whether it has a significant effect on the accuracy of your results.
+    \end{enumerate}
+
+    \subsection*{Data Analysis and Estimation of $e/m_e$}
+
+    To estimate $e/m_e$, you will make nine measurements of the radius of curvature $r$ given a fixed accelerating voltage $V$ and a varying Helmholtz coil current $I$. From these, you will estimate the product $rB$ that appears in eq.~\ref{eq: em ratio}. You will need to calculate the mean, the standard deviation, and the uncertainty on the mean value of $rB$. These three quantities are defined below:
+    %
+    \begin{align}
+        \text{Mean:}& & \overline{rB} &= \frac{1}{9}\sum_{i=1}^9 (rB)_i, \label{eq: rB mean}
+        \\
+        \text{Standard deviation:}& & \sigma_{rB}&= \sqrt{\frac{\sum_{i=1}^9\left((rB)_i - \overline{rB}\right)^2}{9-1}}, \label{eq: rB std dev}
+        \\
+        \text{Uncertainty on the mean:}& & \sigma_{\overline{rB}} &= \frac{\sigma_{rB}}{\sqrt{9}}.
+    \end{align}
+
+    \subsubsection*{Propagation of Uncertainties}
+
+    When you have completed the statistical analysis of the three data sets, you will calculate $e/m_e$ from eq.~\ref{eq: em ratio} for each of the three accelerating voltages. You will calculate an uncertainty on $e/m_e$ by propagating the uncertainty on the mean $\sigma_{\overline{rB}}$:
+    %
+    \begin{align}
+        \text{Uncertainty on $e/m_e$:}& & \Delta(e/m_e) &= 2\frac{\sigma_{\overline{rB}}}{\overline{rB}}{\color{red}\frac{e}{m_e}}.
+    \end{align}
+
+    \subsubsection*{Reporting the Charge to Mass Ratio}
+
+    At the end of the data analysis, you will have found three different values for $e/m_e$ and its uncertainty for each of the three accelerating voltages. You will want to quote results to \textbf{three significant figures}. Below are two proper ways to quote your results:
+    %
+    \begin{align*}
+        \frac{e}{m} &= (1.91\pm0.02)\times10^{11}~\qty{}{\coulomb/\kilo\gram}, & & \text{\cmark}
+        \\
+        \frac{e}{m} &= \qty{1.91e11}{\nothing} \pm \qty{0.02e11}{\coulomb/\kilo\gram}. & & \text{\cmark}
+    \end{align*}
+    %
+    The following are examples of \textsl{incorrect} ways to report your results. Look carefully and make sure you understand why each is incorrect. If you are unsure, ask your TA or TI.
+    %
+    \begin{align*}
+        \frac{e}{m} &= \qty{1.91e11}{\nothing} \pm \qty{0.0205e11}{\coulomb/\kilo\gram}, & &\text{\xmark}
+        \\
+        \frac{e}{m} &= \qty{1.9e11}{\nothing} \pm \qty{0.0005e11}{\coulomb/\kilo\gram}, & &\text{\xmark}
+        \\
+        \frac{e}{m} &= \qty{1.9e11}{\nothing} \pm \qty{2.05e9}{\coulomb/\kilo\gram}. & &\text{\xmark}
+        \\
+    \end{align*}
+    
+\end{experiment}
+
+\end{labsection}
+
+% POSTLAB SECTION
+\begin{postlab}
+
+    \filbreak
+    \question[2] Record your measurments of the Helmholtz coil diameter $D$ and radius $R=D/2$ and compute an average value in Data Table~\ref{data: helmholtz coil dimensions}.
+
+    \begin{center}
+        \captionsetup{font=normalsize}
+        \captionof{data table}{Measurements of Helmholtz coil radius. \label{data: helmholtz coil dimensions}}
+        \renewcommand{\arraystretch}{2}
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            \rowcolor{gray!20}
+            $D_\text{inner}$ (cm) & $D_\text{outer}$ (cm) & $R_\text{inner}$ (cm) & $R_\text{outer}$ (cm) & $(R_\text{inner} + R_\text{outer})/2$ (cm)
+            \\
+            \hline
+            & & & & \\ \hline
+            & & & & \\ \hline
+            & & & & \\ \hline
+            \multicolumn{1}{r}{} & \multicolumn{1}{r}{} & \multicolumn{1}{r}{} & \multicolumn{1}{r}{$R = \overline{R}=$} & \multicolumn{1}{r}{m}
+            \\
+            \cline{5-5}
+        \end{tabular}
+    \end{center}
+
+    Next, using the average value of the Helmholtz coil radius $R$, use eq.~\ref{eq: field magnitude} to recompute the coefficient in eq.~\ref{eq: magnetic field}, assuming $N=130$:
+    \[
+        B = \underbrace{\left[\left(\frac{4}{5}\right)^{3/2}\frac{\mu_0 N}{\overline{R}}\right]}_{\text{coefficient (\qty{}{\tesla\cdot\ampere })}} I.
+    \]
+
+    \vspace{6cm}
+    In the experiment, you measured the diameter of the electron beam $d$, which is related to the radius of curvature by $r=d/2$. The calculation of $e/m_e$ uses the product $rB$, so write a formula for computing $rB$ given the measured current $I$ and beam diameter $d$:
+
+    \begin{center}
+        \renewcommand{\arraystretch}{2}
+        \begin{tabular}{rll}
+        $rB=$ & \phantom{the coefficient we want} & $d\cdot I$ (\qty{}{\meter\cdot\tesla})
+        \\
+        \cline{2-2}
+        \end{tabular}
+    \end{center}
+
+    %%% e/m for 200V
+    \filbreak
+    \question[3] Record your measurements from the first voltage setting (\qty{200}{\volt}).{\color{red}(\qty{350}{\volt})} Compute the mean of $rB$, the standard deviation, and the uncertainty on the mean, and estimate $e/m_e$.
+
+    \begin{center}
+        \captionsetup{font=normalsize}
+        \captionof{data table}{Beam measurements using first voltage setting. \label{data: emratio 200V}}
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{|c|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|}
+            \multicolumn{1}{r}{$V=$} & \multicolumn{1}{c}{\qty{200}{\volt} {\color{red}(\qty{350}{\volt})}} & \multicolumn{2}{c}{}
+            \\
+            \cline{2-2}
+            \multicolumn{4}{c}{}
+            \\
+            \hline
+            \rowcolor{gray!20}
+            $N$ & Coil current $I$ (A) & Beam diameter $d$ (m) & $rB$ (\qty{}{\meter\cdot\tesla})
+            \\
+            \hline
+            1 & & & \\ \hline
+            2 & & & \\ \hline
+            3 & & & \\ \hline
+            4 & & & \\ \hline
+            5 & & & \\ \hline
+            6 & & & \\ \hline
+            7 & & & \\ \hline
+            8 & & & \\ \hline
+            9 & & & \\ \hline
+        \end{tabular}
+    \end{center}
+    \vspace{5mm}
+
+    Mean $\overline{rB}$:\\[3em]
+
+    Standard deviation $\sigma_{rB}$:\\[3em]
+
+    Uncertainty on the mean $\sigma_{\overline{rB}} = \sigma_{rB}/\sqrt{9}$:\\[3em]
+
+    Estimated $e/m_e$:\\[3em]
+
+    Uncertainty on $e/m_e$:\\[3em]
+
+    Final result: $e/m_e$ $\pm$ uncertainty, with units:\\[3em]
+
+    %%% e/m for 300V
+    \filbreak
+    \question[3] Record your measurements from the second voltage setting (\qty{300}{\volt}){\color{red}(\qty{400}{\volt})}. Compute the mean of $rB$, the standard deviation, and the uncertainty on the mean, and estimate $e/m_e$.
+
+    \begin{center}
+        \captionsetup{font=normalsize}
+        \captionof{data table}{Beam measurements using second voltage setting. \label{data: emratio 300V}}
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{|c|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|}
+            \multicolumn{1}{r}{$V=$} & \multicolumn{1}{c}{\qty{300}{\volt}{\color{red}(\qty{400}{\volt})}} & \multicolumn{2}{c}{}
+            \\
+            \cline{2-2}
+            \multicolumn{4}{c}{}
+            \\
+            \hline
+            \rowcolor{gray!20}
+            $N$ & Coil current $I$ (A) & Beam diameter $d$ (m) & $rB$ (\qty{}{\meter\cdot\tesla})
+            \\
+            \hline
+            1 & & & \\ \hline
+            2 & & & \\ \hline
+            3 & & & \\ \hline
+            4 & & & \\ \hline
+            5 & & & \\ \hline
+            6 & & & \\ \hline
+            7 & & & \\ \hline
+            8 & & & \\ \hline
+            9 & & & \\ \hline
+        \end{tabular}
+    \end{center}
+    \vspace{5mm}
+
+    Mean $\overline{rB}$:\\[3em]
+
+    Standard deviation $\sigma_{rB}$:\\[3em]
+
+    Uncertainty on the mean $\sigma_{\overline{rB}} = \sigma_{rB}/\sqrt{9}$:\\[3em]
+
+    Estimated $e/m_e$:\\[3em]
+
+    Uncertainty on $e/m_e$:\\[3em]
+
+    Final result: $e/m_e$ $\pm$ uncertainty, with units:\\[3em]
+
+    %%% e/m for another voltage setting
+    \filbreak
+    \question[3] Record your measurements from the third voltage setting. Compute the mean of $rB$, the standard deviation, and the uncertainty on the mean, and estimate $e/m_e$.
+
+    \begin{center}
+        \captionsetup{font=normalsize}
+        \captionof{data table}{Beam measurements using third voltage setting. \label{data: emratio user V}}
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{|c|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|}
+            \multicolumn{1}{r}{$V=$} & \multicolumn{1}{r}{\qty{}{\volt}} & \multicolumn{2}{c}{}
+            \\
+            \cline{2-2}
+            \multicolumn{4}{c}{}
+            \\
+            \hline
+            \rowcolor{gray!20}
+            $N$ & Coil current $I$ (A) & Beam diameter $d$ (m) & $rB$ (\qty{}{\meter\cdot\tesla})
+            \\
+            \hline
+            1 & & & \\ \hline
+            2 & & & \\ \hline
+            3 & & & \\ \hline
+            4 & & & \\ \hline
+            5 & & & \\ \hline
+            6 & & & \\ \hline
+            7 & & & \\ \hline
+            8 & & & \\ \hline
+            9 & & & \\ \hline
+        \end{tabular}
+    \end{center}
+    \vspace{5mm}
+
+    Mean $\overline{rB}$:\\[3em]
+
+    Standard deviation $\sigma_{rB}$:\\[3em]
+
+    Uncertainty on the mean $\sigma_{\overline{rB}} = \sigma_{rB}/\sqrt{9}$:\\[3em]
+
+    Estimated $e/m_e$:\\[3em]
+
+    Uncertainty on $e/m_e$:\\[3em]
+
+    Final result: $e/m_e$ $\pm$ uncertainty, with units:\\[3em]
+
+    %%% e/m versus applied voltage
+    \filbreak
+    \question[4] In Graph~\ref{graph: emratio vs V}, plot $e/m_e$ vs. accelerating voltage $V$ and include error bars determined from your calculation of the uncertainty in $e/m_e$. Include axes labels with units. Use scientific notation in your y-axis label by stating it in terms of $10^{11}$~C/kg. Draw a horizontal line at the $y$-axis value of $e/m_e=\qty{1.759e11}{\coulomb/\kilo\gram}$, the accepted value of $e/m_e$.
+
+    \begin{center}
+    \captionsetup{font=normalsize}
+    \captionof{graph}{$e/m_e$ versus accelerating voltage. \label{graph: emratio vs V}}
+    \begin{tikzpicture}
+        % Define dimensions
+        \def\gridwidth{20}
+        \def\gridheight{15}
+        \def\spacing{0.6}
+        % Draw grid paper on the left
+        \begin{scope}[xshift=0cm,yshift=0cm]
+            % Major grid lines (thicker)
+            \foreach \x in {0,1,...,\gridwidth}
+                \draw[gray!50,thick] (\x*\spacing,0) -- (\x*\spacing,\gridheight*\spacing);
+            \foreach \y in {0,1,...,\gridheight}
+                \draw[gray!50, thick] (0,\y*\spacing) -- (\gridwidth*\spacing,\y*\spacing);
+            \draw[black, very thick] (0,0) rectangle (\gridwidth*\spacing,\gridheight*\spacing);
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
+
+    \filbreak
+    \question[3] Taking into account each measured value with its associated error, are your results consistent with each other? With the true value? Explain your answer and discuss why or why not.
+    %
+    \begin{solution}[3cm]
+        
+    \end{solution}
+
+    \filbreak
+    \question[2] Name at least two of the major sources of uncertainty in the measurement of $e/m_e$ in this lab. Be specific (e.g., ``human error'' as a reason is vague and imprecise).
+    %
+    \begin{solution}[3cm]
+        
+    \end{solution}
+    
+\end{postlab}
+
+\end{document}

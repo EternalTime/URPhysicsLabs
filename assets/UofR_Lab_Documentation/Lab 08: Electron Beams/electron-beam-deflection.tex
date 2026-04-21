@@ -1,0 +1,24 @@
+\begin{tikzpicture}
+    % Draw the plates and E field
+    \draw[ultra thick, gray] (0,0) -- (0,4);
+    \draw[ultra thick, gray] (3,0) -- (3,0.9);
+    \draw[ultra thick, gray] (3,1.1) -- (3,4);
+    \foreach \y in {0, ..., 3}
+        \draw[-latex, red] (0.5,\y+0.5) -- (2.5,\y+0.5);
+    \draw (1.5,0) node[red] {$\mathbf{E}$};
+    % Draw the B field
+    \foreach \x in {0, ..., 3} {
+        \foreach \y in {0, ..., 3}
+            \draw (\x+6, \y+0.5) node[violet] {$\times$};
+    }
+    \draw (8,0) node[violet] {$\mathbf{B}$};
+    % Draw the deflected electron path
+    \draw[fill=blue] (0.2,1) circle (0.1);
+    \draw[blue, -latex] (0.4,1) -- (6,1);
+    \draw[blue, -latex] (6,1) arc (-90:90:1.1);
+    % Draw the force and radius of curvature
+    \begin{scope}[rotate around={35:(6,2.1)}]
+    \draw[thick, -Latex] (6,1) node[below right] {$\mathbf{F}$} -- (6,1.65);
+    \draw[gray, fill=gray, thick, dotted] (6,1) -- node[midway, above, xshift=2mm] {$r$} (6,2.1) circle (0.05);
+    \end{scope}
+\end{tikzpicture}

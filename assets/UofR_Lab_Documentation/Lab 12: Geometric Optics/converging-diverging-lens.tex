@@ -1,0 +1,69 @@
+\begin{tikzpicture}
+    \begin{scope}
+        \def\L{4}           % near point
+        \def\f{1.25}           % focal length
+        \def\h{0.6}         % object height
+        \def\p{1.8*\f}      % object-lens distance
+        % Compute angles
+        \def\tanalpha{\h / (\p - \f)}
+        \def\tanbeta{\h / (\p)}
+        % Draw the converging lens
+        \draw[cyan, line join=round,fill=cyan!15] (0.025,-1.25) coordinate (L1) arc (-30:30:1 and 2.5) coordinate (L2) -- ++(-0.05,0) arc (150:210:1 and 2.5) -- cycle;
+        % Draw the axial line and focal points
+        \draw ({-2.3*\f}, 0) -- ({2.3*\f}, 0);
+        \filldraw[black] (-\f, 0) circle (0.035);
+        \filldraw[black] (\f, 0) circle (0.035);
+        % Draw the object beyond the focal point
+        \draw[ultra thick, -Latex] (-\p, 0) coordinate (O1) -- (-\p, \h) coordinate (O2);
+        % Draw rays from the object to the image through the lens
+       % \draw[red] (O2) -- (0,\h) -- (\f,0) -- ({(\f*\tanalpha)/(\tanbeta)}, {-\f*\tanalpha});
+       % \draw[red] (O2) -- (-\f,0) -- (0,{-\f*\tanalpha}) -- ({(\f*\tanalpha)/(\tanbeta)}, {-\f*\tanalpha});
+       % \draw[red] (O2) -- (0,0) -- ({(\f*\tanalpha)/(\tanbeta)}, {-\f*\tanalpha});
+       % \draw[ultra thick, violet, -Latex] ({(\f*\tanalpha)/(\tanbeta)}, 0) -- ({(\f*\tanalpha)/(\tanbeta)}, {-\f*\tanalpha});
+    \end{scope}
+    %
+    \begin{scope}[shift={(0,-3.5)}]
+        \def\L{4}           % near point
+        \def\f{1.25}           % focal length
+        \def\h{0.6}         % object height
+        \def\p{0.8*\f}      % object-lens distance
+        % Draw the converging lens
+        \draw[cyan, line join=round,fill=cyan!15] (0.025,-1.25) coordinate (L1) arc (-30:30:1 and 2.5) coordinate (L2) -- ++(-0.05,0) arc (150:210:1 and 2.5) -- cycle;
+        % Draw the axial line and focal points
+        \draw ({-2.3*\f}, 0) -- ({2.3*\f}, 0);
+        \filldraw[black] (-\f, 0) circle (0.035);
+        \filldraw[black] (\f, 0) circle (0.035);
+        % Draw the object before the focal point
+        \draw[ultra thick, -Latex] (-\p, 0) coordinate (O1) -- (-\p, \h) coordinate (O2);
+    \end{scope}
+    %
+    \begin{scope}[shift={(8,0)}]
+        \def\L{4}           % near point
+        \def\f{1.25}           % focal length
+        \def\h{0.6}         % object height
+        \def\p{1.8*\f}      % object-lens distance
+        % Draw the diverging lens
+        \draw[cyan, line join=round, fill=cyan!15] (0.2,1.25) coordinate (L1) arc (150:210:1 and 2.5) -- ++(-0.4,0) coordinate (L2) arc (-30:30:1 and 2.5) -- cycle;
+        % Draw the axial line and focal points
+        \draw ({-2.3*\f}, 0) -- ({2.3*\f}, 0);
+        \filldraw[black] (-\f, 0) circle (0.035);
+        \filldraw[black] (\f, 0) circle (0.035);
+        % Draw the object beyond the focal point
+        \draw[ultra thick, -Latex] (-\p, 0) coordinate (O1) -- (-\p, \h) coordinate (O2);
+    \end{scope}
+    %
+    \begin{scope}[shift={(8,-3.5)}]
+        \def\L{4}           % near point
+        \def\f{1.25}           % focal length
+        \def\h{0.6}         % object height
+        \def\p{0.4*\f}      % object-lens distance
+        % Draw the diverging lens
+        \draw[cyan, line join=round, fill=cyan!15] (0.2,1.25) coordinate (L1) arc (150:210:1 and 2.5) -- ++(-0.4,0) coordinate (L2) arc (-30:30:1 and 2.5) -- cycle;
+        % Draw the axial line and focal points
+        \draw ({-2.3*\f}, 0) -- ({2.3*\f}, 0);
+        \filldraw[black] (-\f, 0) circle (0.035);
+        \filldraw[black] (\f, 0) circle (0.035);
+        % Draw the object beyond the focal point
+        \draw[ultra thick, -Latex] (-\p, 0) coordinate (O1) -- (-\p, \h) coordinate (O2);
+    \end{scope}
+\end{tikzpicture}

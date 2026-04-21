@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+    \draw[-Latex] (0,0) -- (6,0);
+    \draw (0,0)    -- (0,-0.1)    node[below] {$0$};
+    \draw (2.75,0) -- (2.75,-0.1) node[below] {$t_\text{stop}$};
+    \draw (5.5,0)  -- (5.5,-0.1)  node[below] {$2t_\text{stop}$};
+    %
+    \draw[-Latex] (0,0) -- (0,3);
+    \draw (0,0.25)    -- (-0.1,0.25)    node[left] {$T_\text{initial}$};
+    \draw (0,2.5)    -- (-0.1,2.5)      node[left] {$T_\text{peak}$};
+    \draw[thick, densely dotted] (0,2.5) -- (5.5,2.5);
+    \draw (0,2)    -- (-0.1,2)          node[left] {$T_\text{final}$};
+    \draw[thick, densely dotted] (0,2) -- (5.5,2);
+    %
+    \draw[very thick] (0,0.25) -- (2.85,2.5);
+    \draw[very thick] (2.85,2.5) -- (5.5,2);
+    %
+    \draw[dashed, -latex] (2.75,0) -- (2.75,2.35);
+\end{tikzpicture}

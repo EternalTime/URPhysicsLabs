@@ -1,0 +1,68 @@
+\begin{tikzpicture}
+    % Turntable, grating, and vernier window
+    \draw[fill=gray!50] (0,0) circle (2cm);
+    \draw[thick] (0,0) circle (1.7cm);
+    \draw[fill=white] (0,0) circle (1.6cm);
+    \draw[fill=gray!50] (0,0) circle (1.1cm);
+    \draw[fill=white] (-0.1,-0.9) rectangle (0.1,0.9);
+    \draw[pattern=north west lines, pattern color=blue] (-0.1,-0.9) rectangle (0.1,0.9);
+    \def\Rin{1.65};
+    \def\Rout{1.9};
+    \def\AngAStart{180 - 7};
+    \def\AngAStop{180 + 7};
+    \def\AngBStart{-7};
+    \def\AngBStop{7};
+    \filldraw[fill=white, draw=black, thick]
+        (\AngAStart:\Rin)
+        arc[radius=\Rin, start angle=\AngAStart, end angle=\AngAStop] --
+        (\AngAStop:\Rout)
+        arc[radius=\Rout, start angle=\AngAStop, end angle=\AngAStart] --
+        cycle;
+    \filldraw[fill=white, draw=black, thick]
+        (\AngBStart:\Rin)
+        arc[radius=\Rin, start angle=\AngBStart, end angle=\AngBStop] --
+        (\AngBStop:\Rout)
+        arc[radius=\Rout, start angle=\AngBStop, end angle=\AngBStart] --
+        cycle;
+    % Collimator
+    \draw[color=white, fill=white] (-3,0.75) rectangle (-6,-0.75);
+    \draw[thick] (-3,0.75) -- (-6,0.75);
+    \draw[thick] (-3,-0.75) -- (-6,-0.75);
+    \draw[fill=cyan!20] (-3,0) ellipse (0.1 cm and 0.75cm);
+    \draw[thick] (-5,0.6) -- (-8,0.6) -- (-8,0.1);
+    \draw[thick] (-5,-0.6) -- (-8,-0.6) -- (-8,-0.1);
+    % Collimator and slit adjustment knobs
+    \draw[fill=gray!50] (-5.425,-0.6) rectangle (-5.575,-1);
+    \draw[thick,pattern=vertical lines] (-5.15,-1) rectangle (-5.85,-1.15);
+    \draw[fill=gray!50] (-8,-0.6) rectangle (-7.85,-0.8);
+    \draw[thick,pattern=vertical lines] (-8.1,-0.8) rectangle (-7.75,-0.95);
+    % Source
+    \node [star, star point height=2mm, minimum size=1mm, fill=RubineRed, draw] at (-8.75,0) {};
+    % Rays from source to collimator lens
+    \draw[ultra thick, -latex, RubineRed] (-8.5,0) -- (0,0);
+    % Draw straight-through line
+    \draw[densely dotted, thick] (-8.5,0) -- (8,0);
+    %
+    % Draw Balmer lines (n=1)
+    %
+    \foreach \ang/\wlcolor in {{14.3/Purple}, {15.2/Violet}, {17.0/Cyan}, {23.3/Red}} {
+      \draw[-latex, color=\wlcolor] (0,0) -- ({6*cos(\ang)}, {6*sin(\ang)});
+      \draw[-latex, color=\wlcolor] (0,0) -- ({6*cos(-\ang)}, {6*sin(-\ang)});
+    }
+    \draw ({6.2*cos(20)}, {6.2*sin(20)}) node[right] {$m=1$};
+    \draw ({6.2*cos(340)}, {6.2*sin(340)}) node[right] {$m=1$};
+    %
+    % Draw Balmer lines (n=2)
+    %
+    \foreach \ang/\wlcolor in {{29.6/Purple}, {31.5/Violet}, {35.9/Cyan}, {52.3/Red}} {
+      \draw[thick, -latex, color=\wlcolor, dashed] (0,0) -- ({5*cos(\ang)}, {5*sin(\ang)});
+      \draw[thick, -latex, color=\wlcolor, dashed] (0,0) -- ({5*cos(-\ang)}, {5*sin(-\ang)});
+    }
+    \draw ({5.2*cos(40)}, {5.2*sin(40)}) node[right] {$m=2$};
+    \draw ({5.2*cos(320)}, {5.2*sin(320)}) node[right] {$m=2$};
+    %
+    % Add some labels
+    %
+    \draw (-8.8,1.5) node[above, align=left] {\small hydrogen\\[-0.25em] \small source} -- (-8.75,0.5);
+    \draw (-5,0.9) node[above] {\small collimator};
+\end{tikzpicture}

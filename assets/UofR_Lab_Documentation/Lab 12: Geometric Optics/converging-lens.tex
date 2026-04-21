@@ -1,0 +1,115 @@
+\begin{tikzpicture}
+    \tikzset{
+      % style to apply some styles to each segment of a path
+      on each segment/.style={
+        decorate,
+        decoration={
+          show path construction,
+          moveto code={},
+          lineto code={
+            \path [#1]
+            (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
+          },
+          curveto code={
+            \path [#1] (\tikzinputsegmentfirst)
+            .. controls
+            (\tikzinputsegmentsupporta) and (\tikzinputsegmentsupportb)
+            ..
+            (\tikzinputsegmentlast);
+          },
+          closepath code={
+            \path [#1]
+            (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
+          },
+        },
+      },
+      % style to add an arrow in the middle of a path
+      mid arrow/.style={postaction={decorate,decoration={
+            markings,
+            mark=at position 0.55 with {\arrow[#1]{latex}}
+          }}},
+    }
+
+    \begin{scope}[local bounding box=box1]
+        \def\f{1.25}              % focal length
+        \def\D{2.5}               % lens diameter
+        \def\h{1}                 % object height
+        \def\p{2.75*\f}           % object-lens distance
+        \def\i{{\f*\p/(\p-\f)}}   % image distance
+        \def\m{{-\f/(\p - \f)}}   % magnification
+        \def\hi{{-\f*\h/(\p-\f)}} % image height
+        %
+        % Compute angles
+        \def\tanalpha{\h / (\p - \f)}
+        \def\tanbeta{\h / (\p)}
+        %
+        % Draw the converging lens
+        \draw[cyan, line join=round,fill=cyan!15] (0.025,{-\D/2}) coordinate (L1) arc (-30:30:1 and \D) coordinate (L2) -- ++(-0.05,0) arc (150:210:1 and \D) -- cycle;
+        \draw[densely dotted] (0,{-0.6*\D}) -- (0,{0.6*\D});
+        %
+        % Draw the axial line and focal points
+        \draw ({-3.5*\f}, 0) -- ({2.25*\f}, 0);
+        \filldraw[black] (-\f, 0) circle (0.035);
+        \filldraw[black] (\f, 0) circle (0.035);
+        %
+        % Draw the object beyond the focal point
+        \draw[ultra thick, -Latex] (-\p, 0) coordinate (O1) -- node[midway, left] {\small $h$} (-\p, \h) coordinate (O2);
+        %
+        % Draw rays from the object to the image through the lens
+        \draw[red, postaction={on each segment={mid arrow=red}}] (O2) -- (0,\h) -- (\i, \hi);
+        \draw[red, postaction={on each segment={mid arrow=red}}] (O2) -- (0,0) -- (\i, \hi);
+        \draw[red, postaction={on each segment={mid arrow=red}}] (O2) -- (0, \hi) -- (\i, \hi);
+        \draw[ultra thick, violet, -Latex] (\i, 0) -- node[right] {\small $h'$} (\i, {\hi});
+        %
+        % Label all lengths
+        \draw[|-|] (-\f, {0.6*\D}) -- node[midway, fill=white] {\small $f$} (0, {0.6*\D});
+        \draw[|-|] (\f, {0.6*\D}) -- node[midway, fill=white] {\small $f$} (0, {0.6*\D});
+        \draw[|-|] (-\p, {-0.6*\D}) -- node[midway, fill=white] {\small $p$} (0, {-0.6*\D});
+        \draw[|-|] (\i, {-0.6*\D}) -- node[midway, fill=white] {\small $i$} (0, {-0.6*\D});
+    \end{scope}
+    \draw[black] (box1.south west) rectangle (box1.north east);
+
+    \begin{scope}[shift={(7.5,0)}, local bounding box=box2]
+        \def\f{1.25}              % focal length
+        \def\D{2.5}               % lens diameter
+        \def\h{0.5}               % object height
+        \def\p{0.575*\f}          % object-lens distance
+        \def\i{{\f*\p/(\p-\f)}}   % image distance
+        \def\m{{-\f/(\p - \f)}}   % magnification
+        \def\hi{{-\f*\h/(\p-\f)}} % image height
+        %
+        % Compute angles
+        \def\tanalpha{\h / (\p - \f)}
+        \def\tanbeta{\h / (\p)}
+        %
+        % Draw the converging lens
+        \draw[cyan, line join=round,fill=cyan!15] (0.025,{-\D/2}) coordinate (L1) arc (-30:30:1 and \D) coordinate (L2) -- ++(-0.05,0) arc (150:210:1 and \D) -- cycle;
+        \draw[densely dotted] (0,{-0.6*\D}) -- (0,{0.6*\D});
+        %
+        % Draw the axial line and focal points
+        \draw ({-3.5*\f}, 0) -- ({2.25*\f}, 0);
+        \filldraw[black] (-\f, 0) circle (0.035);
+        \filldraw[black] (\f, 0) circle (0.035);
+        %
+        % Draw the object beyond the focal point
+        \draw[ultra thick, -Latex] (-\p, 0) coordinate (O1) node[below] {\small $h$} -- (-\p, \h) coordinate (O2);
+        %
+        % Draw rays from the object to the image through the lens
+        \draw[red, postaction={on each segment={mid arrow=red}}] (O2) -- (0,\h) -- (\f, 0);
+        \draw[red, dashed] (0,\h) -- (\i,\hi);
+        \draw[red, postaction={on each segment={mid arrow=red}}] (O2) -- (0,0) -- (\f, {-\f*\tanbeta});
+        \draw[red, dashed] (O2) -- (\i,\hi);
+        \draw[red, dashed] (\i, \hi) -- (0, \hi) coordinate (O3);
+        \draw[red, postaction={on each segment={mid arrow=red}}] (O2) -- (O3) -- (\f, \hi);
+        \draw[red, dashed] (-\f,0) -- (O3);
+        \draw[ultra thick, violet, -Latex] (\i, 0) -- node[left] {\small $h'$} (\i, {\hi});
+        %
+        % Label all lengths
+        \draw[|-|] (-\f, {0.6*\D}) -- node[midway, fill=white] {\small $f$} (0, {0.6*\D});
+        \draw[|-|] (\f, {0.6*\D}) -- node[midway, fill=white] {\small $f$} (0, {0.6*\D});
+        \draw[|-|] (-\p, {-0.4*\D}) -- node[midway, above] {\small $p$} (0, {-0.4*\D});
+        \draw[|-|] (\i, {-0.6*\D}) -- node[midway, fill=white] {\small $i$} (0, {-0.6*\D});
+    \end{scope}
+    \draw[black] (box2.south west) rectangle (box2.north east);
+    
+\end{tikzpicture}

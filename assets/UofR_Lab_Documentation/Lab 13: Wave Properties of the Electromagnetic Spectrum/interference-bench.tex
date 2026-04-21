@@ -1,0 +1,35 @@
+\begin{tikzpicture}
+    % Bench dimensions
+    \def\L{6}         % screen-slit distance
+    \def\t{0.15}      % bench thickness
+    \def\ft{0.4}      % foot width
+    \def\hs{1.5}      % screen height
+    \def\lw{2}        % laser width
+    % Table
+    \draw[very thick] (-1.1*\L,0) -- (1.1*\L,0);
+    % Optical bench with feet
+    \draw[fill=black] (-0.4*\L,\t) rectangle (0.3*\L,2*\t);
+    \draw[thick] (\ft-0.4*\L,0) rectangle (2*\ft-0.4*\L,\t);
+    \draw[thick] (0.3*\L-2*\ft,0) rectangle (0.3*\L-\ft,\t);
+    \draw (-0.1*\L, 0.75*\t) -- (0, -3*\t) node[below right] {optical bench};
+    % Screen
+    \draw[thick] (\L-2*\t, 0) rectangle (\L+2*\t, 2*\t);
+    \draw[fill=gray] (\L-0.5*\t,2*\t) rectangle (\L+0.5*\t, \hs);
+    \draw (\L+0.5*\t+0.1, \hs) -- (\L+0.5*\t+0.4, 1.5*\hs) node[above] {screen};
+    % Laser with feet and stand
+    \draw[thick,fill=gray!20] (-\L, 0.5*\hs) rectangle (-\L+\lw, 0.9*\hs) node[pos=0.5] {laser};
+    \draw[thick,fill=gray!20] (-\L, 0.5*\hs) rectangle (-\L+\lw, 0.9*\hs) node[pos=0.5] {laser};
+    \draw[thick, fill=black] (-\L+\t, 0.5*\hs) rectangle (-\L+2*\t, 0.5*\hs-0.5*\t);
+    \draw[thick, fill=black] (-\L+\lw-\t, 0.5*\hs) rectangle (-\L+\lw-2*\t, 0.5*\hs-0.5*\t);
+    \draw[pattern={Lines[angle=45, distance=2mm]}] (-\L-2*\t, 0) rectangle (-\L+\lw+2*\t, 0.5*\hs-0.5*\t);
+    % Laser aperture and beam
+    \draw[thick,fill=gray!20] (-\L+\lw, 0.65*\hs) rectangle (-\L+\lw+\t, 0.75*\hs);
+    \draw[photon] (-\L+\lw+\t, 0.7*\hs) -- (\L-0.5*\t, 0.7*\hs);
+    % Slit stand
+    \draw[fill=white] (-\t, 1.5*\t) rectangle (\t, 2.5*\t);
+    \draw[fill=white] (-0.25*\t, 2.5*\t) rectangle (0, 0.9*\hs);
+    \draw (-0.1, 0.9*\hs) -- (-0.5, 1.5*\hs) node[above] {slit};
+    \draw[fill=white] (-0.75*\t, 0.6*\hs) rectangle (-0.25*\t, 0.8*\hs);
+    % Slide-screen distance
+    \draw[latex-latex] (0.01*\L, 0.9*\hs) -- (0.98*\L, 0.9*\hs) node[pos=0.5,fill=white] {$L$};
+\end{tikzpicture}

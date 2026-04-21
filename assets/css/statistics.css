@@ -1,0 +1,609 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', Aptos, Arial, sans-serif;
+  background: var(--white);
+  color: var(--navy);
+  overflow-x: hidden;
+}
+
+/* ── FIXED TOP BAR ─────────────────────────────────────────── */
+.top-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--bar-h);
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 20px;
+  z-index: 200;
+  border-bottom: 4px solid var(--dandelion);
+}
+
+.top-bar .back-link {
+  color: var(--dandelion);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.top-bar .back-link:hover { text-decoration: underline; }
+
+.top-bar .bar-title {
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: 700;
+  flex: 1;
+}
+
+/* Section nav dots — one per section, top-right */
+.section-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.section-dots a {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  display: block;
+  transition: background 0.2s;
+}
+.section-dots a.active,
+.section-dots a:hover { background: var(--dandelion); }
+
+/* Gold progress bar */
+.progress-bar {
+  position: fixed;
+  top: var(--bar-h);
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--dandelion);
+  z-index: 201;
+  transition: width 0.08s linear;
+}
+
+/* ── HERO ──────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: calc(var(--bar-h) + 40px) 40px 60px;
+}
+
+.hero .eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dandelion);
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.15;
+  max-width: 800px;
+  margin-bottom: 24px;
+}
+
+.hero h1 span {
+  color: var(--dandelion);
+}
+
+.hero p {
+  font-size: 1.15rem;
+  color: var(--sky);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.hero .scroll-hint {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.scroll-hint .arrow {
+  width: 24px;
+  height: 24px;
+  border-right: 2px solid rgba(255,255,255,0.3);
+  border-bottom: 2px solid rgba(255,255,255,0.3);
+  transform: rotate(45deg);
+  animation: bounce 1.6s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50%       { transform: rotate(45deg) translateY(6px); }
+}
+
+/* ── INTRO OVERLAY ─────────────────────────────────────────── */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  z-index: 150;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+body.has-scrolled .intro-overlay {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.intro-overlay h1 {
+  font-size: clamp(2.2rem, 6vw, 3.8rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.15;
+  max-width: 800px;
+  margin-bottom: 32px;
+}
+
+.intro-overlay h1 span {
+  color: var(--dandelion);
+}
+
+.intro-overlay .intro-hint {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.intro-hint .arrow {
+  width: 28px;
+  height: 28px;
+  border-right: 2px solid rgba(255,255,255,0.4);
+  border-bottom: 2px solid rgba(255,255,255,0.4);
+  transform: rotate(45deg);
+  animation: bounce 1.6s ease-in-out infinite;
+}
+
+/* ── MEASUREMENT SCENE (pencil + ruler) ─────────────────────── */
+.measurement-scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.pencil-image, .ruler-image {
+  position: absolute;
+  object-fit: contain;
+}
+
+.pencil-image {
+  height: 380px;
+  left: -200px;
+  bottom: -80px;
+  animation: pencil-scroll 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.ruler-image {
+  height: 480px;
+  right: -240px;
+  bottom: -100px;
+  animation: ruler-scroll 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.14s;
+}
+
+@keyframes pencil-scroll {
+  from { left: -200px; opacity: 0; }
+  to   { left: -40px; opacity: 1; }
+}
+
+@keyframes ruler-scroll {
+  from { right: -240px; opacity: 0; }
+  to   { right: -60px; opacity: 1; }
+}
+
+/* Ruler jiggle at pencil measurement point */
+.ruler-image.jiggle {
+  animation: ruler-jiggle 0.4s ease-in-out infinite;
+}
+
+@keyframes ruler-jiggle {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(2px); }
+}
+
+/* ── FIXED BACKGROUND STAGE ────────────────────────────────────
+   The stage sits behind everything and never moves.
+   Cards float above it and animate as the user scrolls.
+   Background color transitions as the user scrolls through sections.
+──────────────────────────────────────────────────────────── */
+.stage {
+  position: fixed;
+  inset: 0;
+  background: #0d1a3a;   /* default: deep navy */
+  z-index: 0;
+  transition: background-color 0.6s ease;
+}
+
+/* Section-specific background colors */
+.stage.bg-sec-why     { background: #0d1a3a; }  /* Section 1 (Why): deep navy */
+.stage.bg-sec-temp    { background: #1a2a5a; }  /* Section 2 (Temperature): brighter blue */
+.stage.bg-sec-grav    { background: #051030; }  /* Section 3 (Gravity): very dark navy */
+.stage.bg-sec-meas    { background: #253060; }  /* Section 4 (Measurement): medium blue-navy */
+.stage.bg-sec-acc     { background: #1a1f4a; }  /* Section 5 (Accuracy): cool deep blue */
+.stage.bg-sec-dist    { background: #0d2a4a; }  /* Section 6 (Distribution): slate blue */
+.stage.bg-sec-std     { background: #1a2840; }  /* Section 7 (Std Dev): indigo blue */
+.stage.bg-sec-sem     { background: #0f1f35; }  /* Section 8 (SEM): deep slate blue */
+.stage.bg-sec-prop    { background: #2a1a4a; }  /* Section 9 (Propagation): purple-navy */
+.stage.bg-sec-summary { background: #0d1f35; }  /* Section 10 (Summary): cool slate blue */
+.stage.bg-sec-poisson { background: #1a2535; }  /* Section 11 (Poisson): muted navy-blue */
+
+/* Subtle radial glow in the center of the stage */
+.stage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%,
+                rgba(0,102,253,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── SCROLL STOP ────────────────────────────────────────────────
+   Each stop is a tall scroll container (300vh).
+   The inner .sticky-frame pins to the viewport for the middle
+   200vh of that scroll, giving plenty of time to see the cards
+   before they exit.
+
+   How the exit works: JS reads how far past the "hold zone"
+   the user has scrolled, then applies scale() + opacity to
+   .card-pair, shrinking the cards into the distance.
+──────────────────────────────────────────────────────────── */
+.stop {
+  position: relative;
+  height: 300vh;          /* tall enough to scroll through */
+  z-index: 1;
+}
+
+.sticky-frame {
+  position: sticky;
+  top: var(--bar-h);
+  height: calc(100vh - var(--bar-h));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;       /* clips cards during slide-in */
+  pointer-events: none;   /* let scroll pass through to the stop */
+}
+
+/* The pair of cards — JS drives scale + opacity on exit */
+.card-pair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 1100px;
+  padding: 0 48px;
+  pointer-events: all;
+  /* transform-origin center so scale() shrinks toward the middle */
+  transform-origin: center center;
+  transition: transform 0.08s linear, opacity 0.08s linear;
+}
+
+/* ── CARDS ──────────────────────────────────────────────────────
+   Each card is a floating rectangle with rounded corners and a
+   layered shadow — close tight shadow for depth, far diffuse
+   shadow for the hover/lift illusion.
+──────────────────────────────────────────────────────────── */
+.panel {
+  flex: 1;
+  max-width: 460px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 44px;
+  border-radius: 20px;
+  box-shadow:
+    0  4px  16px rgba(0,  0,  0, 0.25),
+    0 28px  60px rgba(0,  0,  0, 0.40);
+
+  /* Entry animation — JS adds .stop-active to the .stop,
+     which triggers the transition below */
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity  0.9s ease;
+}
+
+/* Cards start off-screen left/right, opacity 0 */
+.panel-left  { transform: translateX(-120px); opacity: 0; }
+.panel-right { transform: translateX( 120px); opacity: 0; }
+
+/* When the stop becomes active, cards slide to center */
+.stop-active .panel-left,
+.stop-active .panel-right {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Right card follows left with a slight delay */
+.stop-active .panel-right { transition-delay: 0.14s; }
+
+/* ── CARD COLOR VARIANTS ────────────────────────────────────── */
+.panel.navy      { background: var(--navy);      color: var(--white); }
+.panel.dandelion { background: var(--dandelion);  color: var(--navy); }
+.panel.sky       { background: var(--sky);        color: var(--navy); }
+.panel.butter    { background: var(--butter);     color: var(--navy); }
+.panel.white     { background: var(--white);      color: var(--navy); }
+.panel.meliora   { background: var(--meliora);    color: var(--white); }
+
+/* ── PANEL TYPOGRAPHY ──────────────────────────────────────── */
+.panel .section-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 16px;
+}
+
+.panel h2 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.panel .headline-stat {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 20px;
+}
+
+.panel p {
+  font-size: 1rem;
+  line-height: 1.75;
+  opacity: 0.88;
+  max-width: 480px;
+}
+
+.panel p + p { margin-top: 12px; }
+
+/* Accent bar above heading */
+.panel .accent-bar {
+  width: 48px;
+  height: 5px;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.panel.navy .accent-bar      { background: var(--dandelion); }
+.panel.dandelion .accent-bar { background: var(--navy); }
+.panel.sky .accent-bar       { background: var(--navy); }
+.panel.butter .accent-bar    { background: var(--navy); }
+.panel.silver .accent-bar    { background: var(--navy); }
+.panel.white .accent-bar     { background: var(--azure); }
+.panel.meliora .accent-bar   { background: var(--dandelion); }
+
+/* ── GRAPHIC PANEL ─────────────────────────────────────────── */
+.panel.graphic {
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.panel.graphic svg {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+
+/* ── NEWSPAPER CLIPPING style for poll example ─────────────── */
+.clipping {
+  background: var(--white);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 24px 28px;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.08);
+  max-width: 380px;
+}
+
+.clipping .paper-name {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  border-bottom: 2px solid var(--navy);
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+
+.clipping .headline {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 14px;
+}
+
+/* Poll bars */
+.poll-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 0.88rem;
+}
+
+.poll-label { width: 60px; font-weight: 600; color: var(--navy); }
+
+.poll-bar-wrap {
+  flex: 1;
+  height: 22px;
+  background: var(--silver);
+  border-radius: 3px;
+  overflow: visible;
+  position: relative;
+}
+
+.poll-bar {
+  height: 100%;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--white);
+  position: relative;
+}
+
+/* Error bar overlay */
+.poll-bar::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 140%;
+  background: var(--charcoal);
+}
+
+/* Horizontal error whiskers */
+.poll-bar::before {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 2px;
+  background: var(--charcoal);
+}
+
+.clipping .caption {
+  font-size: 0.75rem;
+  color: var(--charcoal);
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.clipping .verdict {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--meliora);
+  background: var(--sky);
+  border-radius: 3px;
+  padding: 6px 10px;
+}
+
+/* ── TEMPERATURE graphic ───────────────────────────────────── */
+.temp-graphic {
+  background: var(--white);
+  border-radius: 6px;
+  padding: 20px 24px;
+  max-width: 380px;
+  box-shadow: 0 2px 16px rgba(0,30,95,0.1);
+}
+
+.temp-graphic .tg-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 12px;
+}
+
+.temp-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.temp-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+}
+
+.temp-year { width: 36px; font-weight: 700; color: var(--navy); }
+
+.temp-bar {
+  height: 24px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--white);
+  position: relative;
+  transition: width 0.6s ease;
+}
+
+/* ── MOBILE ────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  /* On mobile the sticky + tall-scroll effect is too awkward;
+     fall back to a simple stacked scroll */
+  .stop        { height: auto; }
+  .sticky-frame {
+    position: relative;
+    top: auto;
+    height: auto;
+    flex-direction: column;
+    padding: 48px 20px;
+    gap: 24px;
+    overflow: visible;
+  }
+  .card-pair {
+    flex-direction: column;
+    padding: 0;
+    gap: 24px;
+  }
+  .panel {
+    max-width: 100%;
+    padding: 36px 28px;
+  }
+  .panel-left, .panel-right {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  .stop-active .panel-left,
+  .stop-active .panel-right {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

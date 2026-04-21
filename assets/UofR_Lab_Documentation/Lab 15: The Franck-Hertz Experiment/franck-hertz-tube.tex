@@ -1,0 +1,43 @@
+\begin{circuitikz}
+    % Vacuum tube
+    \draw[very thick] (0,0) arc (90:270:2cm);
+    \draw[very thick] (0,-4) -- (8,-4);
+    \draw[very thick] (8,-4) arc (-90:90:2cm);
+    \draw[very thick] (0,0) -- (8,0);
+    % Accelerating grid
+    \draw[very thick, purple, dash pattern=on 8pt off 3pt] (7,-4) -- (7,0);
+    \draw (6,1) node[above,align=left] {accelerating\\grid} -- (6.9,-0.5);
+    % Collector (ammeter)
+    \draw (9,1) node[above right, align=left] {collector\\(anode)} -- (8.1,-0.75);
+    \draw[very thick, blue] (8,-3.5) -- (8,-0.5);
+    \draw (8,-2)        
+                 to [short] (11,-2)
+                 to [rmeter, t=A] ++(0,-3.5)
+                 to [battery2, invert, l^={rejecting potential }] ++(-4,0)
+                 to [battery2, l^={adjustable voltage (0-\qty{15}{\volt})}, name=Vacc] ++(-8,0)
+                 to [battery2, invert, l^={filament supply}] ++(-2,0)
+                 to [short] ++(0,5)
+                 to [short] ++(2,0)
+                 to [L, color=blue] ++(0,-3)
+                 to [short, -*] ++(0,-2)
+                 ;
+    \ctikztunablearrow{1}{1}{220}{Vacc};
+    \draw (7,-5.5) to [short, *-] ++(0,1.5);
+    % Electrons from electrode
+    \draw[blue, thick, densely dotted, -latex] (-0.5,-1.75) -- (2,-1.25);
+    \draw[blue, fill=blue] (-0.5,-1.75) circle (0.5mm) node[above] {\small $e^-$};
+    \draw[blue, thick, densely dotted, -latex] (-0.25,-2) -- (2.25,-2);
+    \draw[blue, fill=blue] (-0.25,-2) circle (0.5mm);
+    \draw[blue, thick, densely dotted, -latex] (-0.5,-2.25) -- (2,-2.5);
+    \draw[blue, fill=blue] (-0.5,-2.25) circle (0.5mm) node[below] {\small $e^-$};
+    % Hg gas inside
+    \draw (3,0.5) node[above] {mercury vapor} -- (3.5,-1);
+    \draw[violet, fill=violet!10] (5,-3) circle [radius=3mm] node {\small Hg};
+    \draw[violet, fill=violet!10] (4,-1) circle [radius=3mm] node {\small Hg};
+    \draw[violet, fill=violet!10] (5.5,-2) circle [radius=3mm] node {\small Hg};
+    \draw[violet, fill=violet!10] (3,-1.5) circle [radius=3mm] node {\small Hg};
+    \draw[violet, fill=violet!10] (3.7,-2) circle [radius=3mm] node {\small Hg};
+    \draw[violet, fill=violet!10] (3.4,-3.25) circle [radius=3mm] node {\small Hg};
+    % Label the cathode
+    \draw (0,1) node [above, align=left] {electron filament\\(at cathode)} -- (-0.75,-1.25);
+\end{circuitikz}

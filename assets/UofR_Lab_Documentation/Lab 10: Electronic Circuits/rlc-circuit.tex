@@ -1,0 +1,51 @@
+\begin{circuitikz}
+    %
+    % RLC circuit
+    %
+    \begin{scope}[scale=0.85]
+        \draw (-1,0) node {\large (a)};
+        \draw (0,0.5) coordinate (O)
+              to[sV] ++(0,2)
+              to[american inductor, l^={$L$}] ++(5,0) coordinate (C)
+              to[R, l_={$R$}] ++(0,-2) coordinate (D)
+              to[C, l_={$C$}] ++(-5,0) 
+              to[short] (O);
+        \draw[red] (0,1) node[above right, xshift=10, yshift=15] {$V_0\sin{(\omega t)}$};
+        \draw (C) to[short, *-o] ++(1.5,0) coordinate (F);
+        \draw (D) to[short, *-o] ++(1.5,0) coordinate (G);
+        \draw[densely dotted, latex-latex, blue] ($ (F)-(0,0.1) $) -- ($ (G)+(0,0.1) $) node[pos=0.5,fill=white] {$V_R$};
+    \end{scope}
+    %
+    % Mechanical analog
+    %
+    \begin{scope}[shift={(8,0)}, scale=0.85]
+        \draw (-1,0) node {\large (b)};
+        % Draw the table
+        \draw[thick] (0,0.5) coordinate (O) -- ++(0,2) coordinate (A);
+        \draw[thick] (O) -- ++(8,0) coordinate (B); 
+        % Draw the mass and spring
+        \draw[fill=gray!40] (3.25,0.5) rectangle (4.75,2) node[pos=0.5] {$m$};
+        \draw (0,1.75) to[L, l^=$k$] (3.25,1.75);
+        % Draw the damper
+        \draw (0,1) -- (1,1);
+        \draw[cyan!30, fill=cyan!30] (1,0.75) rectangle (2.25,1.25);
+        \draw[thick] (2.25,1.25) -- (1,1.25) -- (1,0.75) -- (2.25,0.75);
+        \draw (3.25,1) -- node[midway, above right=1] {$b$} (1.75,1);
+        \draw[thick] (1.75,0.825) -- (1.75,1.175);
+        \draw[thick] (2.25,0.75) -- (2.25,0.95);
+        \draw[thick] (2.25,1.25) -- (2.25,1.05);
+        % Draw the motor
+        \draw[fill=gray!40] (7,1.25) circle (0.6);
+        \draw[fill=white] (6.8,0.5) -- (6.95,1.25) -- (7.05,1.25) -- (7.2,0.5) -- cycle;
+        \draw[fill=white] (7,1.25) circle (0.15);
+        \draw[thick, -latex, red] (6.4,1.85) arc[start angle=135, end angle=45, radius=0.85] node[pos=0.5, above=1] {$\omega$};
+        % Draw the piston attaching the block to the motor
+        \begin{scope}[rotate around={14.5:(4.75,1.25)}]
+            \draw[fill=white] (4.77,1.22) rectangle (7,1.28);
+            \draw[fill=white] (4.77,1.2) rectangle (5.75,1.3);
+        \end{scope}
+        \draw[fill=white] (4.75,1.3) -- (4.75,1.15) arc (-90:90:0.1) -- cycle;
+        \draw[fill=white] (7,1.82) circle (0.08);
+%        \draw
+    \end{scope}
+\end{circuitikz}

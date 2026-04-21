@@ -1,0 +1,21 @@
+/* ── UR Brand Palette ────────────────────────────────────────
+   Primary:   #001E5F (Navy), #FFD82B (Dandelion Yellow)
+   Secondary: #021BC3 (Meliora Blue), #0066FD (Arpeggio Azure)
+              #B7D3FF (Wondrous Sky), #FFC200 (Yellowjacket Gold)
+   Tertiary:  #707070 (Charcoal), #E8E8E8 (Meridian Silver)
+──────────────────────────────────────────────────────────── */
+:root {
+  --navy:       #001E5F;
+  --dandelion:  #FFD82B;
+  --meliora:    #021BC3;
+  --azure:      #0066FD;
+  --sky:        #B7D3FF;
+  --gold:       #FFC200;
+  --lemon:      #FFE95F;
+  --butter:     #FFF3B1;
+  --charcoal:   #707070;
+  --silver:     #E8E8E8;
+  --white:      #FFFFFF;
+
+  --bar-h: 58px;
+}

@@ -1,0 +1,116 @@
+\documentclass[addpoints]{physlabs}
+
+\labtitle{Voltage \& Electrostatic Potential}
+\labnum{7}
+\labnumroman{VII}
+\course{PHYSICS 122 - 142 - 182}
+\coursesubtitle{Electricity and Magnetism}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% PRELAB SECTION
+\begin{prelab}
+
+    \filbreak
+    \question[1] In the first part of this lab, you will be using a mechanically-balanced, axially-symmetric cylindrical capacitor to measure an absolute voltage. Each time you take a measurement, but before you read the microscope scale, you should perform a critical procedural technique.  What is it, why is it critical, and how many times should you perform it?
+    \begin{solution}[5cm]
+        
+    \end{solution}
+
+    \filbreak
+    \question[1] How do you determine the electric field lines for the second part of the experiment? Electric fields are vector quantities.  How will you determine the direction that they should point?
+    \begin{solution}[5cm]
+        
+    \end{solution}
+
+\end{prelab}
+
+% LAB SECTION
+\begin{labsection}
+
+\begin{objective}
+    The purpose is to calculate an absolute voltage measurement by mechanical means and illustrate the concepts of the electric field by means of experimental demonstration.
+\end{objective}
+    
+    \begin{theory}
+    A particle of charge $q$ moving with a velocity $\boldsymbol{v}$ through a region of space containing both electric, $\boldsymbol{E}$, and magnetic, $\boldsymbol{B}$, fields experiences the Lorentz force
+    \begin{align}
+        \boldsymbol{F} = q(\boldsymbol{E}+\boldsymbol{v}\times\boldsymbol{B}).
+    \end{align}
+    Our experimental apparatus first accelerates electrons ($q = -e=-1.60217663\times 10^{-19} C$) through a region containing only an electric field.
+    The electric field tunes their velocity, so that when they enter another region containing only a magnetic field they move in a circle whose size depends on the charge to mass ratio, $e/m$.
+    Let's understand why.
+    
+    A cathode within the apparatus heats up, causing electrons to be emitted. 
+    The cathode is connected to the negative of the high voltage supply, $V_-$. 
+    The anode is connected to the high voltage positive end of the supply, $V_+$, a distance $d$ away from the cathode.
+    The potential difference sets up an electric field of strength
+    \begin{align}
+        E = \frac{V_--V_+}{d}=-\frac{\Delta V}{d}.
+    \end{align}
+    The minus sign is because the field points to the left (see figure below), from positive to negative.
+    Electrons are rapidly accelerated toward the anode by the electric field. 
+    Most of the electrons hit the anode, but some of them pass through a hole in the anode and form the electron beam.
+        \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.3\linewidth]{Lab 07: Electrostatic Potential/CathodeAnodeElectronBeam.png}
+        \label{fig:placeholder}
+    \end{figure}
+    
+    By Newton's second law, the acceleration they experience due to the electric field is
+    \begin{align}
+        a = \frac{q}{m}E=\frac{e\Delta V}{md},
+    \end{align}
+    which, between the two plates, is constant.
+    The electrons emitted by the cathode move with some initial velocity $v_i$.
+    We can use kinematics to find the final speed of the elctrons when they pass through the hole in the anode. 
+    Plugging into the kinematic equation
+    \begin{align}
+        v_f^2 = v_i^2+2ad=v_i^2+\frac{2e\Delta V}{m}
+    \end{align}
+    The final speed of the electrons is much greater than what they started with, $v_f\gg v_i$, so we can approximate their velocity leaving the anode as
+    \begin{align}
+        v_f \approx \sqrt{\frac{2e\Delta V}{m}}
+    \end{align}
+    
+
+    
+    A pair of Helmholtz coils provides the uniform magnetic field oriented perpendicular to the path of the electron. 
+    There is no electric field present. 
+    For this case, the Lorentz force reduces to
+    \end{theory}
+    
+    \begin{equipment}
+    \item lalala
+    \end{equipment}
+    
+    \begin{experiment}
+    \end{experiment}
+\end{labsection}
+
+\begin{postlab}
+
+    \filbreak
+    \question[1] In Graph~\ref{graph: two point field lines}, sketch the electric field lines according to your measured mapping of equipotential surfaces.  Be sure to include arrows to show the direction of your field lines.
+
+    \begin{center}
+        \captionsetup{font=normalsize}
+        \captionof{graph}{Two-point potential and electric lines. \label{graph: two point field lines}}
+        \includegraphics[width=\linewidth]{Lab 07: Electrostatic Potential/graphite-paper-grid.png}
+    \end{center}
+
+    \filbreak
+    \question[1] In Graph~\ref{graph: parallel field lines}, sketch the electric field lines according to your measured mapping of equipotential surfaces.  Be sure to include arrows to show the direction of your field lines.
+
+    \begin{center}
+        \captionsetup{font=normalsize}
+        \captionof{graph}{Parallel-plate potential and electric lines. \label{graph: parallel field lines}}
+        \includegraphics[width=\linewidth]{Lab 07: Electrostatic Potential/graphite-paper-grid.png}
+    \end{center}
+
+\end{postlab}
+
+\end{document}

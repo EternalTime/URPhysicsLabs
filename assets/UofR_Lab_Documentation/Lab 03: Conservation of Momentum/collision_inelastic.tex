@@ -1,0 +1,36 @@
+\begin{tikzpicture}
+    \begin{scope}[shift={(-3,0)}]
+        \draw[fill=gray!30] (0,0) circle (7mm) node {$m_1$};
+        \draw[thick,-Latex] (0.8,0) -- node[above] {$u_1$} ++(1,0);
+        \draw[fill=gray!10] (3.4,0) circle (4mm) node {$m_2$};
+        \draw[thick,-Latex] (2.9,0) -- node[above] {$u_2$} ++(-1,0);
+        \draw (1.7,1.25) node {Before collision:};
+    \end{scope}
+    \draw (2.5,0) node {$\implies$};
+    \begin{scope}[shift={(5,0)}]
+        \path[spath/save=large circle] (0,0) circle[radius=7mm];
+        \path[spath/save=small circle] (0.8,0) circle[radius=4mm];
+        
+        \tikzset{
+          spath/remove empty components=large circle,
+          spath/remove empty components=small circle,
+          spath/split at intersections={large circle}{small circle},
+          spath/get components of={large circle}\largeCpts,
+          spath/get components of={small circle}\smallCpts,
+        }
+        
+        \draw[
+          fill=gray!30,
+          spath/use={\getComponentOf\smallCpts{2}},
+          spath/use={\getComponentOf\largeCpts{1},weld},
+          spath/adjust and close=current,
+        ] node[xshift=-3.5mm, yshift=3.5mm] {$m_1+m_2$};
+
+        \draw[thick, -Latex] (1.5,0) -- node[above] {$v$} ++(0.333,0);
+        
+        \draw (1.7,1.25) node {After collision:};
+
+        % Hack: add invisible arrow for alignment
+        \draw[color=white, thick,-Latex] (3.9,0) -- ++(1.667,0);
+    \end{scope}
+\end{tikzpicture}

@@ -1,0 +1,54 @@
+\begin{circuitikz}
+    %
+    % Close circuit to A
+    %
+    \begin{scope}[scale=0.85]
+        \draw (-1,0) node {\large (a)};
+        \draw (0,0) coordinate (O)
+              to[battery2, invert, l_={$V_B$}] ++(0,3)
+              to[short, -*] ++(1,0) node[above] {$A$} coordinate (A);
+        \draw ($ (A) + (1,0) $) coordinate (X)
+              to[R, *-, l^={$R$}] ++(3,0) coordinate (C)
+              to[C, l^={$C$}] node[above right,pos=-0.25,red]{\tiny $+q$} node[below right,pos=0,red]{\tiny $-q$} ++(0,-3) coordinate (D)
+              to[short, -*] ++(-3,0) coordinate (Y);
+        \draw (Y) -- (O);
+        \draw[gray!50] ($ (X) - (0,1) $) node[left] {$B$} coordinate (B)
+              to[short, o-] ++(0,-2);
+        \draw[rotate around={0:(X)}] (X) to[short] ++(-1,0);
+        % Draw the current loop
+        \draw[thick, dashed, red, -Latex, rounded corners=1em] ($ (X)+(0.5,-0.5) $) -- ($ (C)+(-0.75,-0.5) $) -- ($ (C)+(-0.75,-2) $) node[below] {$I$};
+        % Draw the switch
+        \draw[dashed, gray!50] (B) -- (X);
+        \draw[gray!50, -latex] ($ (B) + (-0.1,0.3) $) arc[start angle=270, end angle=175, radius=0.5];
+        % Draw Vc
+        \draw (C) to[short, *-o] ++(1.5,0) coordinate (E);
+        \draw (D) to[short, *-o] ++(1.5,0) coordinate (F);
+        \draw[densely dotted, latex-latex, blue] ($ (E)-(0,0.1) $) -- ($ (F)+(0,0.1) $) node[pos=0.5,fill=white] {$V_C$};
+    \end{scope}
+    %
+    % Close circuit to B
+    %
+    \begin{scope}[scale=0.85, shift={(10,0)}]
+        \draw (-1,0) node {\large (b)};
+        \draw[gray!50] (0,0) coordinate (O)
+              to[battery2, invert, l_={$V_B$}] ++(0,3)
+              to[short, -o] ++(1,0) node[above] {$A$} coordinate (A);
+        \draw ($ (A) + (1,0) $) coordinate (X)
+              to[R, *-, l^={$R$}] ++(3,0) coordinate (C)
+              to[C, l^={$C$}] node[above right,pos=-0.25,red]{\tiny $+q$} node[below right,pos=0,red]{\tiny $-q$} ++(0,-3) coordinate (D)
+              to[short, -*] ++(-3,0) coordinate (Y);
+        \draw[gray!50] (Y) -- (O);
+        \draw ($ (X) - (0,1) $) node[left] {$B$} coordinate (B)
+              to[short, *-] ++(0,-2);
+        \draw[rotate around={90:(X)}] (X) to[short] ++(-1,0);
+        % Draw the current loop
+        \draw[thick, dashed, red, Latex-, rounded corners=1em] ($ (X)+(0.5,-1.5) $) -- ($ (X)+(0.5,-0.5) $) -- ($ (C)+(-0.75,-0.5) $) -- ($ (C)+(-0.75,-2) $) node[below] {$I$};
+        % Draw the switch
+        \draw[dashed, gray!50] (A) -- (X);
+        \draw[gray!50, latex-] ($ (B) + (-0.1,0.3) $) arc[start angle=270, end angle=175, radius=0.5];
+        % Draw Vc
+        \draw (C) to[short, *-o] ++(1.5,0) coordinate (E);
+        \draw (D) to[short, *-o] ++(1.5,0) coordinate (F);
+        \draw[densely dotted, latex-latex, blue] ($ (E)-(0,0.1) $) -- ($ (F)+(0,0.1) $) node[pos=0.5,fill=white] {$V_C$};
+    \end{scope}
+\end{circuitikz}

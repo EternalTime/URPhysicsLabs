@@ -1,0 +1,25 @@
+\begin{circuitikz}
+    % Draw the parabolic path
+    \def\nsamples{30}
+    \def\vb{12}
+    \def\g{9.8}
+    \def\L{10}
+    \draw[very thick, blue, dashed, variable=\t, samples=\nsamples, smooth, domain=0:1] plot({\vb*\t}, {-0.5*\g*\t^2});
+    % Draw the projectile
+    \draw[thick] (-0.4, 0.2) -- ++(-1,0) -- ++(0,-0.4) -- ++(1,0);
+    % \ctikzset{bipoles/cuteinductor/lower coil height=.1}
+    \begin{scope}[scale=0.8, transform shape]
+        \draw (-1.65,-0.05) to[cute inductor] ++(0.8,0);
+    \end{scope}
+    \draw[fill=gray] (-0.2,0) circle (1mm) node[above, yshift=1mm] {$m$};
+    \draw[thick, -Latex] (-0.1,0) -- node[above] {$v_b$} ++(3,0);
+    % Draw the platform and floor
+    \draw (-1.5, -0.3)  coordinate (A) 
+          -- ++(1.5,0)  coordinate (B)
+          -- ++(0,-4.6) coordinate (C)
+          -- ++({\L+3},0)   coordinate (D);
+    \fill[pattern color=gray, pattern={north east lines}] (A) -- (B) -- (C) -- (D) -- ++(0,-0.5) -- ++({-\L-4.5}, 0) -- cycle;
+    % Mark off lengths
+    \draw[|-|] (12,0) -- node[midway, fill=white] {$\displaystyle H=\frac{1}{2}gt^2$} ++(0,-4.9);
+    \draw[|-|] (0,-6) -- node[midway, fill=white] {$L=v_b t$} ++(12,0);
+\end{circuitikz}

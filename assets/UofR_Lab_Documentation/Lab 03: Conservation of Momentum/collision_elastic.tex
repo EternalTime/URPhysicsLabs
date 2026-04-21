@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+    \begin{scope}
+        \draw[fill=gray!30] (0,0) circle (7mm) node {$m_1$};
+        \draw[thick,-Latex] (0.8,0) -- node[above] {$u_1$} ++(1,0);
+        \draw[fill=gray!10] (3.4,0) circle (4mm) node {$m_2$};
+        \draw[thick,-Latex] (2.9,0) -- node[above] {$u_2$} ++(-1,0);
+        \draw (1.7,1.25) node {Before collision:};
+    \end{scope}
+    \draw (5.5,0) node {$\implies$};
+    \begin{scope}[shift={(8,0)}]
+        \draw[fill=gray!30] (0,0) circle (7mm) node {$m_1$};
+        \draw[thick,-Latex] (-0.8,0) -- node[above] {$v_1$} ++(-0.333,0);
+        \draw[fill=gray!10] (3.4,0) circle (4mm) node {$m_2$};
+        \draw[thick,-Latex] (3.9,0) -- node[above] {$v_2$} ++(1.667,0);
+        \draw (1.7,1.25) node {After collision:};
+    \end{scope}
+\end{tikzpicture}

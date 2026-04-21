@@ -1,0 +1,102 @@
+\begin{tikzpicture}
+
+    \tikzset{
+      % style to apply some styles to each segment of a path
+      on each segment/.style={
+        decorate,
+        decoration={
+          show path construction,
+          moveto code={},
+          lineto code={
+            \path [#1]
+            (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
+          },
+          curveto code={
+            \path [#1] (\tikzinputsegmentfirst)
+            .. controls
+            (\tikzinputsegmentsupporta) and (\tikzinputsegmentsupportb)
+            ..
+            (\tikzinputsegmentlast);
+          },
+          closepath code={
+            \path [#1]
+            (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
+          },
+        },
+      },
+      % style to add an arrow in the middle of a path
+      mid arrow/.style={postaction={decorate,decoration={
+            markings,
+            mark=at position 0.55 with {\arrow[#1]{latex}}
+          }}},
+    }
+
+    \def\L{6}                       % microscope tube length
+    \def\fobj{5}                    % objective focal length
+    \def\feye{1.5}                  % eyepiece focal length
+    \def\D{2.5}                     % objective diameter
+    \def\De{2.8}                    % eyepiece diameter
+    \def\h{0.5}                     % object height
+    \def\hi{-1}                     % objective image height
+    \def\i{{\fobj}}                 % objective image distance
+    \def\offset{0.75}               % ray offsets for plotting
+    \def\ii{-2}                     % eyepiece image location
+    \def\hii{-6}                    % eyepiece image height
+    %
+    % Compute angles
+    \def\thetaAng{11.3}
+    \def\tantheta{-\hi / (\fobj)}
+    \def\tanalpha{-(\offset + \hi)/(\fobj)}
+    \def\tanbeta{(\offset - \hi)/(\fobj)}
+    %
+    % Draw the objective lens
+    \draw[cyan, line join=round,fill=cyan!15] (0.025,{-\D/2}) coordinate (L1) arc (-30:30:1 and \D) coordinate (L2) -- ++(-0.05,0) arc (150:210:1 and \D) -- cycle;
+    \draw[densely dotted] (0,{-0.6*\D}) -- (0,{0.6*\D});
+    \draw (0, {0.4*\D}) -- ++(-1.5,1) node[left] {\small objective lens};
+    % Draw the eyepiece
+    \draw[cyan, line join=round,fill=cyan!15] (\L+0.025,{-\De/2}) coordinate (L1) arc (-30:30:1 and \De) coordinate (L2) -- ++(-0.05,0) arc (150:210:1 and \De) -- cycle;
+    \draw[densely dotted] (\L,{-0.6*\D}) -- (\L,{0.6*\D});
+    \draw (\L, {-0.6*\D}) -- ++(0.25,-1.25) node[below] {\small eyepiece};
+    %
+    % Draw the axial line and focal points
+    \draw ({-0.5*\L}, 0) -- ({\L+1.1*\feye}, 0);
+    \filldraw[black] (\fobj, 0) circle (0.035);
+    \filldraw[black] ({\L-\feye}, 0) circle (0.035);
+    \filldraw[black] ({\L+\feye}, 0) circle (0.035);
+    %
+    % Draw the objective image
+    \draw[ultra thick, violet, -Latex] (\i, 0) -- node[right] {\small $h'$} (\i, {\hi}) coordinate (O3);
+    %
+    % Draw rays from infinity to the first real image through the objective
+    \draw[red, postaction={on each segment={mid arrow=red}}] ({-0.5*\L}, {0.5*\L*\tantheta}) -- (0,0) -- (O3);
+    \draw[red, postaction={on each segment={mid arrow=red}}] ({-0.5*\L}, {0.5*\L*\tantheta + \offset}) -- (0, \offset) -- (O3);
+    \draw[red, postaction={on each segment={mid arrow=red}}] ({-0.5*\L}, {0.5*\L*\tantheta - \offset}) -- (0, -\offset) -- (O3);
+    \draw[red] ({-0.5*\L}, {1.2*\offset}) node[left, align=center] {\small object\\ \small (at $\infty$)};
+    \draw[-latex, red] (-2.5, 0) arc[start angle=180, end angle={180-\thetaAng}, radius=2.5] node[left=3, pos=0.5] {\footnotesize $\theta$};
+    %
+    % Draw rays from the first real image to the eyepiece and the final virtual image
+    \draw[ultra thick, blue, -Latex] (\ii, 0) -- node[left, align=center] {\small $h''$\\ \small (at $\infty$)} (\ii, \hii) coordinate (O4);
+    \draw[blue] (O3) -- ++({\L - \fobj}, {-(\L - \fobj)*\tanalpha}) coordinate (A);
+    \draw[blue] (O3) -- ++({\L - \fobj}, {-(\L - \fobj)*\tantheta}) coordinate (B);
+    \draw[blue] (O3) -- ++({\L - \fobj}, {-(\L - \fobj)*\tanbeta}) coordinate (C);
+    \draw[blue, postaction={on each segment={mid arrow=blue}}] (A) -- ({\L+\feye}, 0);
+    \draw[blue, postaction={on each segment={mid arrow=blue}}] (B) --
+    ({\L+\feye}, -0.225);
+    \draw[blue, postaction={on each segment={mid arrow=blue}}] (C) --
+    ({\L+\feye}, -0.45);
+    \draw[blue, dashed] (O4) -- (A);
+    \draw[blue, dashed] (O4) -- (B);
+    \draw[blue, dashed] (O4) -- (C);
+    \draw[-latex, blue] ({\L+\feye-0.5}, 0) arc[start angle=180, end angle=200, radius=1] node[left=2, pos=0.5] {\footnotesize $\theta'$};
+    %
+    % Draw the observer eyeball
+    \begin{scope}[shift={(\L+1.2*\feye,0)}]
+        \draw[thick] (0,0.25) -- (0.5,0) -- (0,-0.25);
+        \draw[thick] (0.1,-0.2) arc ({180+26.56}:155:0.45);
+        \draw[fill=black] (0.08,0) ellipse (0.35mm and 1mm);
+    \end{scope}
+    %
+    % Label all lengths
+    \draw[|-|] (\fobj, {0.8*\D}) -- node[midway, fill=white] {\small $f_\text{obj}$} (0, {0.8*\D});
+    \draw[|-|] ({\L-\feye}, {0.6*\D}) -- node[midway, fill=white] {\small $f_\text{eye}$} (\L, {0.6*\D});
+\end{tikzpicture}

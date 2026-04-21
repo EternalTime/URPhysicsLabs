@@ -1,8 +1,19 @@
 title: Undergraduate Physics Labs
 email: lwade3@ur.rochester.edu
 description: Lab resources for undergraduate physics courses at the University of Rochester.
+# ── Deployment target ───────────────────────────────────────────────────────
+# Uncomment ONE baseurl/url pair before building. After changing this,
+# run: bundle exec jekyll build
+# Then scp _site/ to the server (or serve locally with: bundle exec jekyll serve).
+
+# LOCAL (comment out when deploying to server)
 baseurl: ""
-url: ""
+url: "http://localhost:4000"
+
+# SERVER — pas.rochester.edu (uncomment when deploying, comment out local above)
+# baseurl: "/~dsowinsk"
+# url: "https://www.pas.rochester.edu"
+# ────────────────────────────────────────────────────────────────────────────
 
 # No theme — we use a fully custom layout
 # theme: minima

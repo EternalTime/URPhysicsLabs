@@ -1,0 +1,104 @@
+\begin{tikzpicture}
+
+    \tikzset{
+      % style to apply some styles to each segment of a path
+      on each segment/.style={
+        decorate,
+        decoration={
+          show path construction,
+          moveto code={},
+          lineto code={
+            \path [#1]
+            (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
+          },
+          curveto code={
+            \path [#1] (\tikzinputsegmentfirst)
+            .. controls
+            (\tikzinputsegmentsupporta) and (\tikzinputsegmentsupportb)
+            ..
+            (\tikzinputsegmentlast);
+          },
+          closepath code={
+            \path [#1]
+            (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
+          },
+        },
+      },
+      % style to add an arrow in the middle of a path
+      mid arrow/.style={postaction={decorate,decoration={
+            markings,
+            mark=at position 0.55 with {\arrow[#1]{latex}}
+          }}},
+    }
+
+    \def\L{6}                       % microscope tube length
+    \def\fobj{1.5}                  % objective focal length
+    \def\feye{2.05}                 % eyepiece focal length
+    \def\D{2.5}                     % objective diameter
+    \def\De{2.8}                    % eyepiece diameter
+    \def\h{0.5}                     % object height
+    \def\p{1.6*\fobj}               % object-lens distance
+    \def\i{{\fobj*\p/(\p-\fobj)}}   % image distance
+    \def\m{{-\fobj/(\p - \fobj)}}   % magnification
+    \def\hi{{-\fobj*\h/(\p-\fobj)}} % objective image height
+    \def\ii{{-1.1*\p}}              % eyepiece image location
+    \def\hii{-4.35}                 % eyepiece image height
+    %
+    % Compute angles
+    \def\tanalpha{\h / (\p - \f)}
+    \def\tanbeta{\h / (\p)}
+%    \def\tangamma{{{\hi} / \feye}}
+    %
+    % Draw the objective lens
+    \draw[cyan, line join=round,fill=cyan!15] (0.025,{-\D/2}) coordinate (L1) arc (-30:30:1 and \D) coordinate (L2) -- ++(-0.05,0) arc (150:210:1 and \D) -- cycle;
+    \draw[densely dotted] (0,{-0.6*\D}) -- (0,{0.6*\D});
+    \draw (0, {0.4*\D}) -- ++(-1.5,0.25) node[left] {\small objective lens};
+    % Draw the eyepiece
+    \draw[cyan, line join=round,fill=cyan!15] (\L+0.025,{-\De/2}) coordinate (L1) arc (-30:30:1 and \De) coordinate (L2) -- ++(-0.05,0) arc (150:210:1 and \De) -- cycle;
+    \draw[densely dotted] (\L,{-0.6*\D}) -- (\L,{0.6*\D});
+    \draw (\L, {-0.6*\D}) -- ++(0.25,-1.25) node[below] {\small eyepiece};
+    %
+    % Draw the axial line and focal points
+    \draw ({-0.6*\L}, 0) -- ({\L+1.1*\feye}, 0);
+    \filldraw[black] (-\fobj, 0) circle (0.035);
+    \filldraw[black] (\fobj, 0) circle (0.035);
+    \filldraw[black] ({\L-\feye}, 0) circle (0.035);
+    \filldraw[black] ({\L+\feye}, 0) circle (0.035);
+    %
+    % Draw the object beyond the focal point
+    \draw[ultra thick, -Latex] (-\p, 0) coordinate (O1) -- node[midway, left] {\small $h$} (-\p, \h) coordinate (O2);
+%    %
+%    % Draw rays from the object to the first real image through the objective
+    \draw[red, postaction={on each segment={mid arrow=red}}] (O2) -- (0,\h) -- (\i, \hi);
+    \draw[red, postaction={on each segment={mid arrow=red}}] (O2) -- (0,0) -- (\i, \hi);
+    \draw[red, postaction={on each segment={mid arrow=red}}] (O2) -- (0, \hi) -- (\i, \hi);
+    %
+    % Draw the objective image
+    \draw[ultra thick, violet, -Latex] (\i, 0) -- node[right] {\small $h'$} (\i, {\hi}) coordinate (O3);
+    %
+    % Draw rays from the first real image to the eyepiece and the final virtual image
+    \draw[blue, postaction={on each segment={mid arrow=blue}}] (\i, \hi) -- (\L, \hi) -- ({\L+\feye}, 0);
+    \draw[blue, dashed] ({\L}, \hi) -- (\ii, \hii);
+    \draw[ultra thick, blue, -Latex] (\ii, 0) -- node[left, align=center]
+    {\small $h''$} (\ii, \hii) coordinate (O4);
+    \draw[blue, postaction={on each segment={mid arrow=blue}}] (O3) -- ++({0.98*\feye}, {-\feye*\tanbeta}) coordinate (O5);
+    \draw[blue, dashed] (O4) -- (O5);
+    \draw[blue, postaction={on each segment={mid arrow=blue}}] (O5) --
+    ({\L+\feye}, -0.53);
+    %
+    % Draw the observer eyeball
+    \begin{scope}[shift={(\L+1.2*\feye,0)}]
+        \draw[thick] (0,0.25) -- (0.5,0) -- (0,-0.25);
+        \draw[thick] (0.1,-0.2) arc ({180+26.56}:155:0.45);
+        \draw[fill=black] (0.08,0) ellipse (0.35mm and 1mm);
+    \end{scope}
+    %
+    % Label all lengths
+    \draw[|-|] (-\fobj, {0.8*\D}) -- node[midway, fill=white] {\small $f_\text{obj}$} (0, {0.8*\D});
+    \draw[|-|] (\fobj, {0.8*\D}) -- node[midway, fill=white] {\small $f_\text{obj}$} (0, {0.8*\D});
+    \draw[|-|] ({\L-\feye}, {0.8*\D}) -- node[midway, fill=white] {\small $f_\text{eye}$} (\L, {0.8*\D});
+    \draw[|-|] ({\L+\feye}, {0.8*\D}) -- node[midway, fill=white] {\small $f_\text{eye}$} (\L, {0.8*\D});
+    \draw[|-|] (0, {0.65*\D}) -- node[midway, fill=white] {\small $L$} (\L, {0.65*\D});
+    \draw[|-|] (-\p, {-0.575*\D}) -- node[midway, fill=white] {\small $p$} (0, {-0.575*\D});
+    \draw[|-|] (0, {-0.575*\D}) -- node[midway, fill=white] {\small $i$} (\i, {-0.575*\D});
+\end{tikzpicture}

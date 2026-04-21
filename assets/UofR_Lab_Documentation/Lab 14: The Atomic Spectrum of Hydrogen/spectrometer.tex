@@ -1,0 +1,142 @@
+% \documentclass{standalone}
+
+% \usepackage{amsmath}
+% \usepackage{siunitx}
+% \usepackage{tikz}
+% \usetikzlibrary{patterns, angles, quotes, shapes, shapes.geometric, shapes.gates.logic.US, calc, arrows.meta}
+
+% \usepackage{circuitikz}
+
+% \begin{document}
+
+\begin{tikzpicture}
+    % Table base
+    \def\Ra{3.5};
+    \def\Aa{120};
+    \def\Ab{\Aa - 90};
+    \def\Ac{180 - \Ab};
+    \def\Rb{2.5}
+    \draw ({\Ra*cos(\Aa)},{-\Ra*sin(\Aa)}) arc (-\Aa:\Aa:\Ra);
+    \draw ({\Ra*cos(\Aa)},{-\Ra*sin(\Aa)}) -- ++({-\Rb*cos(\Ab)},{\Rb*sin(\Ab)});
+    \draw ({\Ra*cos(\Aa)},{\Ra*sin(\Aa)}) -- ++({-\Rb*cos(\Ab)},{-\Rb*sin(\Ab)});
+    \draw ({\Ra*cos(\Aa)-\Rb*cos(\Ab)},{\Ra*sin(\Aa)-\Rb*sin(\Ab)})
+          arc (120:240:{\Ra-1.155*\Rb*sin(\Ab)});
+    % Table base lock screw and adjustment screw
+    \begin{scope}[rotate around={\Ac:(-3.5,-2.025)}]
+        \draw[thick,pattern=vertical lines] (-3.75,-2.2) rectangle (-3.35,-2.4);
+        \draw (-3.6,-2.2) rectangle (-3.5,-2.025);
+    \end{scope}
+    %
+    \begin{scope}[rotate around={342.5:(-0.95,-3.37)}]
+        \draw[thick,pattern=vertical lines] (-1.2,-3.545) rectangle (-0.8,-3.745);
+        \draw (-1.05,-3.545) rectangle (-0.95,-3.37);
+    \end{scope}
+    % Spectrometer table adjustment screw
+    \draw[fill=white] (-0.065,-1.1) rectangle (0.065,-3.9);
+    \draw[thick, pattern=vertical lines] (-0.2,-3.9) rectangle (0.2,-4.1);
+    % Turntable, grating, and vernier window
+    \draw[fill=gray!50] (0,0) circle (2cm);
+    \draw[thick] (0,0) circle (1.7cm);
+    \draw[fill=white] (0,0) circle (1.6cm);
+    \draw[fill=gray!50] (0,0) circle (1.1cm);
+    \draw[fill=white] (-0.1,-0.9) rectangle (0.1,0.9);
+    \draw[pattern=north west lines, pattern color=blue] (-0.1,-0.9) rectangle (0.1,0.9);
+    \def\Rin{1.65};
+    \def\Rout{1.9};
+    \def\AngAStart{180 - 7};
+    \def\AngAStop{180 + 7};
+    \def\AngBStart{-7};
+    \def\AngBStop{7};
+    \filldraw[fill=white, draw=black, thick]
+        (\AngAStart:\Rin)
+        arc[radius=\Rin, start angle=\AngAStart, end angle=\AngAStop] --
+        (\AngAStop:\Rout)
+        arc[radius=\Rout, start angle=\AngAStop, end angle=\AngAStart] --
+        cycle;
+    \filldraw[fill=white, draw=black, thick]
+        (\AngBStart:\Rin)
+        arc[radius=\Rin, start angle=\AngBStart, end angle=\AngBStop] --
+        (\AngBStop:\Rout)
+        arc[radius=\Rout, start angle=\AngBStop, end angle=\AngBStart] --
+        cycle;
+    % Collimator
+    \draw[color=white, fill=white] (-3,0.75) rectangle (-6,-0.75);
+    \draw[thick] (-3,0.75) -- (-6,0.75);
+    \draw[thick] (-3,-0.75) -- (-6,-0.75);
+    \draw[fill=cyan!20] (-3,0) ellipse (0.1 cm and 0.75cm);
+    \draw[thick] (-5,0.6) -- (-8,0.6) -- (-8,0.1);
+    \draw[thick] (-5,-0.6) -- (-8,-0.6) -- (-8,-0.1);
+    % Collimator and slit adjustment knobs
+    \draw[fill=gray!50] (-5.425,-0.6) rectangle (-5.575,-1);
+    \draw[thick,pattern=vertical lines] (-5.15,-1) rectangle (-5.85,-1.15);
+    \draw[fill=gray!50] (-8,-0.6) rectangle (-7.85,-0.8);
+    \draw[thick,pattern=vertical lines] (-8.1,-0.8) rectangle (-7.75,-0.95);
+    % Source
+    \node [star, star point height=2mm, minimum size=1mm, fill=red, draw] at (-8.75,0) {};
+    % Rays from source to collimator lens
+    \draw[-latex, densely dashed, red] (-8.5,0) -- (-2.9,0.6);
+    \draw[-latex, densely dashed, red] (-8.5,0) -- (-2.9,-0.6);
+    % Rays from collimator lens to grating
+    \draw[-latex, densely dashed, red] (-2.9,0.6) -- (0,0.6);
+    \draw[-latex, densely dashed, red] (-2.9,-0.6) -- (0,-0.6);
+    % Rays from grating to telescope lens
+    % Define a rotation angle.
+    \def\RotAngle{25};
+    \draw[-latex, densely dashed, red] (0,0.6) -- ({3*cos(\RotAngle)-0.6*sin(\RotAngle)},{3*sin(\RotAngle)+0.6*cos(\RotAngle)});
+    \draw[-latex, densely dashed, red] (0,-0.6) -- ({3*cos(\RotAngle)+0.6*sin(\RotAngle)},{3*sin(\RotAngle)-0.6*cos(\RotAngle)});
+    \begin{scope}[rotate around={\RotAngle:(0,0)}]
+        % Telescope
+        \draw[color=white, fill=white] (3,0.75) rectangle (6,-0.75);
+        \draw[thick] (3,0.75) -- (6,0.75);
+        \draw[thick] (3,-0.75) -- (6,-0.75);
+        \draw[fill=cyan!20] (3,0) ellipse (0.1 cm and 0.75cm);
+        \draw[thick] (5,0.6) -- (8,0.6);
+        \draw[thick] (5,-0.6) -- (8,-0.6);
+        \draw[thick, dashed] (7.1,-0.6) -- (7.1,0.6);
+        \draw[thick] (7.75,0.45) -- (8.75,0.45);
+        \draw[thick] (7.75,-0.45) -- (8.75,-0.45);
+        \draw[fill=black] (7.75,0.45) rectangle (8,0.6);
+        \draw[fill=black] (7.75,-0.45) rectangle (8,-0.6);
+        \draw[fill=cyan!20] (8.75,0) ellipse (0.075 cm and 0.45cm);
+        % Telescope adjustment knob
+        \draw[fill=gray!50] (5.425,0.6) rectangle (5.575,1);
+        \draw[thick,pattern=vertical lines] (5.15,1) rectangle (5.85,1.15);
+        % Draw observer eyeball
+        \draw[thick] (9.5,0.25) -- (10,0) -- (9.5,-0.25);
+        \draw[thick] (9.6,-0.2) arc ({180+26.56}:155:0.45);
+        \draw[fill=black] (9.58,0) ellipse (0.35mm and 1mm);
+        % Rays from telescope lens to eyepiece lens
+        \draw[-latex, densely dashed, red] (3,0.6) -- (8.75,-0.25);
+        \draw[-latex, densely dashed, red] (3,-0.6) -- (8.75,0.25);
+        \draw[-latex, densely dashed, red] (8.75,-0.25) -- (9.4,-0.25);
+        \draw[-latex, densely dashed, red] (8.75,0.25) -- (9.4,0.25);
+        %
+        % Labels
+        %
+        \draw (5,-1) node[below] {\small telescope};
+        \draw (5.25,2) node[above] {\small focus knob} -- (5.5,1.25);
+        \draw (8,1.5) node[above] {\small eyepiece} -- (8.25,0.55);
+        \draw (7.5,-1.5) node[right, align=left] {\small crosshairs} -- (7.1,-0.7);
+    \end{scope}
+    % Draw straight-through line
+    \draw[densely dotted, thick] (-8.5,0) -- (9.4,0);
+    %
+    % Add some labels
+    %
+    \draw[latex-latex] (2.75,0) node[below] {\small $\theta$} arc (0:{\RotAngle}:1.375);
+    \draw (-2,4) node[above, align=left] {\small diffraction\\[-0.25em] \small grating} -- (-0.1,0.8);
+    \draw (-3.5,3) node[above, align=left] {\small spectrometer\\[-0.25em] \small table} -- (-0.6,0.8);
+    \draw (-2,-1.8) node[below, align=center] {\small Vernier\\[-0.25em] \small scales} -- (-1.8,-0.3);
+    \draw (-2,-1.8) -- (1.8,-0.3);
+%    \draw (2,-1.5) node[right, align=left] {\small telescope\\[-0.25em] \small turntable} -- (1,-0.7);
+    \draw (-6,0.9) node[above] {\small collimator};
+    \draw (-5.75,-2) node[below] {\small focus knob} -- (-5.5,-1.25);
+    \draw (-7.85,-2) node[below, align=left] {\small slit\\[-0.25em] \small adjust} -- (-7.75,-1.1);
+    \draw (-8.75,-1.5) node[below] {\small slit} -- (-8.1,-0.1);
+    \draw (-8.8,1.5) node[above] {\small source} -- (-8.75,0.5);
+    \draw (-1.15,-3.8) -- (-1.3,-4.2) node[below, align=left] {\small table rotation\\[-0.25em] \small lock screw};
+    \draw (-3.8,-2.4) -- (-4.3,-3.2) node[below, align=left] {\small table rotation\\[-0.25em] \small fine adjustment};
+    \draw (0.3,-4) -- (1.5,-4.3) node[right, align=left] {\small spectrometer table\\[-0.25em] \small lock screw};
+\end{tikzpicture}
+
+% \end{document}

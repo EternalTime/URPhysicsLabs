@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+    \node[cylinder,
+        draw=violet,
+        cylinder uses custom fill, 
+        cylinder body fill = magenta!10, 
+        cylinder end fill = magenta!40,
+        minimum width = 30mm,
+        aspect = 3,
+        shape border rotate = 90] (c) at (0,0) { };
+    \draw[-latex] (0,0.5) -- (0,2) node[below left, yshift=-2mm] {$\vec{L}$, $\vec{\omega}$};
+    \draw (0,0.5) -- node[midway, fill=magenta!40] {\small $R$} (1.5,0.5);
+    \draw[-latex] (1.5,0.5) -- (0.9,1.2) node[above, xshift=3mm] {\small $v=\omega R$};
+    \draw[thick] (1.42,0.6) -- (1.28,0.6) -- (1.36,0.5); 
+\end{tikzpicture}

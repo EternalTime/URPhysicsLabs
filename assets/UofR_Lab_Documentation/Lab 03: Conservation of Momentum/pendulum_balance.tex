@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+    % Pendulum pivot pin and arm
+    \draw[very thick] (0,0) -- node[midway, above] {pendulum arm} (6,0);
+    \draw[fill=white] (0,0) circle (1mm) node[left, align=left, xshift=-2mm] {pivot\\pin};
+    % Draw the mass and the catcher
+    \draw[very thick] (6,-0.15) -- ++(0,0.3) -- ++(0.2,0) -- ++(0,0.2) -- ++(0.5,0) -- ++(0,-0.2) -- ++(0.2,0) -- ++(0,-0.3) -- ++(-0.2,0) -- ++(0,-0.2) -- ++(-0.5,0) -- ++(0,0.2) -- cycle;
+    \draw[fill=gray] (6.45,0) circle (2mm);
+    \draw (6.45,0) -- ++(0.5,1) node[above right] {metal ball};
+    \draw (7,0) -- ++(0.75,0.25) node[right] {catcher};
+    % Table
+    \draw (6.35,-1.35) -- ++(0,1) -- ++(3,0);
+    \fill[pattern color=gray, pattern={north east lines}] (6.35,-1.35) rectangle ++(3,1) node[pos=0.5, fill=white] {table};
+    \draw ((6.3,-0.4) -- ++(-1,-0.75) node[left] {balance point};
+    % Mark the distance R
+    \draw[densely dotted] (0,0.2) -- (0,1.5);
+    \draw[densely dotted] (6.35,0.45) -- (6.35,1.5);
+    \draw[latex-latex] (0,1.3) -- node[midway,fill=white] {$R$} (6.35,1.3);
+\end{tikzpicture}

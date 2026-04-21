@@ -1,0 +1,59 @@
+\begin{tikzpicture}
+    % Turntable, grating, and vernier window
+    \draw[fill=gray!50] (0,0) circle (2cm);
+    \draw[thick] (0,0) circle (1.7cm);
+    \draw[fill=white] (0,0) circle (1.6cm);
+    \draw[fill=gray!50] (0,0) circle (1.1cm);
+    \draw[fill=white, rotate around={-45:(0,0)}] (-0.1,-0.9) rectangle (0.1,0.9);
+    \draw[pattern=north west lines, pattern color=blue, rotate around={-45:(0,0)}] (-0.1,-0.9) rectangle (0.1,0.9);
+    \def\Rin{1.65};
+    \def\Rout{1.85};
+    \def\StartAngle{263};
+    \def\StopAngle{277};
+    \filldraw[fill=white, draw=black, thick]
+        (\StartAngle:\Rin)
+        arc[radius=\Rin, start angle=\StartAngle, end angle=\StopAngle] --
+        (\StopAngle:\Rout)
+        arc[radius=\Rout, start angle=\StopAngle, end angle=\StartAngle] --
+        cycle;
+    % Collimator
+    \draw[thick] (-3,0.75) -- (-6,0.75);
+    \draw[thick] (-3,-0.75) -- (-6,-0.75);
+    \draw[fill=cyan!20] (-3,0) ellipse (0.1 cm and 0.75cm);
+    \draw[thick] (-5,0.6) -- (-8,0.6) -- (-8,0.1);
+    \draw[thick] (-5,-0.6) -- (-8,-0.6) -- (-8,-0.1);
+    % Collimator and slit adjustment knobs
+    \draw[fill=gray!50] (-5.425,-0.6) rectangle (-5.575,-1);
+    \draw[thick,pattern=vertical lines] (-5.15,-1) rectangle (-5.85,-1.15);
+    \draw[fill=gray!50] (-8,-0.6) rectangle (-7.85,-0.8);
+    \draw[thick,pattern=vertical lines] (-8.1,-0.8) rectangle (-7.75,-0.95);
+    % Source
+    \node [star, star point height=2mm, minimum size=1mm, fill=yellow, draw] at (-8.75,0) {};
+    % Rays from source to grating and to telescope
+    \draw[-Latex, densely dashed, red] (-8.5,0) -- (0,0);
+    \draw[-Latex, densely dashed, red] (0,0) -- (0,9.4);
+    % Rays from grating to telescope lens
+    % Define a rotation angle.
+    \def\RotAngle{90};
+    \begin{scope}[rotate around={\RotAngle:(0,0)}]
+        % Telescope
+        \draw[thick] (3,0.75) -- (6,0.75);
+        \draw[thick] (3,-0.75) -- (6,-0.75);
+        \draw[fill=cyan!20] (3,0) ellipse (0.1 cm and 0.75cm);
+        \draw[thick] (5,0.6) -- (8,0.6);
+        \draw[thick] (5,-0.6) -- (8,-0.6);
+        \draw[thick, dashed] (7.1,-0.6) -- (7.1,0.6);
+        \draw[thick] (7.75,0.45) -- (8.75,0.45);
+        \draw[thick] (7.75,-0.45) -- (8.75,-0.45);
+        \draw[fill=black] (7.75,0.45) rectangle (8,0.6);
+        \draw[fill=black] (7.75,-0.45) rectangle (8,-0.6);
+        \draw[fill=cyan!20] (8.75,0) ellipse (0.075 cm and 0.45cm);
+        % Telescope adjustment knob
+        \draw[fill=gray!50] (5.425,0.6) rectangle (5.575,1);
+        \draw[thick,pattern=vertical lines] (5.15,1) rectangle (5.85,1.15);
+        % Draw observer eyeball
+        \draw[thick] (9.5,0.25) -- (10,0) -- (9.5,-0.25);
+        \draw[thick] (9.6,-0.2) arc ({180+26.56}:155:0.45);
+        \draw[fill=black] (9.58,0) ellipse (0.35mm and 1mm);
+    \end{scope}
+\end{tikzpicture}

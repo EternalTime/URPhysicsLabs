@@ -1,0 +1,45 @@
+\begin{tikzpicture}
+    % Draw the naked eye
+    \begin{scope}
+        \def\np{3}          % near point
+        \def\offset{0.35}   % offset from the eye
+        \def\viewAngA{15}   % viewing angle (left diagram)
+        % Draw observer eyeball
+        \draw[thick] (0,0.25) -- (0.5,0) -- (0,-0.25);
+        \draw[thick] (0.1,-0.2) arc ({180+26.56}:155:0.45);
+        \draw[fill=black] (0.08,0) ellipse (0.35mm and 1mm);
+        % Draw naked eye max angle
+        \draw[dashed] (-\offset, 0) -- (-\offset-1.3*\np, 0);
+        \draw[dashed, rotate around={{360-\viewAngA}:(-\offset, 0)}] (-\offset, 0) -- (-\offset-1.3*\np, 0);
+        \draw[-latex, RubineRed] (-1.25*\np-\offset, 0) arc[start angle=180, end angle={180-\viewAngA}, radius=1.25*\np] node[left=3, pos=0.5] {\footnotesize $\theta_\text{eye}$};
+        % Draw the object at the near point
+        \draw[ultra thick, -Latex] (-\np-\offset, 0) -- node[midway, right] {$h$} (-\offset-\np, {(\np+\offset)*sin(\viewAngA)});
+        \draw[latex-latex] (-\np-\offset, -0.3) -- (-\offset, -0.3) node[pos=0.5, below, align=center] {\footnotesize near point\\[-0.25em]\footnotesize $p_n\sim\qty{25}{\centi\meter}$};
+    \end{scope}
+    %
+    % Draw the eye with a magnifying lens
+    \begin{scope}[shift={(9,0)}]
+        \def\L{4}          % near point
+        \def\f{2.2}         % focal length
+        \def\offset{0.35}   % offset from the eye
+        \def\viewAngB{20}   % viewing angle (left diagram)
+        % Draw observer eyeball
+        \draw[thick] (0,0.25) -- (0.5,0) -- (0,-0.25);
+        \draw[thick] (0.1,-0.2) arc ({180+26.56}:155:0.45);
+        \draw[fill=black] (0.08,0) ellipse (0.35mm and 1mm);
+        % Draw a converging lens at the offset
+        \draw[cyan, line join=round,fill=cyan!15] (-\offset+0.025,-1) coordinate (L1) arc (-30:30:1 and 2) coordinate (L2) -- ++(-0.05,0) arc (150:210:1 and 2) -- cycle;
+        
+        % \draw[cyan, line join=round,fill=cyan!15] (-\offset,-1) arc (-30:30:1 and 2) arc (150:210:1 and 2);
+        % Draw naked eye max angle
+        \draw[dashed] (-\offset, 0) -- (-\offset-1.3*\L, 0);
+        \draw[dashed, rotate around={{360-\viewAngB}:(-\offset, 0)}] (-\offset, 0) -- (-\offset-1.3*\L, 0);
+        \draw[-latex, RubineRed] (-0.8*\L-\offset, 0) arc[start angle=180, end angle={180-\viewAngB}, radius=0.8*\L] node[above=2] {\footnotesize $\theta_\text{mag}$};
+        % Draw the object at the focal length
+        \filldraw[black] (-\f-\offset, 0) circle (0.065);
+        \draw[ultra thick, -Latex] (-\f-\offset, 0) -- node[midway, right] {$h$} (-\f-\offset, {(\f+\offset)*sin(\viewAngB)});
+        \draw[latex-latex] (-\f-\offset, -0.3) -- (-\offset, -0.3) node[pos=0.5, below, align=center] {\footnotesize focal\\[-0.25em]\footnotesize length $f$};
+        % Draw the image
+        \draw[violet, ultra thick, -Latex] (-1.1*\L-\offset, 0) -- (-1.1*\L-\offset, {(1.1*\L+\offset)*sin(\viewAngB)}) node[pos=0.5, left, align=center] {$h'$\\(at $\infty$)};
+    \end{scope}
+\end{tikzpicture}
