@@ -1,0 +1,134 @@
+# Course definitions.
+# lab_ids: list of exactly 5 lab IDs from labs.yml
+# custom_text: optional HTML snippet shown between the stats link and the lab list
+
+- id: phys113
+  title: "PHY 113 — General Physics I"
+  description: >
+    First course in a two-semester sequence for students in the life sciences.
+    Covers Newtonian mechanics, including Newton's laws, straight-line and circular motion,
+    energy, linear and angular momentum, harmonic motion, sound, wave properties, and fluid dynamics.
+    Calculus is used as needed.
+  location: "B&L 267"
+  custom_text: ""
+  lab_ids: [lab01, lab02, lab03, lab04, lab05]
+
+- id: phys113p
+  title: "PHY 113P — General Physics I"
+  description: >
+    First course in a two-semester sequence for students in the life sciences.
+    Covers Newtonian mechanics, including Newton's laws, straight-line and circular motion,
+    energy, linear and angular momentum, harmonic motion, sound, wave properties, and fluid dynamics.
+    Calculus is used as needed.
+  location: "B&L 267"
+  custom_text: ""
+  lab_ids: [lab01, lab02, lab03, lab04, lab05]
+
+- id: phys114
+  title: "PHY 114 — General Physics II"
+  description: >
+    Second course in a two-semester sequence for students in the life sciences.
+    Covers electricity and magnetism, optics, electromagnetic waves, and an introduction to
+    modern physics including special relativity and quantum physics.
+  location: "B&L 268"
+  custom_text: ""
+  lab_ids: [lab06, lab08, lab09, lab12, lab13]
+
+- id: phys114p
+  title: "PHY 114P — General Physics II"
+  description: >
+    Second course in a two-semester sequence for students in the life sciences.
+    Covers electricity and magnetism, optics, electromagnetic waves, and an introduction to
+    modern physics including special relativity and quantum physics.
+  location: "B&L 268"
+  custom_text: ""
+  lab_ids: [lab06, lab08, lab09, lab12, lab13]
+
+- id: phys121
+  title: "PHY 121 — Mechanics"
+  description: >
+    First course in a three-semester sequence for students in physics, the physical sciences, or engineering.
+    Covers motion in one and two dimensions, Newton's laws, work and energy, conservation laws,
+    systems of particles, rotations, oscillations, gravity, and thermodynamics.
+    Requires prior knowledge of introductory calculus.
+  location: "B&L 267"
+  custom_text: ""
+  lab_ids: [lab01, lab02, lab03, lab04, lab05]
+
+- id: phys121p
+  title: "PHY 121P — Mechanics"
+  description: >
+    First course in a three-semester sequence for students in physics, the physical sciences, or engineering.
+    Covers motion in one and two dimensions, Newton's laws, work and energy, conservation laws,
+    systems of particles, rotations, oscillations, gravity, and thermodynamics.
+    Requires prior knowledge of introductory calculus.
+  location: "B&L 267"
+  custom_text: ""
+  lab_ids: [lab01, lab02, lab03, lab04, lab05]
+
+- id: phys122
+  title: "PHY 122 — Electricity &amp; Magnetism"
+  description: >
+    Second course in a three-semester sequence for students in physics, the physical sciences, or engineering.
+    Covers electrostatics, electrical potential, capacitors, electric fields in matter, circuits,
+    magnetostatics, magnetic fields in matter, induction, A.C. circuits, and electromagnetic waves.
+    Calculus is used throughout.
+  location: "B&L 268"
+  custom_text: ""
+  lab_ids: [lab06, lab07, lab08, lab09, lab10]
+
+- id: phys122p
+  title: "PHY 122P — Electricity &amp; Magnetism"
+  description: >
+    Second course in a three-semester sequence for students in physics, the physical sciences, or engineering.
+    Covers electrostatics, electrical potential, capacitors, electric fields in matter, circuits,
+    magnetostatics, magnetic fields in matter, induction, A.C. circuits, and electromagnetic waves.
+    Calculus is used throughout.
+  location: "B&L 268"
+  custom_text: ""
+  lab_ids: [lab06, lab07, lab08, lab09, lab10]
+
+- id: phys123
+  title: "PHY 123 — Modern Physics"
+  description: >
+    Third course in a three-semester sequence for students in physics, the physical sciences, or engineering.
+    Covers wave motion, physical optics, special relativity, and quantum mechanics, including the
+    Schrödinger equation, the hydrogen atom, the uncertainty principle, radioactive transitions,
+    statistical mechanics, and selected topics in solid state, nuclear, and particle physics.
+  location: "B&L 165"
+  custom_text: ""
+  lab_ids: [lab11, lab12, lab13, lab14, lab15]
+
+- id: phys141
+  title: "PHY 141 — Mechanics"
+  description: >
+    First course in a three-semester honors sequence for students planning to concentrate in
+    physics, astrophysics, or astronomy. Covers the same topics as PHY 121 in greater depth,
+    including symmetries, special relativity, Kepler's laws, and thermodynamics.
+    Calculus is used throughout.
+  location: ""
+  custom_text: ""
+  lab_ids: []
+
+- id: phys142
+  title: "PHY 142 — Electricity &amp; Magnetism"
+  description: >
+    Third course in a three-semester honors sequence (PHY 141, 143, 142) for students planning
+    to concentrate in physics, astrophysics, or astronomy. Covers the same topics as PHY 122
+    in greater depth, including electrostatics, circuits, magnetostatics, induction,
+    A.C. circuits, and electromagnetic waves.
+  location: "B&L 268"
+  custom_text: ""
+  lab_ids: [lab06, lab07, lab08, lab09, lab10]
+
+- id: phys143
+  title: "PHY 143 — Modern Physics"
+  description: >
+    Second course in a three-semester honors sequence for students planning to concentrate in
+    physics, astrophysics, or astronomy. Covers the same topics as PHY 123 in greater depth,
+    including the Bohr model, de Broglie waves, energy quantization, Heisenberg's uncertainty
+    relation, electron spin, photon interference, Bell's inequalities, and applications in
+    solid-state, nuclear, and particle physics.
+  location: ""
+  custom_text: ""
+  lab_ids: []

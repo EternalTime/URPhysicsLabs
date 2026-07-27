@@ -1,8 +1,27 @@
+/* ── Self-hosted fonts ──────────────────────────────────────── */
+@font-face {
+  font-family: 'Inter';
+  src: url('/assets/fonts/Inter-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/assets/fonts/Inter-Variable-Italic.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 /* ── Brand tokens ──────────────────────────────────────────── */
 :root {
   --ur-navy:   #001E5F;
-  --ur-gold:   #FFD100;
-  --ur-light:  #F4F4F4;
+  --ur-gold:   #FFD82B;
+  --ur-light:  #E8E8E8;
+  --ur-butter: #FFF3B1;
+  --ur-sky:    #B7D3FF;
   --ur-text:   #222222;
   --ur-link:   #005EB8;
   --max-width: 980px;
@@ -21,15 +40,23 @@ body {
 a { color: var(--ur-link); text-decoration: underline; }
 a:hover { color: var(--ur-navy); }
 
+/* ── FIXED HEADER ──────────────────────────────────────────── */
+#site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+}
+
 /* ── MASTHEAD ───────────────────────────────────────────────── */
 .masthead {
-  background: var(--ur-navy);
-  padding: 10px 20px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 8px 20px;
 }
 
 .masthead-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -44,13 +71,25 @@ a:hover { color: var(--ur-navy); }
 .nameplate {
   background: var(--ur-navy);
   border-bottom: 4px solid var(--ur-gold);
-  padding: 12px 20px 14px;
+  padding: 8px 20px;
 }
 
 .nameplate-inner {
   max-width: var(--max-width);
   margin: 0 auto;
 }
+
+.nameplate-inner .school-name {
+  display: block;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1px;
+}
+
+.nameplate-inner .school-name:hover { color: rgba(255,255,255,0.8); }
 
 .nameplate-inner .dept-name {
   display: block;
@@ -61,6 +100,8 @@ a:hover { color: var(--ur-navy); }
   text-transform: uppercase;
   margin-bottom: 2px;
 }
+
+.nameplate-inner .dept-name:hover { color: rgba(255,255,255,1); }
 
 .nameplate-inner .site-title {
   display: block;
@@ -73,8 +114,7 @@ a:hover { color: var(--ur-navy); }
 
 /* ── NAV BAR ────────────────────────────────────────────────── */
 nav {
-  background: #fff;
-  border-bottom: 2px solid var(--ur-navy);
+  background: var(--ur-navy);
   position: relative;
   z-index: 100;
 }
@@ -90,19 +130,41 @@ nav > ul {
 
 nav > ul > li > a {
   display: block;
-  padding: 12px 20px;
-  color: var(--ur-navy);
+  padding: 12px 18px;
+  color: #fff;
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   border-bottom: 3px solid transparent;
-  transition: border-color 0.15s, color 0.15s;
+  transition: border-color 0.15s, background 0.15s;
 }
 
 nav > ul > li > a:hover,
 nav > ul > li > a.active {
   border-bottom-color: var(--ur-gold);
-  color: var(--ur-navy);
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+}
+
+/* Targets the nested <ul> */
+.has-dropdown .dropdown {
+  width: max-content;       /* Forces the menu to be as wide as the longest item */
+  min-width: 100%;          /* Ensures it's at least as wide as the 'Documents' link */
+  display: none;            /* Usually hidden by default until hover */
+  position: absolute;       /* Positions it relative to the parent li */
+  z-index: 1000;
+}
+
+/* Targets the links inside the dropdown */
+.has-dropdown .dropdown li a {
+  white-space: nowrap;      /* Crucial: prevents the text from jumping to a new line */
+  display: block;           /* Ensures the link fills the width of the li */
+  padding: 10px 15px;       /* Adds a bit of breathing room on the sides */
+}
+
+/* Optional: Ensure the parent is the reference point */
+.has-dropdown {
+  position: relative;
 }
 
 /* ── DROPDOWN ───────────────────────────────────────────────── */
@@ -115,11 +177,10 @@ nav > ul > li {
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 220px;
+  min-width: 240px;
   background: #fff;
-  border: 1px solid #ddd;
-  border-top: 3px solid var(--ur-navy);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-top: 3px solid var(--ur-gold);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
   list-style: none;
   z-index: 200;
 }
@@ -133,7 +194,7 @@ nav > ul > li:hover .dropdown {
   padding: 10px 18px;
   color: var(--ur-navy);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 400;
   border-left: 3px solid transparent;
   transition: background 0.12s, border-color 0.12s;
@@ -146,8 +207,8 @@ nav > ul > li:hover .dropdown {
 
 .has-dropdown > a::after {
   content: " ▾";
-  font-size: 0.75rem;
-  opacity: 0.7;
+  font-size: 0.72rem;
+  opacity: 0.75;
 }
 
 /* ── MAIN CONTENT ───────────────────────────────────────────── */
@@ -163,6 +224,13 @@ main {
   padding: 18px 22px;
   margin-bottom: 28px;
   font-size: 1.02rem;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ur-navy);
+  margin: 0 0 24px;
 }
 
 h2 {
@@ -198,12 +266,18 @@ ul.content-list li { margin-bottom: 0.35em; }
   align-items: start;
 }
 
-.general-main  { min-width: 0; }
+.general-main { min-width: 0; }
 
 .general-sidebar {
   position: sticky;
-  top: 20px;
+  top: 220px;
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+
+.general-sidebar::-webkit-scrollbar { display: none; }
 
 .general-sidebar h3 { margin-top: 0; }
 
@@ -217,40 +291,156 @@ ul.content-list li { margin-bottom: 0.35em; }
 }
 
 /* ── Calendar ───────────────────────────────────────────────── */
-.lab-calendar {
-  border-collapse: collapse;
-  width: 100%;
+.lab-calendar-wrap {
+  display: inline-block;
   margin: 12px 0 0;
   font-size: 0.88rem;
 }
 
-.lab-calendar caption {
+/* Semester title */
+.lab-calendar-title {
+  font-size: 1.4rem;
   font-weight: 700;
-  text-align: left;
   color: var(--ur-navy);
-  caption-side: top;
-  padding-bottom: 6px;
-}
-
-.lab-calendar th {
-  background: var(--ur-navy);
-  color: #fff;
-  padding: 6px 8px;
   text-align: center;
+  width: 224px;
+  margin-left: 48px;
+  margin-bottom: 8px;
 }
 
-.lab-calendar td {
-  padding: 5px 8px;
-  border-bottom: 1px solid #ddd;
+/* Header row wrapper: A/B spacer + day labels */
+.lab-calendar-header-wrap {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 2px;
+}
+
+.ab-header {
+  width: 48px;
+  flex-shrink: 0;
+}
+
+/* Day labels above the grid */
+.lab-calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 32px);
+  margin-left: 0;
+  margin-bottom: 2px;
+}
+
+.lab-calendar-header span {
   text-align: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--ur-navy);
+  padding: 2px 0;
 }
 
-.lab-calendar tr:nth-child(even) td { background: var(--ur-light); }
+.lab-calendar-header span.weekend-head {
+  color: var(--ur-text);
+  opacity: 0.5;
+}
 
-.lab-calendar tr.break td {
-  background: #d4edda;
+/* A/B column */
+.lab-calendar-ab {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.ab-cell {
+  width: 48px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ur-navy);
+}
+
+/* Body: grid + month labels side by side */
+.lab-calendar-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.lab-calendar-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.lab-calendar-row {
+  display: grid;
+  grid-template-columns: repeat(7, 32px);
+}
+
+.cal-cell {
+  width: 32px;
+  height: 32px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  border: 1px solid #ddd;
+  color: var(--ur-text);
+  background: #fff;
+}
+
+.cal-cell.weekend {
+  background: var(--ur-light);
+}
+
+.cal-cell.mb-top    { border-top:    3px solid var(--ur-navy); }
+.cal-cell.mb-bottom { border-bottom: 3px solid var(--ur-navy); }
+.cal-cell.mb-left   { border-left:   3px solid var(--ur-navy); }
+.cal-cell.mb-right  { border-right:  3px solid var(--ur-navy); }
+
+.cal-cell.holiday {
+  background: var(--ur-butter);
+  color: var(--ur-navy);
+}
+
+.cal-cell.finals {
+  background: var(--ur-sky);
+  color: var(--ur-navy);
+}
+
+.cal-cell.out-of-range {
+  background: transparent;
+  color: var(--ur-text);
+  opacity: 0.15;
+}
+
+.cal-cell.break {
+  background: var(--ur-butter);
   font-style: italic;
-  color: #4a6741;
+  color: var(--ur-navy);
+}
+
+/* Month labels to the right, rotated 90° */
+.lab-calendar-months {
+  display: flex;
+  flex-direction: column;
+}
+
+.month-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--ur-navy);
+  white-space: nowrap;
+  padding: 0 4px;
+}
+
+.lab-calendar-wrap .calendar-pdf-link {
+  font-size: 0.82rem;
+  margin-top: 6px;
 }
 
 /* ── Manual lists ───────────────────────────────────────────── */
@@ -297,6 +487,109 @@ details.faq-item[open] summary::before { content: "▼"; }
 
 details.faq-item .faq-body { padding: 6px 24px 14px; }
 
+/* ── LAB LIST ───────────────────────────────────────────────── */
+.lab-list { margin-top: 8px; }
+
+.lab-entry {
+  border-top: 1px solid #ddd;
+  padding: 16px 0 12px;
+}
+
+.lab-entry h3 { margin-top: 0; }
+
+/* ── Lab / calendar hover interaction ───────────────────────── */
+.ab-cell.ab-highlight {
+  font-size: 1rem;
+  color: var(--ur-link);
+  cursor: default;
+  transition: font-size 0.15s ease;
+}
+
+.lab-entry.lab-highlight .lab-entry-title {
+  font-size: 1.3rem;
+  color: var(--ur-link);
+  transition: font-size 0.15s ease;
+}
+
+.lab-description {
+  font-size: 0.93rem;
+  color: #444;
+  margin: 4px 0 8px;
+}
+
+.lab-docs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.lab-doc-link {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--ur-navy);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background 0.12s;
+}
+
+.lab-doc-link:hover {
+  background: var(--ur-link);
+  color: #fff;
+}
+
+.lab-doc-setup {
+  background: var(--ur-gold);
+  color: var(--ur-navy);
+}
+
+.lab-doc-setup:hover {
+  background: #e6c200;
+  color: var(--ur-navy);
+}
+
+.lab-doc-placeholder {
+  font-size: 0.88rem;
+  color: #888;
+  font-style: italic;
+}
+
+.lab-videos {
+  margin-top: 12px;
+}
+
+.lab-video {
+  margin-top: 10px;
+  max-width: 640px;
+}
+
+.lab-video-title {
+  margin: 0 0 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.video-embed {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+}
+
+.video-embed iframe,
+.video-embed video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.course-custom-text {
+  margin: 16px 0 8px;
+}
+
 /* ── FOOTER ─────────────────────────────────────────────────── */
 footer {
   background: var(--ur-navy);
@@ -317,3 +610,120 @@ footer img.footer-logo {
 footer a { color: var(--ur-gold); text-decoration: none; }
 footer a:hover { text-decoration: underline; }
 footer p + p { margin-top: 6px; }
+
+/* ── LAB SETUP PAGES ─────────────────────────────────────────── */
+.setup-page {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+.setup-page .setup-subtitle {
+  color: #707070;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 4px 0 24px;
+}
+
+.setup-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.setup-photo figcaption {
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--ur-navy);
+  margin-top: 8px;
+}
+
+.setup-photo-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 260px;
+  border: 2px dashed var(--ur-sky);
+  border-radius: 8px;
+  color: #707070;
+  font-size: 0.95rem;
+  background: #FAFBFF;
+}
+
+.setup-page h2 {
+  margin: 36px 0 16px;
+  color: var(--ur-navy);
+  border-bottom: 2px solid var(--ur-gold);
+  padding-bottom: 6px;
+}
+
+.equip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 20px;
+}
+
+.equip-card {
+  border: 1px solid var(--ur-light);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,30,95,0.08);
+}
+
+.equip-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--ur-light);
+}
+
+.equip-photo-missing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 180px;
+  color: #707070;
+  font-size: 0.85rem;
+}
+
+.equip-info { padding: 12px 14px 14px; }
+
+.equip-info h3 {
+  font-size: 1rem;
+  color: var(--ur-navy);
+  margin-bottom: 6px;
+}
+
+.equip-loc {
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--ur-navy);
+  margin-bottom: 4px;
+}
+
+.equip-loc-unknown { color: #707070; font-weight: 400; font-style: italic; }
+
+.equip-count {
+  font-size: 0.82rem;
+  color: #707070;
+  margin-bottom: 4px;
+}
+
+.equip-notes {
+  font-size: 0.82rem;
+  color: #444;
+}
+
+.equip-broken {
+  font-size: 0.82rem;
+  color: #8B0000;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.setup-back { margin-top: 36px; }
+.setup-back a { color: var(--ur-link); text-decoration: none; font-weight: 600; }
+.setup-back a:hover { text-decoration: underline; }

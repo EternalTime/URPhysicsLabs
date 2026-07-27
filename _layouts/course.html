@@ -1,0 +1,210 @@
+---
+layout: default
+---
+
+{% comment %} Look up this course's data by matching page.course_id to courses.yml {% endcomment %}
+{% assign course = nil %}
+{% for c in site.data.courses %}
+  {% if c.id == page.course_id %}
+    {% assign course = c %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% comment %} Build a lookup map: lab id -> lab object {% endcomment %}
+{% assign lab_map = site.data.labs %}
+
+<div class="general-layout">
+
+  <div class="general-main">
+
+    <h1>{{ course.title }}</h1>
+
+    <h2>Course Description</h2>
+    <p>{{ course.description }}</p>
+    {% if course.location and course.location != "" %}
+    <h2>Location &amp; Time</h2>
+    <p>Labs are held in <strong>{{ course.location }}</strong>.</p>
+    <ul class="content-list">
+      <li>Afternoon: 2:00 PM – 4:40 PM</li>
+      <li>Evening: 4:50 PM – 7:30 PM</li>
+      <li>Night: 7:40 PM – 10:20 PM</li>
+    </ul>
+    {% endif %}
+
+    {% comment %} Statistics tutorial link {% endcomment %}
+    <h2>Statistics &amp; Error Analysis</h2>
+    <p>Prior to the first lab, go through the <a href="{{ '/statistics.html' | relative_url }}"><strong>statistics &amp; error analysis tutorial.</strong></a>
+       Print out the <a href="{{ '/assets/docs/SEtutorial.pdf' | relative_url }}" target="_blank" rel="noopener"><strong>accompanying document</strong></a>, and go through the examples.</p>
+    {% comment %} Optional custom text block {% endcomment %}
+    {% if course.custom_text and course.custom_text != "" %}
+      <div class="course-custom-text">
+        {{ course.custom_text }}
+      </div>
+    {% endif %}
+
+    {% comment %} Lab list {% endcomment %}
+    {% if course.lab_ids.size > 0 %}
+    <h2>Labs</h2>
+    <div class="lab-list">
+      {% for lab_id in course.lab_ids %}
+        {% assign lab = nil %}
+        {% for l in site.data.labs %}
+          {% if l.id == lab_id %}
+            {% assign lab = l %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        {% if lab %}
+        {% assign lab_index = forloop.index %}
+        <div class="lab-entry" data-lab="{{ lab_index }}">
+          <h3 class="lab-entry-title">Lab {{ lab_index }} — {{ lab.name }}</h3>
+          {% if lab.description and lab.description != "" %}
+            <p class="lab-description">{{ lab.description }}</p>
+          {% endif %}
+          <div class="lab-docs">
+            {% if lab.prelab and lab.prelab != "" %}
+              <a href="{{ lab.prelab | relative_url }}" class="lab-doc-link" target="_blank" rel="noopener">Prelab</a>
+            {% endif %}
+            {% if lab.manual and lab.manual != "" %}
+              <a href="{{ lab.manual | relative_url }}" class="lab-doc-link" target="_blank" rel="noopener">Manual</a>
+            {% endif %}
+            {% if lab.postlab and lab.postlab != "" %}
+              <a href="{{ lab.postlab | relative_url }}" class="lab-doc-link" target="_blank" rel="noopener">Postlab</a>
+            {% endif %}
+            {% if lab.links and lab.links.size > 0 %}
+              {% for link in lab.links %}
+                <a href="{{ link.url }}" class="lab-doc-link" target="_blank" rel="noopener">{{ link.title }}</a>
+              {% endfor %}
+            {% endif %}
+            {% if lab.prelab == "" and lab.manual == "" and lab.postlab == "" and lab.links == nil %}
+              <span class="lab-doc-placeholder">Documents coming soon.</span>
+            {% endif %}
+          </div>
+          {% if lab.videos and lab.videos.size > 0 %}
+          <div class="lab-videos">
+            {% for video in lab.videos %}
+            <div class="lab-video">
+              {% if video.title and video.title != "" %}
+                <p class="lab-video-title">{{ video.title }}</p>
+              {% endif %}
+              <div class="video-embed">
+                {% if video.url contains ".mp4" or video.url contains ".webm" %}
+                <video src="{{ video.url | relative_url }}" title="{{ video.title }}" controls preload="metadata"></video>
+                {% else %}
+                <iframe src="{{ video.url }}" title="{{ video.title }}"
+                        frameborder="0" allowfullscreen
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+
+  </div>
+
+  <div class="general-sidebar">
+    {% include lab_calendar.html semester=site.data.semesters.calendar mode="minimal" %}
+  </div>
+
+</div>
+
+<script>
+(function () {
+  // Wait for the calendar to finish rendering
+  window.addEventListener('DOMContentLoaded', function () {
+    var sidebar = document.querySelector('.general-sidebar');
+    var firstLab = document.querySelector('.lab-entry[data-lab="1"]');
+
+    function updateSidebar() {
+      if (!sidebar || !firstLab) return;
+      var header = document.getElementById('site-header');
+      var headerH = header ? header.offsetHeight : 0;
+      var labRect = firstLab.getBoundingClientRect();
+      // Keep sidebar top aligned with lab 1, but never exceed its natural offset
+      var newTop = Math.min(labRect.top, 220);
+      // Don't let it go above the header
+      newTop = Math.max(newTop, headerH);
+      sidebar.style.top = newTop + 'px';
+    }
+
+    window.addEventListener('scroll', updateSidebar, { passive: true });
+    window.addEventListener('resize', updateSidebar);
+    updateSidebar();
+
+    function highlight(labNum, on, doScroll) {
+      // Calendar AB cells
+      document.querySelectorAll('.ab-cell').forEach(function (cell) {
+        var text = cell.textContent.trim();
+        var match = text.match(/^(\d+)[AB]$/);
+        if (match && parseInt(match[1]) === labNum) {
+          cell.classList.toggle('ab-highlight', on);
+        }
+      });
+      // Lab entry
+      var entry = document.querySelector('.lab-entry[data-lab="' + labNum + '"]');
+      if (entry) {
+        entry.classList.toggle('lab-highlight', on);
+        if (on && doScroll) {
+          var rect = entry.getBoundingClientRect();
+          var inView = rect.top >= 0 && rect.top <= window.innerHeight;
+          if (!inView) {
+            var header = document.getElementById('site-header');
+            var headerH = header ? header.offsetHeight : 0;
+            var availableH = window.innerHeight - headerH;
+            var targetY = window.scrollY + rect.top - headerH - (availableH / 2) + (rect.height / 2);
+            window.scrollTo({ top: targetY, behavior: 'smooth' });
+          }
+        }
+      }
+    }
+
+    // Hover on AB cells → highlight lab (scroll delayed 300ms)
+    document.querySelectorAll('.ab-cell').forEach(function (cell) {
+      var text = cell.textContent.trim();
+      var match = text.match(/^(\d+)[AB]$/);
+      if (!match) return;
+      var labNum = parseInt(match[1]);
+      var scrollTimer = null;
+      cell.addEventListener('mouseenter', function () {
+        highlight(labNum, true, false); // highlight immediately, no scroll yet
+        scrollTimer = setTimeout(function () {
+          highlight(labNum, true, true); // scroll after delay
+        }, 300);
+      });
+      cell.addEventListener('mouseleave', function () {
+        clearTimeout(scrollTimer);
+        highlight(labNum, false);
+      });
+    });
+
+    // Hover on lab entry → highlight AB cells (no scroll)
+    document.querySelectorAll('.lab-entry[data-lab]').forEach(function (entry) {
+      var labNum = parseInt(entry.getAttribute('data-lab'));
+      entry.addEventListener('mouseenter', function () {
+        document.querySelectorAll('.ab-cell').forEach(function (cell) {
+          var text = cell.textContent.trim();
+          var match = text.match(/^(\d+)[AB]$/);
+          if (match && parseInt(match[1]) === labNum) {
+            cell.classList.add('ab-highlight');
+          }
+        });
+        entry.classList.add('lab-highlight');
+      });
+      entry.addEventListener('mouseleave', function () {
+        document.querySelectorAll('.ab-cell').forEach(function (cell) {
+          cell.classList.remove('ab-highlight');
+        });
+        entry.classList.remove('lab-highlight');
+      });
+    });
+
+  });
+})();
+</script>

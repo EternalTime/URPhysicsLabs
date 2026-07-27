@@ -11,12 +11,17 @@ baseurl: ""
 url: "http://localhost:4000"
 
 # SERVER — pas.rochester.edu (uncomment when deploying, comment out local above)
-# baseurl: "/~dsowinsk"
+# baseurl: "/~dsowinsk/physlabs"
 # url: "https://www.pas.rochester.edu"
 # ────────────────────────────────────────────────────────────────────────────
 
 # No theme — we use a fully custom layout
 # theme: minima
+
+collections:
+  courses:
+    output: true
+    permalink: /courses/:name.html
 
 plugins:
   - jekyll-feed
@@ -25,3 +30,10 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - localOnly/
+  - CLAUDE.md
+  - TASKS.md
+  - dashboard.html
+  - test_geiger.pdf
+  - test_table.pdf
+  - test_table2.pdf
