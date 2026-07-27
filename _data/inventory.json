@@ -1,0 +1,1417 @@
+{
+  "unclassified_images": [
+    {
+      "id": "a",
+      "image": "/assets/images/inventory/unclassified-a.jpg"
+    },
+    {
+      "id": "b",
+      "image": "/assets/images/inventory/unclassified-b.jpg"
+    },
+    {
+      "id": "c",
+      "image": "/assets/images/inventory/unclassified-c.jpg"
+    }
+  ],
+  "inventory": [
+    {
+      "name": "Power Cord",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "C",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/power-cord.jpg",
+      "experiments": [
+        6,
+        9
+      ],
+      "inventory": 13,
+      "broken": "",
+      "notes": "Near C, at the movable shelf"
+    },
+    {
+      "name": "Power Supply",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "B",
+          "shelf": ""
+        },
+        {
+          "room": "268",
+          "section": "E",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/power-supply-kv.jpg",
+      "experiments": [
+        5,
+        6,
+        8,
+        9
+      ],
+      "inventory": "9 near 268-B, 3 near 268-E",
+      "broken": "",
+      "notes": "Under the table for 268-B, Near cabinet for 268-E"
+    },
+    {
+      "name": "Coulomb Balance Apparatus",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "C",
+          "shelf": "4"
+        }
+      ],
+      "image": "/assets/images/inventory/coulomb-balance.jpg",
+      "experiments": [
+        6
+      ],
+      "inventory": 12,
+      "broken": "",
+      "notes": "One at 268-C-1"
+    },
+    {
+      "name": "Black wire with probe (ground)",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "E",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/probe-black.jpg",
+      "experiments": [
+        6,
+        9
+      ],
+      "inventory": 7,
+      "broken": "",
+      "notes": "At the left hand side of 267-E"
+    },
+    {
+      "name": "Red wire with probe (high voltage)",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "E",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/probe-red.jpg",
+      "experiments": [
+        6,
+        9
+      ],
+      "inventory": 23,
+      "broken": "",
+      "notes": "At the left hand side of 267-E"
+    },
+    {
+      "name": "E/M Apparatus",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "A",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/em-apparatus.jpg",
+      "experiments": [
+        8
+      ],
+      "inventory": 14,
+      "broken": "",
+      "notes": "Under the table"
+    },
+    {
+      "name": "Meter Stick",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/meter-stick.jpg",
+      "experiments": [
+        8
+      ],
+      "inventory": 6,
+      "broken": "",
+      "notes": "At the left hand side of chalkboard"
+    },
+    {
+      "name": "Compass",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "H",
+          "shelf": "2"
+        }
+      ],
+      "image": "/assets/images/inventory/compass.jpg",
+      "experiments": [
+        8
+      ],
+      "inventory": 9,
+      "broken": "",
+      "notes": "7 small, 2 big"
+    },
+    {
+      "name": "Magnetic Rod",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "H",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/magnetic-rod.jpg",
+      "experiments": [
+        8,
+        9
+      ],
+      "inventory": 13,
+      "broken": "Three red rods broken in two parts",
+      "notes": "6 red rods, 1 thin rod, 3 rectangular rods, 3 square rods"
+    },
+    {
+      "name": "3 Normal Multimeters",
+      "addresses": [],
+      "image": "/assets/images/inventory/multimeter.jpg",
+      "experiments": [
+        5,
+        7,
+        9
+      ],
+      "inventory": null,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Box with two resistors and one light bulb",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "H",
+          "shelf": "1"
+        }
+      ],
+      "image": "/assets/images/inventory/resistor-lightbulb-box.jpg",
+      "experiments": [
+        9
+      ],
+      "inventory": 5,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Hair Dryer",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "H",
+          "shelf": "6"
+        },
+        {
+          "room": "268",
+          "section": "G",
+          "shelf": "6"
+        }
+      ],
+      "image": "/assets/images/inventory/hair-dryer.jpg",
+      "experiments": [
+        9
+      ],
+      "inventory": "8 in 268-H-6, 2 in 268-G-6",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Styrofoam Tray",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "G",
+          "shelf": "4"
+        }
+      ],
+      "image": "/assets/images/inventory/styrofoam-tray.jpg",
+      "experiments": [
+        9
+      ],
+      "inventory": 12,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Box: Empty",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "E",
+          "shelf": "1"
+        },
+        {
+          "room": "268",
+          "section": "E",
+          "shelf": "4"
+        }
+      ],
+      "image": "/assets/images/inventory/box-empty.jpg",
+      "experiments": [
+        9,
+        10
+      ],
+      "inventory": "2 in 268-E-1, 4 in 268-E-4",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Battery",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "A",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/battery.jpg",
+      "experiments": [
+        8,
+        9
+      ],
+      "inventory": 4,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Aluminium Tray",
+      "addresses": [],
+      "image": "/assets/images/inventory/aluminium-tray.jpg",
+      "experiments": [
+        9
+      ],
+      "inventory": 9,
+      "broken": "",
+      "notes": "Unclear what kind"
+    },
+    {
+      "name": "High Resolution Multimeter (Fluke)",
+      "addresses": [
+        {
+          "room": "165",
+          "section": "C",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/high-res-multimeter.jpg",
+      "experiments": [
+        9
+      ],
+      "inventory": 3,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Screen Board",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "E",
+          "shelf": ""
+        },
+        {
+          "room": "268",
+          "section": "F",
+          "shelf": ""
+        },
+        {
+          "room": "268",
+          "section": "G",
+          "shelf": ""
+        },
+        {
+          "room": "268",
+          "section": "H",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/screen-board.jpg",
+      "experiments": [
+        13
+      ],
+      "inventory": "5 large, 13 small",
+      "broken": "",
+      "notes": "At the top of E F G H"
+    },
+    {
+      "name": "Laser",
+      "addresses": [],
+      "image": "/assets/images/inventory/laser.jpg",
+      "experiments": [
+        13
+      ],
+      "inventory": null,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Grating Holder",
+      "addresses": [],
+      "image": "/assets/images/inventory/grating-holder.jpg",
+      "experiments": [
+        13
+      ],
+      "inventory": null,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "3 Lengths of Track",
+      "addresses": [],
+      "image": "/assets/images/inventory/track-3lengths.jpg",
+      "experiments": [
+        13
+      ],
+      "inventory": null,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Box: Grating",
+      "addresses": [],
+      "image": "/assets/images/inventory/box-grating.jpg",
+      "experiments": [
+        13
+      ],
+      "inventory": null,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Box: Mesh",
+      "addresses": [],
+      "image": "/assets/images/inventory/box-mesh.jpg",
+      "experiments": [
+        13
+      ],
+      "inventory": null,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Box: Slits",
+      "addresses": [],
+      "image": "/assets/images/inventory/box-slits.jpg",
+      "experiments": [
+        13
+      ],
+      "inventory": null,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Microwave Generator",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "E",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/microwave-generator.jpg",
+      "experiments": [
+        13
+      ],
+      "inventory": 8,
+      "broken": "",
+      "notes": "The shelf at the right hand side of E, the second shelf and boxes"
+    },
+    {
+      "name": "Magnetic Place Holder",
+      "addresses": [],
+      "image": "/assets/images/inventory/magnetic-place-holder.jpg",
+      "experiments": [
+        13
+      ],
+      "inventory": null,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Microwave Receiver",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "E",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/microwave-receiver.jpg",
+      "experiments": [
+        13
+      ],
+      "inventory": 5,
+      "broken": "",
+      "notes": "The shelf at the right hand side of E, in the boxes"
+    },
+    {
+      "name": "Rotating Ruler",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "D",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/rotating-ruler.jpg",
+      "experiments": [
+        13
+      ],
+      "inventory": 5,
+      "broken": "",
+      "notes": "Under the table"
+    },
+    {
+      "name": "Box: Calipers",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "E",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/box-calipers.jpg",
+      "experiments": [
+        13
+      ],
+      "inventory": 2,
+      "broken": "",
+      "notes": "The right hand side shelf of E, at the first shelf"
+    },
+    {
+      "name": "Oscilloscope",
+      "addresses": [
+        {
+          "room": "165",
+          "section": "B",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/oscilloscope.jpg",
+      "experiments": [
+        11
+      ],
+      "inventory": 9,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Signal Generator",
+      "addresses": [
+        {
+          "room": "165",
+          "section": "B",
+          "shelf": "1"
+        },
+        {
+          "room": "165",
+          "section": "B",
+          "shelf": "2"
+        }
+      ],
+      "image": "/assets/images/inventory/signal-generator.jpg",
+      "experiments": [
+        11
+      ],
+      "inventory": 10,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Sonometer",
+      "addresses": [
+        {
+          "room": "165",
+          "section": "B",
+          "shelf": "2"
+        }
+      ],
+      "image": "/assets/images/inventory/sonometer.jpg",
+      "experiments": [
+        11
+      ],
+      "inventory": 12,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Wave Generator & Detector",
+      "addresses": [
+        {
+          "room": "165",
+          "section": "C",
+          "shelf": "2"
+        },
+        {
+          "room": "165",
+          "section": "C",
+          "shelf": "3"
+        },
+        {
+          "room": "165",
+          "section": "C",
+          "shelf": "4"
+        }
+      ],
+      "image": "/assets/images/inventory/wave-generator-detector.jpg",
+      "experiments": [
+        11
+      ],
+      "inventory": 19,
+      "broken": "",
+      "notes": "Inside the box"
+    },
+    {
+      "name": "Wire Stops",
+      "addresses": [
+        {
+          "room": "165",
+          "section": "C",
+          "shelf": "2"
+        },
+        {
+          "room": "165",
+          "section": "C",
+          "shelf": "3"
+        },
+        {
+          "room": "165",
+          "section": "C",
+          "shelf": "4"
+        }
+      ],
+      "image": "/assets/images/inventory/wire-stops.jpg",
+      "experiments": [
+        11
+      ],
+      "inventory": 19,
+      "broken": "",
+      "notes": "Inside the box"
+    },
+    {
+      "name": "Mass Set, Mass Hanger",
+      "addresses": [
+        {
+          "room": "165",
+          "section": "C",
+          "shelf": "2"
+        },
+        {
+          "room": "165",
+          "section": "C",
+          "shelf": "3"
+        },
+        {
+          "room": "165",
+          "section": "C",
+          "shelf": "4"
+        }
+      ],
+      "image": "/assets/images/inventory/mass-set-hanger.jpg",
+      "experiments": [
+        2,
+        11
+      ],
+      "inventory": 19,
+      "broken": "",
+      "notes": "Inside the box"
+    },
+    {
+      "name": "Cables to attach signal generator and oscilloscope",
+      "addresses": [
+        {
+          "room": "165",
+          "section": "C",
+          "shelf": "2"
+        },
+        {
+          "room": "165",
+          "section": "C",
+          "shelf": "3"
+        },
+        {
+          "room": "165",
+          "section": "C",
+          "shelf": "4"
+        }
+      ],
+      "image": "/assets/images/inventory/cables-sig-osc.jpg",
+      "experiments": [
+        11
+      ],
+      "inventory": 19,
+      "broken": "",
+      "notes": "Inside the box"
+    },
+    {
+      "name": "Vibration Tube with Plunger",
+      "addresses": [
+        {
+          "room": "165",
+          "section": "H",
+          "shelf": "3"
+        },
+        {
+          "room": "165",
+          "section": "H",
+          "shelf": "4"
+        },
+        {
+          "room": "165",
+          "section": "H",
+          "shelf": "5"
+        }
+      ],
+      "image": "/assets/images/inventory/vibration-tube.jpg",
+      "experiments": [
+        11
+      ],
+      "inventory": 10,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Wires",
+      "addresses": [
+        {
+          "room": "165",
+          "section": "H",
+          "shelf": "7"
+        }
+      ],
+      "image": "/assets/images/inventory/wires.jpg",
+      "experiments": [
+        11
+      ],
+      "inventory": 3,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Tuning Forks",
+      "addresses": [
+        {
+          "room": "165",
+          "section": "H",
+          "shelf": "6"
+        }
+      ],
+      "image": "/assets/images/inventory/tuning-forks.jpg",
+      "experiments": [
+        11
+      ],
+      "inventory": 12,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Strikers",
+      "addresses": [
+        {
+          "room": "165",
+          "section": "H",
+          "shelf": "6"
+        }
+      ],
+      "image": "/assets/images/inventory/strikers.jpg",
+      "experiments": [
+        11
+      ],
+      "inventory": 15,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Spectroscope",
+      "addresses": [
+        {
+          "room": "165",
+          "section": "E",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/spectroscope.jpg",
+      "experiments": [
+        14
+      ],
+      "inventory": 14,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Sodium Lamp",
+      "addresses": [],
+      "image": "/assets/images/inventory/sodium-lamp.jpg",
+      "experiments": [
+        14
+      ],
+      "inventory": 8,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Black Cloth",
+      "addresses": [],
+      "image": "/assets/images/inventory/black-cloth.jpg",
+      "experiments": [
+        14
+      ],
+      "inventory": 12,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Box: Diffraction Grating & Laser Pointer",
+      "addresses": [],
+      "image": "/assets/images/inventory/box-diffraction-laser.jpg",
+      "experiments": [
+        14
+      ],
+      "inventory": null,
+      "broken": "",
+      "notes": "Currently used in the lab"
+    },
+    {
+      "name": "Franck Hertz Apparatus",
+      "addresses": [],
+      "image": "",
+      "experiments": [
+        15
+      ],
+      "inventory": null,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Geiger Counter Board: Geiger Counter and Wand",
+      "addresses": [],
+      "image": "/assets/images/inventory/geiger-counter.jpg",
+      "experiments": [
+        1
+      ],
+      "inventory": 11,
+      "broken": "",
+      "notes": "Currently using during the lab"
+    },
+    {
+      "name": "Power Cord",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "E",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/power-cord-2.jpg",
+      "experiments": [
+        1,
+        2
+      ],
+      "inventory": 11,
+      "broken": "",
+      "notes": "3 at the right hand side shelf to 268-E, the first shelf"
+    },
+    {
+      "name": "Pulley Wheel",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "B",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/pulley-wheel.jpg",
+      "experiments": [
+        2
+      ],
+      "inventory": 9,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "3 Ring Masses",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "A",
+          "shelf": "3"
+        },
+        {
+          "room": "267",
+          "section": "A",
+          "shelf": "2"
+        }
+      ],
+      "image": "/assets/images/inventory/ring-masses.jpg",
+      "experiments": [
+        2
+      ],
+      "inventory": "32 in 267-A-3, 6 in 267-A-2",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Mass Holder",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "A",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/mass-holder.jpg",
+      "experiments": [
+        2
+      ],
+      "inventory": "30 in 267-A-3",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Pole with Photogates",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "B",
+          "shelf": "3"
+        },
+        {
+          "room": "267",
+          "section": "B",
+          "shelf": "6"
+        }
+      ],
+      "image": "/assets/images/inventory/pole-photogates.jpg",
+      "experiments": [
+        2
+      ],
+      "inventory": "6 in 267-B-3, 18 in 267-B-6",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "PVC Mass Holder",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "A",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/pvc-mass-holder.jpg",
+      "experiments": [
+        2
+      ],
+      "inventory": "15 in 267-A-3",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Double Pulley",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "B",
+          "shelf": "3"
+        },
+        {
+          "room": "267",
+          "section": "B",
+          "shelf": "5"
+        }
+      ],
+      "image": "/assets/images/inventory/double-pulley.jpg",
+      "experiments": [
+        2
+      ],
+      "inventory": null,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Photogate",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "B",
+          "shelf": "3"
+        },
+        {
+          "room": "267",
+          "section": "B",
+          "shelf": "6"
+        }
+      ],
+      "image": "/assets/images/inventory/photogate.jpg",
+      "experiments": [
+        2,
+        3,
+        4
+      ],
+      "inventory": "9 in 267-B-6, 2 in 267-B-3",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Photogate Timer",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "A",
+          "shelf": "4"
+        },
+        {
+          "room": "266",
+          "section": "C",
+          "shelf": "1"
+        }
+      ],
+      "image": "/assets/images/inventory/photogate-timer.jpg",
+      "experiments": [
+        2,
+        4,
+        5
+      ],
+      "inventory": "7 in 267-A-4, 5 in 266-C-1",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Aluminium I-beam",
+      "addresses": [
+        {
+          "room": "266",
+          "section": "C",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/aluminium-i-beam.jpg",
+      "experiments": [
+        3
+      ],
+      "inventory": 2,
+      "broken": "",
+      "notes": "At the left hand side of 266-C, under the table"
+    },
+    {
+      "name": "Ballistic Pendulum / Projectile Launcher",
+      "addresses": [
+        {
+          "room": "266",
+          "section": "C",
+          "shelf": "2"
+        }
+      ],
+      "image": "/assets/images/inventory/ballistic-pendulum.jpg",
+      "experiments": [
+        3
+      ],
+      "inventory": 2,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Pail with Metal Ball",
+      "addresses": [
+        {
+          "room": "266",
+          "section": "C",
+          "shelf": "2"
+        }
+      ],
+      "image": "/assets/images/inventory/plastic-pail.jpg",
+      "experiments": [
+        3
+      ],
+      "inventory": 4,
+      "broken": "",
+      "notes": "There is no metal ball"
+    },
+    {
+      "name": "Ball Loader Stick",
+      "addresses": [
+        {
+          "room": "266",
+          "section": "C",
+          "shelf": "2"
+        }
+      ],
+      "image": "/assets/images/inventory/ball-loader-stick.jpg",
+      "experiments": [
+        3
+      ],
+      "inventory": 4,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "2 Plastic Carts",
+      "addresses": [
+        {
+          "room": "266",
+          "section": "C",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/plastic-carts.jpg",
+      "experiments": [
+        3
+      ],
+      "inventory": 2,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Masses",
+      "addresses": [
+        {
+          "room": "266",
+          "section": "C",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/masses.jpg",
+      "experiments": [
+        3
+      ],
+      "inventory": "4 for each box",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "2 Wooden Blocks",
+      "addresses": [
+        {
+          "room": "266",
+          "section": "C",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/wooden-blocks.jpg",
+      "experiments": [
+        3
+      ],
+      "inventory": "2 for each box",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Level",
+      "addresses": [
+        {
+          "room": "266",
+          "section": "C",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/level.jpg",
+      "experiments": [
+        3
+      ],
+      "inventory": "1 for each box",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Spring Turn Table",
+      "addresses": [
+        {
+          "room": "266",
+          "section": "C",
+          "shelf": "2"
+        },
+        {
+          "room": "267",
+          "section": "C",
+          "shelf": "4"
+        },
+        {
+          "room": "267",
+          "section": "C",
+          "shelf": "5"
+        }
+      ],
+      "image": "/assets/images/inventory/spring-turn-table.jpg",
+      "experiments": [
+        4
+      ],
+      "inventory": "3 in 266-C-2, 5 in 267-C-4, 1 in 267-C-5",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "3 Weights: Ring, Disk, Odd Shape",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "C",
+          "shelf": "4"
+        }
+      ],
+      "image": "/assets/images/inventory/weights-ring-disk.jpg",
+      "experiments": [
+        4
+      ],
+      "inventory": "7 odd shapes, 8 disks, 9 rings",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Meter Stick with Bolt and Nut",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "F",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/meter-stick-bolt.jpg",
+      "experiments": [
+        4
+      ],
+      "inventory": null,
+      "broken": "",
+      "notes": "On the left hand side of 267-F"
+    },
+    {
+      "name": "Spring (Slinky)",
+      "addresses": [
+        {
+          "room": "266",
+          "section": "C",
+          "shelf": "2"
+        },
+        {
+          "room": "267",
+          "section": "C",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/spring-slinky.jpg",
+      "experiments": [
+        4
+      ],
+      "inventory": "3 in 266-C-2, 2 in 267-C-3",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Pole with Clamp",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "A",
+          "shelf": ""
+        },
+        {
+          "room": "266",
+          "section": "B",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/pole-clamp.jpg",
+      "experiments": [
+        5
+      ],
+      "inventory": "10 at the left hand side of 267-A, 3 at the left hand side of 267-B on the table",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Box: 1 Resistor",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "E",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/box-resistor.jpg",
+      "experiments": [
+        10
+      ],
+      "inventory": 16,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Box: 1 Capacitor",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "E",
+          "shelf": "3"
+        },
+        {
+          "room": "268",
+          "section": "E",
+          "shelf": "1"
+        }
+      ],
+      "image": "/assets/images/inventory/box-capacitor.jpg",
+      "experiments": [
+        10
+      ],
+      "inventory": "13 in 268-E-3, 4 in 268-E-1",
+      "broken": "",
+      "notes": "The capacitors in 268-E-1 don't have shells"
+    },
+    {
+      "name": "Box: 1 Inductor",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "E",
+          "shelf": "2"
+        },
+        {
+          "room": "268",
+          "section": "E",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/box-inductor.jpg",
+      "experiments": [
+        10
+      ],
+      "inventory": "12 in 268-E-3, 2 in 268-E-2",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Power Supply",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "C",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/power-supply-dc.jpg",
+      "experiments": [
+        9
+      ],
+      "inventory": 11,
+      "broken": "",
+      "notes": "At the left hand side of 268-C"
+    },
+    {
+      "name": "Liquid Nitrogen Kettle?",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "A",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/liquid-nitrogen-kettle.jpg",
+      "experiments": [
+        10
+      ],
+      "inventory": 7,
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Multi-fringe",
+      "addresses": [
+        {
+          "room": "268",
+          "section": "E",
+          "shelf": ""
+        }
+      ],
+      "image": "/assets/images/inventory/multi-fringe.jpg",
+      "experiments": [
+        9
+      ],
+      "inventory": 13,
+      "broken": "",
+      "notes": "At the right hand side of 268-E, the third shelf"
+    },
+    {
+      "name": "Silver Rods",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "B",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/silver-rods.jpg",
+      "experiments": [
+        2
+      ],
+      "inventory": "8 big rods, 19 small rods in 267-B-3",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Extra Rod Clamps",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "B",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/extra-rod-clamps.jpg",
+      "experiments": [
+        2
+      ],
+      "inventory": "6 in 267-B-3",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "Washers and Nuts",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "A",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/washers-nuts.jpg",
+      "experiments": [
+        2
+      ],
+      "inventory": "40 washers and 20 nuts in 267-A-3",
+      "broken": "",
+      "notes": ""
+    },
+    {
+      "name": "String",
+      "addresses": [
+        {
+          "room": "267",
+          "section": "A",
+          "shelf": "3"
+        }
+      ],
+      "image": "/assets/images/inventory/string.jpg",
+      "experiments": [
+        2
+      ],
+      "inventory": "Roll in 267-A-3",
+      "broken": "",
+      "notes": ""
+    }
+  ]
+}
