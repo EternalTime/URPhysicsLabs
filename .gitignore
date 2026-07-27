@@ -3,3 +3,13 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
+localOnly/
+*.aux
+*.log
+*.out
+.DS_Store
+CLAUDE.md
+TASKS.md
+dashboard.html
+test_*.pdf
+assets/videos/*.mp4
