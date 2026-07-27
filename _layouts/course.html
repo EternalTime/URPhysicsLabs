@@ -11,9 +11,6 @@ layout: default
   {% endif %}
 {% endfor %}
 
-{% comment %} Build a lookup map: lab id -> lab object {% endcomment %}
-{% assign lab_map = site.data.labs %}
-
 <div class="general-layout">
 
   <div class="general-main">
@@ -62,7 +59,7 @@ layout: default
           {% if lab.description and lab.description != "" %}
             <p class="lab-description">{{ lab.description }}</p>
           {% endif %}
-          <div class="lab-docs">
+          {% capture lab_doc_links %}
             {% if lab.prelab and lab.prelab != "" %}
               <a href="{{ lab.prelab | relative_url }}" class="lab-doc-link" target="_blank" rel="noopener">Prelab</a>
             {% endif %}
@@ -77,7 +74,11 @@ layout: default
                 <a href="{{ link.url }}" class="lab-doc-link" target="_blank" rel="noopener">{{ link.title }}</a>
               {% endfor %}
             {% endif %}
-            {% if lab.prelab == "" and lab.manual == "" and lab.postlab == "" and lab.links == nil %}
+          {% endcapture %}
+          {% assign lab_doc_links_present = lab_doc_links | strip %}
+          <div class="lab-docs">
+            {{ lab_doc_links }}
+            {% if lab_doc_links_present == "" %}
               <span class="lab-doc-placeholder">Documents coming soon.</span>
             {% endif %}
           </div>
@@ -110,7 +111,7 @@ layout: default
   </div>
 
   <div class="general-sidebar">
-    {% include lab_calendar.html semester=site.data.semesters.calendar mode="minimal" %}
+    {% include lab_calendar.html semester=site.data.semesters.calendar %}
   </div>
 
 </div>

@@ -2,8 +2,8 @@
   <ul>
     <li><a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active"{% endif %}>Home</a></li>
     <li class="has-dropdown">
-      <a href="#">Course Materials</a>
-      <ul class="dropdown" aria-label="Course documents">
+      <button type="button" class="dropdown-toggle" aria-expanded="false" aria-controls="course-materials-menu">Course Materials</button>
+      <ul class="dropdown" id="course-materials-menu" aria-label="Course documents">
         <li><a href="{{ '/courses/phys113.html' | relative_url }}">PHY 113  081 — General Physics I</a></li>
         <li><a href="{{ '/courses/phys113p.html' | relative_url }}">PHY 113P 081</a></li>
         <li><a href="{{ '/courses/phys114.html' | relative_url }}">PHY 114  084 — General Physics II</a></li>
@@ -21,3 +21,37 @@
     <li><a href="{{ '/ta.html' | relative_url }}"{% if page.url == '/ta.html' %} class="active"{% endif %}>For TA/TIs</a></li>
   </ul>
 </nav>
+
+<script>
+(function () {
+  var parent = document.querySelector('nav .has-dropdown');
+  if (!parent) return;
+  var toggle = parent.querySelector('.dropdown-toggle');
+  if (!toggle) return;
+
+  function setOpen(open) {
+    parent.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  toggle.addEventListener('click', function (e) {
+    e.preventDefault();
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  parent.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  parent.addEventListener('focusout', function (e) {
+    if (!parent.contains(e.relatedTarget)) setOpen(false);
+  });
+
+  document.addEventListener('pointerdown', function (e) {
+    if (!parent.contains(e.target)) setOpen(false);
+  });
+})();
+</script>

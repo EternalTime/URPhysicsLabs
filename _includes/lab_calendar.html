@@ -2,7 +2,6 @@
   lab_calendar.html
   Parameters:
     include.semester  — a semester object from _data/semesters.yml
-    include.mode      — "minimal" (home page) or "full" (course pages)
 {% endcomment %}
 
 {% assign cal_id = include.semester.semester | slugify | prepend: "cal-" %}

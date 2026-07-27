@@ -14,7 +14,7 @@ title: "For TA/TIs"
       {% for lab in site.data.labs %}
       <div class="lab-entry">
         <h3>Lab {{ lab.number }} — {{ lab.name }}</h3>
-        <div class="lab-docs">
+        {% capture lab_doc_links %}
           {% if lab.prelab and lab.prelab != "" %}
             <a href="{{ lab.prelab | relative_url }}" class="lab-doc-link" target="_blank" rel="noopener">Prelab</a>
           {% endif %}
@@ -30,7 +30,11 @@ title: "For TA/TIs"
           {% if lab.setup and lab.setup != "" %}
             <a href="{{ lab.setup | relative_url }}" class="lab-doc-link lab-doc-setup">Lab Setup</a>
           {% endif %}
-          {% if lab.prelab == "" and lab.manual == "" and lab.postlab == "" and lab.full == "" and lab.setup == "" %}
+        {% endcapture %}
+        {% assign lab_doc_links_present = lab_doc_links | strip %}
+        <div class="lab-docs">
+          {{ lab_doc_links }}
+          {% if lab_doc_links_present == "" %}
             <span class="lab-doc-placeholder">Documents coming soon.</span>
           {% endif %}
         </div>
@@ -41,7 +45,7 @@ title: "For TA/TIs"
   </div>
 
   <div class="general-sidebar">
-    {% include lab_calendar.html semester=site.data.semesters.calendar mode="minimal" %}
+    {% include lab_calendar.html semester=site.data.semesters.calendar %}
   </div>
 
 </div>

@@ -34,6 +34,4 @@ exclude:
   - CLAUDE.md
   - TASKS.md
   - dashboard.html
-  - test_geiger.pdf
-  - test_table.pdf
-  - test_table2.pdf
+  - test_*.pdf

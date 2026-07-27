@@ -1,7 +1,7 @@
 /* ── Self-hosted fonts ──────────────────────────────────────── */
 @font-face {
   font-family: 'Inter';
-  src: url('/assets/fonts/Inter-Variable.woff2') format('woff2');
+  src: url('../fonts/Inter-Variable.woff2') format('woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -9,7 +9,7 @@
 
 @font-face {
   font-family: 'Inter';
-  src: url('/assets/fonts/Inter-Variable-Italic.woff2') format('woff2');
+  src: url('../fonts/Inter-Variable-Italic.woff2') format('woff2');
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
@@ -25,6 +25,7 @@
   --ur-text:   #222222;
   --ur-link:   #005EB8;
   --max-width: 980px;
+  --header-height: 222px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,6 +36,9 @@ body {
   line-height: 1.65;
   color: var(--ur-text);
   background: #fff;
+  /* Clears the fixed #site-header without waiting for JS; the inline
+     script in the layout refines this to the measured height. */
+  padding-top: var(--header-height);
 }
 
 a { color: var(--ur-link); text-decoration: underline; }
@@ -128,47 +132,41 @@ nav > ul {
   gap: 0;
 }
 
-nav > ul > li > a {
+nav > ul > li > a,
+nav > ul > li > .dropdown-toggle {
   display: block;
   padding: 12px 18px;
   color: #fff;
   text-decoration: none;
+  font-family: inherit;
   font-weight: 600;
   font-size: 0.9rem;
+  line-height: 1.65;
+  background: none;
+  border: 0;
   border-bottom: 3px solid transparent;
+  cursor: pointer;
   transition: border-color 0.15s, background 0.15s;
 }
 
 nav > ul > li > a:hover,
-nav > ul > li > a.active {
+nav > ul > li > a.active,
+nav > ul > li > .dropdown-toggle:hover,
+.has-dropdown.is-open > .dropdown-toggle {
   border-bottom-color: var(--ur-gold);
   color: #fff;
   background: rgba(255,255,255,0.08);
 }
 
-/* Targets the nested <ul> */
-.has-dropdown .dropdown {
-  width: max-content;       /* Forces the menu to be as wide as the longest item */
-  min-width: 100%;          /* Ensures it's at least as wide as the 'Documents' link */
-  display: none;            /* Usually hidden by default until hover */
-  position: absolute;       /* Positions it relative to the parent li */
-  z-index: 1000;
-}
-
-/* Targets the links inside the dropdown */
-.has-dropdown .dropdown li a {
-  white-space: nowrap;      /* Crucial: prevents the text from jumping to a new line */
-  display: block;           /* Ensures the link fills the width of the li */
-  padding: 10px 15px;       /* Adds a bit of breathing room on the sides */
-}
-
-/* Optional: Ensure the parent is the reference point */
-.has-dropdown {
-  position: relative;
+nav > ul > li > a:focus-visible,
+nav > ul > li > .dropdown-toggle:focus-visible {
+  outline: 2px solid var(--ur-gold);
+  outline-offset: -2px;
 }
 
 /* ── DROPDOWN ───────────────────────────────────────────────── */
-nav > ul > li {
+nav > ul > li,
+.has-dropdown {
   position: relative;
 }
 
@@ -177,21 +175,31 @@ nav > ul > li {
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 240px;
+  width: max-content;       /* Forces the menu to be as wide as the longest item */
+  min-width: 100%;          /* Ensures it's at least as wide as the 'Documents' link */
   background: #fff;
   border-top: 3px solid var(--ur-gold);
   box-shadow: 0 4px 16px rgba(0,0,0,0.18);
   list-style: none;
-  z-index: 200;
+  z-index: 1000;
 }
 
-nav > ul > li:hover .dropdown {
+/* Touch and keyboard: the toggle button drives the menu */
+.has-dropdown.is-open > .dropdown {
   display: block;
+}
+
+/* Mouse: keep the hover-to-open behavior, but only where hover is real */
+@media (hover: hover) and (pointer: fine) {
+  nav > ul > li:hover > .dropdown {
+    display: block;
+  }
 }
 
 .dropdown li a {
-  display: block;
-  padding: 10px 18px;
+  display: block;           /* Ensures the link fills the width of the li */
+  white-space: nowrap;      /* Crucial: prevents the text from jumping to a new line */
+  padding: 10px 15px;       /* Adds a bit of breathing room on the sides */
   color: var(--ur-navy);
   text-decoration: none;
   font-size: 0.88rem;
@@ -200,15 +208,20 @@ nav > ul > li:hover .dropdown {
   transition: background 0.12s, border-color 0.12s;
 }
 
-.dropdown li a:hover {
+.dropdown li a:hover,
+.dropdown li a:focus-visible {
   background: var(--ur-light);
   border-left-color: var(--ur-gold);
 }
 
-.has-dropdown > a::after {
+.has-dropdown > .dropdown-toggle::after {
   content: " ▾";
   font-size: 0.72rem;
   opacity: 0.75;
+}
+
+.has-dropdown > .dropdown-toggle[aria-expanded="true"]::after {
+  content: " ▴";
 }
 
 /* ── MAIN CONTENT ───────────────────────────────────────────── */
@@ -271,7 +284,7 @@ ul.content-list li { margin-bottom: 0.35em; }
 .general-sidebar {
   position: sticky;
   top: 220px;
-  height: 100vh;
+  max-height: calc(100vh - 220px);
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -287,6 +300,8 @@ ul.content-list li { margin-bottom: 0.35em; }
   }
   .general-sidebar {
     position: static;
+    max-height: none;
+    overflow-y: visible;
   }
 }
 
