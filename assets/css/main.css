@@ -298,6 +298,11 @@ ul.content-list li { margin-bottom: 0.35em; }
     right: 0;
     min-width: 0;
     max-width: calc(100vw - 8px);
+    max-height: calc(100vh - var(--header-height));
+    max-height: calc(100dvh - var(--header-height));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
   .dropdown li a {
     white-space: normal;

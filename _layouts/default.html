@@ -46,12 +46,22 @@
   </div><!-- /#site-header -->
 
   <script>
-    function setBodyPadding() {
+    var lastHeaderHeight = -1;
+    function syncHeaderMetrics() {
       var h = document.getElementById('site-header');
-      if (h) document.body.style.paddingTop = h.offsetHeight + 'px';
+      if (!h) return;
+      var height = h.offsetHeight;
+      if (height === lastHeaderHeight) return;
+      lastHeaderHeight = height;
+      document.body.style.paddingTop = height + 'px';
+      document.documentElement.style.setProperty('--header-height', height + 'px');
     }
-    window.addEventListener('DOMContentLoaded', setBodyPadding);
-    window.addEventListener('resize', setBodyPadding);
+    window.addEventListener('DOMContentLoaded', function () {
+      syncHeaderMetrics();
+      var h = document.getElementById('site-header');
+      if (h && window.ResizeObserver) new ResizeObserver(syncHeaderMetrics).observe(h);
+    });
+    window.addEventListener('resize', syncHeaderMetrics);
   </script>
 
   <!-- PAGE CONTENT -->

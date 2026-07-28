@@ -34,19 +34,20 @@
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
 
+  var hoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)');
+
   toggle.addEventListener('click', function (e) {
     e.preventDefault();
+    if (hoverCapable.matches && e.detail > 0) return;
     setOpen(toggle.getAttribute('aria-expanded') !== 'true');
   });
-
-  var hoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)');
 
   parent.addEventListener('mouseenter', function () {
     if (hoverCapable.matches) setOpen(true);
   });
 
   parent.addEventListener('mouseleave', function () {
-    if (hoverCapable.matches) setOpen(false);
+    if (hoverCapable.matches && !parent.contains(document.activeElement)) setOpen(false);
   });
 
   parent.addEventListener('keydown', function (e) {
