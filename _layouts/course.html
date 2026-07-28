@@ -120,25 +120,6 @@ layout: default
 (function () {
   // Wait for the calendar to finish rendering
   window.addEventListener('DOMContentLoaded', function () {
-    var sidebar = document.querySelector('.general-sidebar');
-    var firstLab = document.querySelector('.lab-entry[data-lab="1"]');
-
-    function updateSidebar() {
-      if (!sidebar || !firstLab) return;
-      var header = document.getElementById('site-header');
-      var headerH = header ? header.offsetHeight : 0;
-      var labRect = firstLab.getBoundingClientRect();
-      // Keep sidebar top aligned with lab 1, but never exceed its natural offset
-      var newTop = Math.min(labRect.top, 220);
-      // Don't let it go above the header
-      newTop = Math.max(newTop, headerH);
-      sidebar.style.top = newTop + 'px';
-    }
-
-    window.addEventListener('scroll', updateSidebar, { passive: true });
-    window.addEventListener('resize', updateSidebar);
-    updateSidebar();
-
     function highlight(labNum, on, doScroll) {
       // Calendar AB cells
       document.querySelectorAll('.ab-cell').forEach(function (cell) {

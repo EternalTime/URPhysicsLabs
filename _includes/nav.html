@@ -39,6 +39,16 @@
     setOpen(toggle.getAttribute('aria-expanded') !== 'true');
   });
 
+  var hoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+  parent.addEventListener('mouseenter', function () {
+    if (hoverCapable.matches) setOpen(true);
+  });
+
+  parent.addEventListener('mouseleave', function () {
+    if (hoverCapable.matches) setOpen(false);
+  });
+
   parent.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
       setOpen(false);

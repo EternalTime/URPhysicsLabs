@@ -184,16 +184,9 @@ nav > ul > li,
   z-index: 1000;
 }
 
-/* Touch and keyboard: the toggle button drives the menu */
+/* Mouse, touch and keyboard all drive the menu through the toggle's state */
 .has-dropdown.is-open > .dropdown {
   display: block;
-}
-
-/* Mouse: keep the hover-to-open behavior, but only where hover is real */
-@media (hover: hover) and (pointer: fine) {
-  nav > ul > li:hover > .dropdown {
-    display: block;
-  }
 }
 
 .dropdown li a {
@@ -286,11 +279,7 @@ ul.content-list li { margin-bottom: 0.35em; }
   top: 220px;
   max-height: calc(100vh - 220px);
   overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
 }
-
-.general-sidebar::-webkit-scrollbar { display: none; }
 
 .general-sidebar h3 { margin-top: 0; }
 
@@ -299,9 +288,19 @@ ul.content-list li { margin-bottom: 0.35em; }
     grid-template-columns: 1fr;
   }
   .general-sidebar {
+    display: none;
+  }
+  .has-dropdown {
     position: static;
-    max-height: none;
-    overflow-y: visible;
+  }
+  .dropdown {
+    left: auto;
+    right: 0;
+    min-width: 0;
+    max-width: calc(100vw - 8px);
+  }
+  .dropdown li a {
+    white-space: normal;
   }
 }
 
