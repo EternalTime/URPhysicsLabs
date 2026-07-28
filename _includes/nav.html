@@ -1,21 +1,68 @@
 <nav aria-label="Main navigation">
   <ul>
     <li><a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active"{% endif %}>Home</a></li>
-    <li><a href="{{ '/' | relative_url }}#general">General Info</a></li>
     <li class="has-dropdown">
-      <a href="{{ '/' | relative_url }}#manuals">Documents</a>
-      <ul class="dropdown" aria-label="Course documents">
-        <li><a href="{{ '/' | relative_url }}#phy113">PHY 113 — Mechanics I</a></li>
-        <li><a href="{{ '/' | relative_url }}#phy114">PHY 114 — Electricity &amp; Magnetism</a></li>
-        <li><a href="{{ '/' | relative_url }}#phy121">PHY 121 — Mechanics</a></li>
-        <li><a href="{{ '/' | relative_url }}#phy122">PHY 122 — Electricity &amp; Magnetism</a></li>
-        <li><a href="{{ '/' | relative_url }}#phy123">PHY 123 — Modern Physics</a></li>
-        <li><a href="{{ '/' | relative_url }}#phy141">PHY 141 — Mechanics</a></li>
-        <li><a href="{{ '/' | relative_url }}#phy142">PHY 142 — Electricity &amp; Magnetism</a></li>
-        <li><a href="{{ '/' | relative_url }}#phy143">PHY 143 — Modern Physics</a></li>
+      <button type="button" class="dropdown-toggle" aria-expanded="false" aria-controls="course-materials-menu">Course Materials</button>
+      <ul class="dropdown" id="course-materials-menu" aria-label="Course documents">
+        <li><a href="{{ '/courses/phys113.html' | relative_url }}">PHY 113  081 — General Physics I</a></li>
+        <li><a href="{{ '/courses/phys113p.html' | relative_url }}">PHY 113P 081</a></li>
+        <li><a href="{{ '/courses/phys114.html' | relative_url }}">PHY 114  084 — General Physics II</a></li>
+        <li><a href="{{ '/courses/phys114p.html' | relative_url }}">PHY 114P 084</a></li>
+        <li><a href="{{ '/courses/phys121.html' | relative_url }}">PHY 121  081 — Mechanics</a></li>
+        <li><a href="{{ '/courses/phys121p.html' | relative_url }}">PHY 121P 081</a></li>
+        <li><a href="{{ '/courses/phys122.html' | relative_url }}">PHY 122  082 — Electricity &amp; Magnetism</a></li>
+        <li><a href="{{ '/courses/phys122p.html' | relative_url }}">PHY 122P 082</a></li>
+        <li><a href="{{ '/courses/phys123.html' | relative_url }}">PHY 123  083 — Modern Physics</a></li>
+        <li><a href="{{ '/courses/phys141.html' | relative_url }}">PHY 141      — Mechanics</a></li>
+        <li><a href="{{ '/courses/phys142.html' | relative_url }}">PHY 142  082 — Electricity &amp; Magnetism</a></li>
+        <li><a href="{{ '/courses/phys143.html' | relative_url }}">PHY 143      — Modern Physics</a></li>
       </ul>
     </li>
-    <li><a href="{{ '/' | relative_url }}#faq">FAQ</a></li>
-    <li><a href="{{ '/' | relative_url }}#ta">For TAs/TIs</a></li>
+    <li><a href="{{ '/ta.html' | relative_url }}"{% if page.url == '/ta.html' %} class="active"{% endif %}>For TA/TIs</a></li>
   </ul>
 </nav>
+
+<script>
+(function () {
+  var parent = document.querySelector('nav .has-dropdown');
+  if (!parent) return;
+  var toggle = parent.querySelector('.dropdown-toggle');
+  if (!toggle) return;
+
+  function setOpen(open) {
+    parent.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  var hoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+  toggle.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (hoverCapable.matches && e.detail > 0) return;
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  parent.addEventListener('mouseenter', function () {
+    if (hoverCapable.matches) setOpen(true);
+  });
+
+  parent.addEventListener('mouseleave', function () {
+    if (hoverCapable.matches && !parent.contains(document.activeElement)) setOpen(false);
+  });
+
+  parent.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  parent.addEventListener('focusout', function (e) {
+    if (!parent.contains(e.relatedTarget)) setOpen(false);
+  });
+
+  document.addEventListener('pointerdown', function (e) {
+    if (!parent.contains(e.target)) setOpen(false);
+  });
+})();
+</script>

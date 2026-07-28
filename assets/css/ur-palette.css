@@ -1,3 +1,20 @@
+/* ── Self-hosted fonts ──────────────────────────────────────── */
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter-Variable-Italic.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 /* ── UR Brand Palette ────────────────────────────────────────
    Primary:   #001E5F (Navy), #FFD82B (Dandelion Yellow)
    Secondary: #021BC3 (Meliora Blue), #0066FD (Arpeggio Azure)

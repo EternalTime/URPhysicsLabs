@@ -1,0 +1,51 @@
+---
+layout: default
+title: "For TA/TIs"
+---
+
+<div class="general-layout">
+
+  <div class="general-main">
+
+    <h1>For TA/TIs</h1>
+
+    <h2>Labs</h2>
+    <div class="lab-list">
+      {% for lab in site.data.labs %}
+      <div class="lab-entry">
+        <h3>Lab {{ lab.number }} — {{ lab.name }}</h3>
+        {% capture lab_doc_links %}
+          {% if lab.prelab and lab.prelab != "" %}
+            <a href="{{ lab.prelab | relative_url }}" class="lab-doc-link" target="_blank" rel="noopener">Prelab</a>
+          {% endif %}
+          {% if lab.manual and lab.manual != "" %}
+            <a href="{{ lab.manual | relative_url }}" class="lab-doc-link" target="_blank" rel="noopener">Manual</a>
+          {% endif %}
+          {% if lab.postlab and lab.postlab != "" %}
+            <a href="{{ lab.postlab | relative_url }}" class="lab-doc-link" target="_blank" rel="noopener">Postlab</a>
+          {% endif %}
+          {% if lab.full and lab.full != "" %}
+            <a href="{{ lab.full | relative_url }}" class="lab-doc-link" target="_blank" rel="noopener">Full Lab</a>
+          {% endif %}
+          {% if lab.setup and lab.setup != "" %}
+            <a href="{{ lab.setup | relative_url }}" class="lab-doc-link lab-doc-setup">Lab Setup</a>
+          {% endif %}
+        {% endcapture %}
+        {% assign lab_doc_links_present = lab_doc_links | strip %}
+        <div class="lab-docs">
+          {{ lab_doc_links }}
+          {% if lab_doc_links_present == "" %}
+            <span class="lab-doc-placeholder">Documents coming soon.</span>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+
+  <div class="general-sidebar">
+    {% include lab_calendar.html semester=site.data.semesters.calendar %}
+  </div>
+
+</div>

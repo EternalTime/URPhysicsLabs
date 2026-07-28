@@ -4,40 +4,65 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title }} — University of Rochester</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="{{ '/assets/logos/URochester_Favicon2.png' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 </head>
 
 <body>
 
-  <!-- MASTHEAD -->
-  <div class="masthead">
-    <div class="masthead-inner">
-      <a href="https://rochester.edu/" aria-label="University of Rochester homepage">
-        <img class="ur-logo"
-             src="{{ '/assets/logos/primary_horizontal_knockout.png' | relative_url }}"
-             alt="University of Rochester"
-             height="44">
-      </a>
-    </div>
-  </div>
+  <!-- STICKY HEADER: masthead + nameplate + nav all scroll with the page until top, then stick -->
+  <div id="site-header">
 
-  <!-- NAMEPLATE -->
-  <div class="nameplate">
-    <div class="nameplate-inner">
-      <a class="dept-name" href="https://www.pas.rochester.edu/">
-        Department of Physics and Astronomy
-      </a>
-      <a class="site-title" href="{{ '/' | relative_url }}">
-        Undergraduate Physics Labs
-      </a>
+    <!-- MASTHEAD -->
+    <div class="masthead">
+      <div class="masthead-inner">
+        <a href="https://rochester.edu/" aria-label="University of Rochester homepage">
+          <img class="ur-logo"
+               src="{{ '/assets/logos/primary_horizontal_navy.png' | relative_url }}"
+               alt="University of Rochester"
+               height="44">
+        </a>
+      </div>
     </div>
-  </div>
 
-  <!-- NAV -->
-  {% include nav.html %}
+    <!-- NAMEPLATE -->
+    <div class="nameplate">
+      <div class="nameplate-inner">
+        <a class="school-name" href="https://www.sas.rochester.edu/">
+          School of Arts &amp; Sciences
+        </a>
+        <a class="dept-name" href="https://www.pas.rochester.edu/">
+          Department of Physics and Astronomy
+        </a>
+        <a class="site-title" href="{{ '/' | relative_url }}">
+          Undergraduate Physics Labs
+        </a>
+      </div>
+    </div>
+
+    <!-- NAV -->
+    {% include nav.html %}
+
+  </div><!-- /#site-header -->
+
+  <script>
+    var lastHeaderHeight = -1;
+    function syncHeaderMetrics() {
+      var h = document.getElementById('site-header');
+      if (!h) return;
+      var height = h.offsetHeight;
+      if (height === lastHeaderHeight) return;
+      lastHeaderHeight = height;
+      document.body.style.paddingTop = height + 'px';
+      document.documentElement.style.setProperty('--header-height', height + 'px');
+    }
+    window.addEventListener('DOMContentLoaded', function () {
+      syncHeaderMetrics();
+      var h = document.getElementById('site-header');
+      if (h && window.ResizeObserver) new ResizeObserver(syncHeaderMetrics).observe(h);
+    });
+    window.addEventListener('resize', syncHeaderMetrics);
+  </script>
 
   <!-- PAGE CONTENT -->
   <main>
@@ -53,8 +78,8 @@
       <a href="https://www.pas.rochester.edu/">Department of Physics &amp; Astronomy</a> ·
       <a href="https://www.rochester.edu/">University of Rochester</a>
     </p>
-    <p>Questions? Email <a href="mailto:lwade3@ur.rochester.edu">lwade3@ur.rochester.edu</a></p>
-    <p style="margin-top:8px; color:rgba(255,255,255,0.45);">Last updated: April 2026</p>
+    <p>Questions? Email <a href="mailto:lwade3@ur.rochester.edu">Lysa Wade, Undergraduate Coordinator</a></p>
+    <p style="margin-top:8px; color:rgba(255,255,255,0.45);">Last updated: May 2026</p>
   </footer>
 
 </body>

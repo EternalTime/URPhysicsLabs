@@ -1,0 +1,274 @@
+{% comment %}
+  lab_calendar.html
+  Parameters:
+    include.semester  — a semester object from _data/semesters.yml
+{% endcomment %}
+
+{% assign cal_id = include.semester.semester | slugify | prepend: "cal-" %}
+
+<div id="{{ cal_id }}" class="lab-calendar-wrap"></div>
+
+<script>
+(function () {
+  var semester = {{ include.semester | jsonify }};
+  var wrap = document.getElementById("{{ cal_id }}");
+
+  var MONTHS = ['January','February','March','April','May','June',
+                'July','August','September','October','November','December'];
+  var DAY_LABELS = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+
+  function parseDate(str) {
+    var p = str.split('-');
+    return new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]));
+  }
+
+  function dateKey(d) {
+    return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+  }
+
+  var start = parseDate(semester.start);
+  var end   = parseDate(semester.end);
+
+  // Build holiday ranges
+  var holidays = (semester.holidays || []).map(function(h) {
+    return {
+      name:  h.name,
+      start: parseDate(h.start),
+      end:   h.end ? parseDate(h.end) : parseDate(h.start)
+    };
+  });
+
+  // Build finals ranges
+  var finals = (semester.finals || []).map(function(f) {
+    return {
+      name:  f.name,
+      start: parseDate(f.start),
+      end:   f.end ? parseDate(f.end) : parseDate(f.start)
+    };
+  });
+
+  // Build A/B cycle map: weekSunday -> label (e.g. "1A", "1B")
+  var abMap = {};
+  var lastSun = null;
+  (semester.ab_cycles || []).forEach(function(cycle) {
+    var label = Object.keys(cycle)[0];
+    var dateStr = cycle[label];
+    var sun;
+    if (dateStr) {
+      sun = parseDate(dateStr);
+      sun.setDate(sun.getDate() - sun.getDay());
+    } else if (lastSun) {
+      sun = new Date(lastSun);
+      sun.setDate(sun.getDate() + 7);
+    } else {
+      return;
+    }
+    abMap[dateKey(sun)] = label;
+    lastSun = sun;
+  });
+
+  function getAbLabel(sunday) {
+    return abMap[dateKey(sunday)] || '';
+  }
+
+  function getHoliday(date) {
+    for (var h = 0; h < holidays.length; h++) {
+      if (date >= holidays[h].start && date <= holidays[h].end) {
+        return holidays[h].name;
+      }
+    }
+    return null;
+  }
+
+  function getFinals(date) {
+    for (var f = 0; f < finals.length; f++) {
+      if (date >= finals[f].start && date <= finals[f].end) {
+        return finals[f].name;
+      }
+    }
+    return null;
+  }
+
+  // ── Semester title ────────────────────────────────────────────
+  var title = document.createElement('div');
+  title.className = 'lab-calendar-title';
+  title.textContent = semester.semester + ' ' + start.getFullYear();
+  wrap.appendChild(title);
+
+  // ── Header row: A/B label + day labels ───────────────────────
+  var headerWrap = document.createElement('div');
+  headerWrap.className = 'lab-calendar-header-wrap';
+
+  var abHeaderCell = document.createElement('span');
+  abHeaderCell.className = 'ab-header';
+  headerWrap.appendChild(abHeaderCell);
+
+  var header = document.createElement('div');
+  header.className = 'lab-calendar-header';
+  DAY_LABELS.forEach(function(d, i) {
+    var span = document.createElement('span');
+    span.textContent = d;
+    if (i === 0 || i === 6) span.className = 'weekend-head';
+    header.appendChild(span);
+  });
+  headerWrap.appendChild(header);
+  wrap.appendChild(headerWrap);
+
+  // ── Build all weeks across all months ────────────────────────
+  // Walk from the Sunday on or before the start of the first month,
+  // through the Saturday on or after the end of the last month,
+  // one week at a time — no duplicates.
+
+  // Find the Sunday of the week containing the start date, then go 2 weeks back
+  var calStart = new Date(start);
+  calStart.setDate(calStart.getDate() - calStart.getDay()); // Sunday of start week
+  calStart.setDate(calStart.getDate() - 14);                // 2 rows before
+
+  // Find the Saturday of the week containing the end date, then go 2 weeks forward
+  var calEnd = new Date(end);
+  calEnd.setDate(calEnd.getDate() + (6 - calEnd.getDay())); // Saturday of end week
+  calEnd.setDate(calEnd.getDate() + 14);                    // 2 rows after
+
+  // ── Collect rows and figure out month spans ───────────────────
+  var rows = [];        // each entry: array of 7 Date objects
+  var monthRows = {};   // month key -> row count
+
+  var weekStart = new Date(calStart);
+  while (weekStart <= calEnd) {
+    var week = [];
+    for (var d = 0; d < 7; d++) {
+      var day = new Date(weekStart);
+      day.setDate(weekStart.getDate() + d);
+      week.push(day);
+    }
+    rows.push(week);
+
+    // Determine which month this row "belongs to" (majority of in-range days)
+    // Use Thursday (index 4) as the canonical day — ISO standard
+    var thu = week[4];
+    var mk = thu.getFullYear() + '-' + thu.getMonth();
+    monthRows[mk] = (monthRows[mk] || 0) + 1;
+
+    weekStart.setDate(weekStart.getDate() + 7);
+  }
+
+  // ── Render ────────────────────────────────────────────────────
+  var body = document.createElement('div');
+  body.className = 'lab-calendar-body';
+
+  var abCol = document.createElement('div');
+  abCol.className = 'lab-calendar-ab';
+
+  var grid = document.createElement('div');
+  grid.className = 'lab-calendar-grid';
+
+  var monthLabelsCol = document.createElement('div');
+  monthLabelsCol.className = 'lab-calendar-months';
+
+  var lastMonthKey = null;
+
+  var totalRows = rows.length;
+
+  rows.forEach(function(week, rowIndex) {
+    var isFirstCalRow = rowIndex === 0;
+    var isLastCalRow  = rowIndex === totalRows - 1;
+
+    // A/B label cell
+    var abCell = document.createElement('div');
+    abCell.className = 'ab-cell';
+    abCell.textContent = getAbLabel(week[0]);
+    abCol.appendChild(abCell);
+
+    var row = document.createElement('div');
+    row.className = 'lab-calendar-row';
+
+    week.forEach(function(day, i) {
+      var cell = document.createElement('div');
+      cell.textContent = day.getDate();
+
+      var inSemester = day >= start && day <= end;
+      var isWeekend  = (i === 0 || i === 6);
+
+      var holidayName = getHoliday(day);
+      var finalsName  = getFinals(day);
+
+      var classes = ['cal-cell'];
+      if (!inSemester)       classes.push('out-of-range');
+      else if (holidayName)  classes.push('holiday');
+      else if (finalsName)   classes.push('finals');
+      else if (isWeekend)    classes.push('weekend');
+
+      if (holidayName) cell.title = holidayName;
+      if (finalsName)  cell.title = finalsName;
+
+      var firstOfMonth = new Date(day.getFullYear(), day.getMonth(), 1);
+      var lastOfMonth  = new Date(day.getFullYear(), day.getMonth() + 1, 0);
+      var firstDow = firstOfMonth.getDay();
+      var lastDow  = lastOfMonth.getDay();
+
+      var isInFirstRow = i >= firstDow && day.getDate() <= (7 - firstDow);
+      var isInLastRow  = i <= lastDow  && day.getDate() >= (lastOfMonth.getDate() - lastDow);
+
+      // Top border — first row of month, not on leftmost column, not on very first calendar row
+      // Only draw if the cell above does NOT already have a bottom border
+      var cellAboveHasBottom = rowIndex > 0 && (function() {
+        var above = rows[rowIndex - 1][i];
+        var aboveLastOfMonth = new Date(above.getFullYear(), above.getMonth() + 1, 0);
+        var aboveLastDow = aboveLastOfMonth.getDay();
+        return i <= aboveLastDow && above.getDate() >= (aboveLastOfMonth.getDate() - aboveLastDow);
+      })();
+
+      if (isInFirstRow && !(i === 0 && firstDow === 0) && !isFirstCalRow && !cellAboveHasBottom) {
+        classes.push('mb-top');
+      }
+
+
+      // Bottom border — last row of month, not on very last calendar row
+      if (isInLastRow && !isLastCalRow) {
+        classes.push('mb-bottom');
+      }
+
+      // Left border — first cell of month, not on leftmost column
+      if (day.getDate() === 1 && firstDow > 0) {
+        classes.push('mb-left');
+      }
+
+
+      cell.className = classes.join(' ');
+      row.appendChild(cell);
+    });
+
+    grid.appendChild(row);
+
+    // Month label — keyed to Thursday of the week
+    var thu = week[4];
+    var mk = thu.getFullYear() + '-' + thu.getMonth();
+    if (mk !== lastMonthKey) {
+      // Only label months that overlap with the semester range
+      var monthStart = new Date(thu.getFullYear(), thu.getMonth(), 1);
+      var monthEnd   = new Date(thu.getFullYear(), thu.getMonth() + 1, 0);
+      var inSemester = monthEnd >= start && monthStart <= end;
+
+      var label = document.createElement('div');
+      label.className = 'month-label';
+      label.textContent = inSemester ? MONTHS[thu.getMonth()] : '';
+      var rowH = (monthRows[mk] || 1) * 32;
+      label.style.height = rowH + 'px';
+      monthLabelsCol.appendChild(label);
+      lastMonthKey = mk;
+    }
+  });
+
+  body.appendChild(abCol);
+  body.appendChild(grid);
+  body.appendChild(monthLabelsCol);
+  wrap.appendChild(body);
+
+  if (semester.pdf) {
+    var p = document.createElement('p');
+    p.className = 'calendar-pdf-link';
+    p.innerHTML = '<a href="' + semester.pdf + '">Download PDF</a>';
+    wrap.appendChild(p);
+  }
+})();
+</script>

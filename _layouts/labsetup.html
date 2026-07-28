@@ -1,0 +1,72 @@
+---
+layout: default
+---
+
+{% comment %} Look up this lab's data by matching page.lab_number to labs.yml {% endcomment %}
+{% assign lab = nil %}
+{% for l in site.data.labs %}
+  {% if l.number == page.lab_number %}
+    {% assign lab = l %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+<div class="setup-page">
+
+  <h1>Lab {{ page.lab_number }} — {{ lab.name }}</h1>
+  <p class="setup-subtitle">Setup guide for TA/TIs</p>
+
+  <!-- Completed-setup photo -->
+  {% if page.setup_photo and page.setup_photo != "" %}
+    <figure class="setup-photo">
+      <img src="{{ page.setup_photo | relative_url }}" alt="Completed setup for Lab {{ page.lab_number }}">
+      <figcaption>Completed setup</figcaption>
+    </figure>
+  {% else %}
+    <div class="setup-photo-placeholder">
+      <span>Completed-setup photo coming soon</span>
+    </div>
+  {% endif %}
+
+  <h2>Equipment &amp; Locations</h2>
+  <div class="equip-grid">
+    {% assign found = false %}
+    {% for item in site.data.inventory.inventory %}
+      {% if item.experiments contains page.lab_number %}
+        {% assign found = true %}
+        <div class="equip-card">
+          {% if item.image and item.image != "" %}
+            <img class="equip-photo" src="{{ item.image | relative_url }}" alt="{{ item.name }}" loading="lazy">
+          {% else %}
+            <div class="equip-photo equip-photo-missing"><span>No photo</span></div>
+          {% endif %}
+          <div class="equip-info">
+            <h3>{{ item.name }}</h3>
+            {% if item.addresses and item.addresses.size > 0 %}
+              <p class="equip-loc">
+                {% for a in item.addresses %}Room {{ a.room }} &middot; Section {{ a.section }}{% if a.shelf and a.shelf != "" %} &middot; Shelf {{ a.shelf }}{% endif %}{% unless forloop.last %}<br>{% endunless %}{% endfor %}
+              </p>
+            {% elsif item.notes == nil or item.notes == "" %}
+              <p class="equip-loc equip-loc-unknown">Location not recorded</p>
+            {% endif %}
+            {% if item.inventory and item.inventory != "" %}
+              <p class="equip-count">Count: {{ item.inventory }}</p>
+            {% endif %}
+            {% if item.notes and item.notes != "" %}
+              <p class="equip-notes">{{ item.notes }}</p>
+            {% endif %}
+            {% if item.broken and item.broken != "" %}
+              <p class="equip-broken">Broken: {{ item.broken }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    {% unless found %}
+      <p class="lab-doc-placeholder">No equipment recorded for this lab yet.</p>
+    {% endunless %}
+  </div>
+
+  <p class="setup-back"><a href="{{ '/ta.html' | relative_url }}">&larr; Back to TA/TIs</a></p>
+
+</div>

@@ -1,0 +1,224 @@
+# Lab definitions — each lab is defined once and referenced by courses.
+# prelab/manual/postlab: student-facing PDFs (leave blank if unused)
+# full: complete writeup PDF, linked only on the TA/TI page
+# setup: TA/TI lab-setup page (leave blank if unused)
+# videos: optional list of { title, url }. A url containing .mp4/.webm renders in a native
+#   player, anything else renders in an iframe and must be the host's embed URL. Video files
+#   are not tracked here (see .gitignore), so point .mp4/.webm at externally hosted media.
+#   Omit if none.
+# links: optional list of { title, url } for external resource pages. Omit if none.
+
+- id: lab01
+  number: 1
+  name: "Statistics and Error Propagation"
+  description: "Develop familiarity with the statistical tools used to describe experimental data, including mean, standard deviation, and error estimators. Apply these tools to estimate measurement uncertainties and propagate them through derived quantities such as areas and ratios."
+  prelab: "/assets/docs/Lab01-prelab.pdf"
+  manual: "/assets/docs/Lab01-manual.pdf"
+  postlab: "/assets/docs/Lab01-postlab.pdf"
+  full: "/assets/docs/Lab01.pdf"
+  setup: "/setup/lab01.html"
+  videos:
+    - title: "Prelab Video"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=5bdc1b28-30d1-412a-a76e-ac0500499e6b&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+
+- id: lab02
+  number: 2
+  name: "Gravitational Acceleration"
+  description: "Use an Atwood machine to measure the acceleration due to gravity, accounting for systematic effects such as pulley friction and rotational inertia that prevent a direct free-fall measurement. Analyze how these apparatus imperfections propagate into the final result and compare your measurement to the accepted value of g."
+  prelab: "/assets/docs/Lab02-prelab.pdf"
+  manual: "/assets/docs/Lab02-manual.pdf"
+  postlab: "/assets/docs/Lab02-postlab.pdf"
+  full: "/assets/docs/Lab02.pdf"
+  setup: "/setup/lab02.html"
+  videos:
+    - title: "Prelab Video"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=576777fd-42ed-4ea7-bbf1-ac0500499e9c&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+
+- id: lab03
+  number: 3
+  name: "Conservation of Momentum"
+  description: "Verify the conservation of energy and momentum through two independent experiments: elastic and inelastic collisions on a linear track, and the launch of a projectile captured by a ballistic pendulum. Both methods provide an independent estimate of the projectile velocity, allowing direct comparison of results."
+  prelab: "/assets/docs/Lab03-prelab.pdf"
+  manual: "/assets/docs/Lab03-manual.pdf"
+  postlab: "/assets/docs/Lab03-postlab.pdf"
+  full: "/assets/docs/Lab03.pdf"
+  setup: "/setup/lab03.html"
+  videos:
+    - title: "Prelab Video"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=dd8e6cbc-48de-4f25-8f64-ac05005034e7&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+
+- id: lab04
+  number: 4
+  name: "Moments of Inertia"
+  description: "Measure the moment of inertia of three objects about a specified rotational axis using a photogate timer, and verify the parallel axis theorem. In the second part, investigate Hooke's Law by measuring the oscillation period of a spring-mass system as a function of the attached mass."
+  prelab: "/assets/docs/Lab04-prelab.pdf"
+  manual: "/assets/docs/Lab04-manual.pdf"
+  postlab: "/assets/docs/Lab04-postlab.pdf"
+  full: "/assets/docs/Lab04.pdf"
+  setup: "/setup/lab04.html"
+  videos:
+    - title: "Prelab Video"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=b9766a7f-9b52-40ac-a5d3-ac0500802d2c&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+
+- id: lab05
+  number: 5
+  name: "Thermal and Mechanical Energy"
+  description: "Observe the conversion of mechanical energy into heat by turning a crank that drives friction against an aluminum cylinder, and measure the resulting temperature rise of the cylinder. Use these measurements to estimate Joule's constant, the proportionality between Joules and Calories."
+  prelab: "/assets/docs/Lab05-prelab.pdf"
+  manual: "/assets/docs/Lab05-manual.pdf"
+  postlab: "/assets/docs/Lab05-postlab.pdf"
+  full: "/assets/docs/Lab05.pdf"
+  setup: "/setup/lab05.html"
+  videos:
+    - title: "Prelab Video"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=0dc4dd14-4b16-49da-a81e-ac05008ab0f8&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+
+- id: lab06
+  number: 6
+  name: "Coulomb's Law"
+  description: "Verify Coulomb's Law by measuring the electrostatic force between two charged spheres as a function of their separation and charge. Use log-log analysis to confirm the inverse-square dependence and determine the proportionality constant."
+  prelab: "/assets/docs/Lab06-prelab.pdf"
+  manual: "/assets/docs/Lab06-manual.pdf"
+  postlab: "/assets/docs/Lab06-postlab.pdf"
+  full: "/assets/docs/Lab06.pdf"
+  setup: "/setup/lab06.html"
+  videos:
+    - title: "Prelab Video"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=132ec518-02ae-447c-aa6a-abfa0161c70d&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+
+- id: lab07
+  number: 7
+  name: "Electrostatic Potential"
+  description: "Use a mechanically-balanced cylindrical capacitor to measure an absolute voltage by two independent methods: a displacement method based on the principle of virtual work, and a null method using calibrated masses. Map equipotential surfaces for two electrode configurations on resistive graphite paper and draw the corresponding electric field lines."
+  prelab: "/assets/docs/Lab07-prelab.pdf"
+  manual: "/assets/docs/Lab07-manual.pdf"
+  postlab: "/assets/docs/Lab07-postlab.pdf"
+  full: "/assets/docs/Lab07.pdf"
+  setup: "/setup/lab07.html"
+  videos:
+    - title: "Prelab Video"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=c1073479-d200-499f-ab3b-abfa0161d8dc&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+
+- id: lab08
+  number: 8
+  name: "Electron Beams"
+  description: "Inject an electron beam into a uniform magnetic field produced by a pair of Helmholtz coils and observe the resulting circular trajectory due to the Lorentz force. Use the measured radius of curvature and the known field strength to determine e/mₑ, the charge-to-mass ratio of the electron."
+  prelab: "/assets/docs/Lab08-prelab.pdf"
+  manual: "/assets/docs/Lab08-manual.pdf"
+  postlab: "/assets/docs/Lab08-postlab.pdf"
+  full: "/assets/docs/Lab08.pdf"
+  setup: "/setup/lab08.html"
+  videos:
+    - title: "Prelab Video"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=55e90526-cc7a-498e-a281-ac05004579eb&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+
+- id: lab09
+  number: 9
+  name: "Superconductivity and Ohm's Law"
+  description: "Observe the Meissner Effect by levitating a magnet above a high-temperature superconductor cooled in liquid nitrogen, demonstrating the expulsion of magnetic flux below the critical temperature. In the second part, build and measure simple DC resistive circuits to verify Ohm's Law and explore series and parallel resistance combinations."
+  prelab: "/assets/docs/Lab09-prelab.pdf"
+  manual: "/assets/docs/Lab09-manual.pdf"
+  postlab: "/assets/docs/Lab09-postlab.pdf"
+  full: "/assets/docs/Lab09.pdf"
+  setup: "/setup/lab09.html"
+  videos:
+    - title: "Prelab Video"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=aa9dabf7-073e-459b-8402-ac0500497d90&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+    - title: "Introduction to Multimeter Use"
+      url: "https://www.pas.rochester.edu/~physlabs/manuals/IntroToMulti.mp4"
+
+- id: lab10
+  number: 10
+  name: "Electronic Circuits"
+  description: "Use an oscilloscope to study RC circuits, measuring capacitance from the charging and discharging time constant of a capacitor. Then assemble a resonant RLC circuit and identify the resonance frequency as a function of inductance and capacitance."
+  prelab: "/assets/docs/Lab10-prelab.pdf"
+  manual: "/assets/docs/Lab10-manual.pdf"
+  postlab: "/assets/docs/Lab10-postlab.pdf"
+  full: "/assets/docs/Lab10.pdf"
+  setup: "/setup/lab10.html"
+  videos:
+    - title: "Prelab Video"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=dfcec750-a88e-4688-80bf-ac0100de3e52&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+    - title: "Introduction to a Digital Oscilloscope"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=00a7b093-db11-4023-8e94-ac050098cac8&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+  links:
+    - title: "Rigol Oscilloscope Basics"
+      url: "https://www.rigolna.com/scopebasics/"
+
+- id: lab11
+  number: 11
+  name: "The Speed of Waves"
+  description: "Measure the speed of sound in air by finding the resonant lengths of a closed tube at a known frequency. In the second part, drive standing waves on strings of different linear densities under varying tension, and verify the dependence of wave speed on these parameters."
+  prelab: "/assets/docs/Lab11-prelab.pdf"
+  manual: "/assets/docs/Lab11-manual.pdf"
+  postlab: "/assets/docs/Lab11-postlab.pdf"
+  full: "/assets/docs/Lab11.pdf"
+  setup: "/setup/lab11.html"
+  videos:
+    - title: "Introductory Lecture"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=c644eba3-bda8-4d1d-9ad4-acbf01025f3b&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+    - title: "Demo part 1"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=357fdb60-8c77-4b8c-879b-acc20010cab7&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+    - title: "Demo part 2"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=efe763f8-8417-4803-a7cc-acc200d2b33d&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+    - title: "Demo part 3"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=bbbb181f-f915-4d14-abc3-acc20010daeb&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+    - title: "Introduction to a Digital Oscilloscope"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=00a7b093-db11-4023-8e94-ac050098cac8&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+    - title: "Oscilloscope Primer"
+      url: "https://www.youtube.com/embed/0FFmGOFqlnQ"
+
+- id: lab12
+  number: 12
+  name: "Geometric Optics"
+  description: "Verify the thin lens equation by measuring image distances for converging and diverging lenses at various object positions, and characterize the difference between real and virtual images. Use combinations of lenses to construct simple optical systems such as a telescope and a compound microscope, measuring their magnifications."
+  prelab: "/assets/docs/Lab12-prelab.pdf"
+  manual: "/assets/docs/Lab12-manual.pdf"
+  postlab: "/assets/docs/Lab12-postlab.pdf"
+  full: "/assets/docs/Lab12.pdf"
+  setup: "/setup/lab12.html"
+  videos:
+    - title: "Prelab Video"
+      url: "https://www.youtube.com/embed/8pGCFx-sIUw"
+
+- id: lab13
+  number: 13
+  name: "Wave Properties of the Electromagnetic Spectrum"
+  description: "Observe double-slit and single-slit interference and diffraction patterns using both a helium-neon laser and a microwave source. Measure the fringe spacings to calculate the wavelengths of each source and confirm that wave optics applies across a wide range of the electromagnetic spectrum."
+  prelab: "/assets/docs/Lab13-prelab.pdf"
+  manual: "/assets/docs/Lab13-manual.pdf"
+  postlab: "/assets/docs/Lab13-postlab.pdf"
+  full: "/assets/docs/Lab13.pdf"
+  setup: "/setup/lab13.html"
+
+- id: lab14
+  number: 14
+  name: "The Atomic Spectrum of Hydrogen"
+  description: "Use a diffraction grating spectrometer to resolve the visible emission lines of atomic hydrogen and measure their wavelengths. Calibrate the spectrometer with a sodium source and verify that the hydrogen wavelengths match the predictions of the Balmer formula, confirming the quantization of atomic energy levels."
+  prelab: "/assets/docs/Lab14-prelab.pdf"
+  manual: "/assets/docs/Lab14-manual.pdf"
+  postlab: "/assets/docs/Lab14-postlab.pdf"
+  full: "/assets/docs/Lab14.pdf"
+  setup: "/setup/lab14.html"
+  videos:
+    - title: "Prelab part 1"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=d6ec9e2f-1947-4008-9fcd-acc20010e9e9&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+    - title: "Prelab part 2"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=b20409bc-02ab-49ae-857e-acc200428676&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+
+- id: lab15
+  number: 15
+  name: "The Franck-Hertz Experiment"
+  description: "Accelerate electrons through argon vapor in a vacuum tube and measure the current at the anode as a function of accelerating voltage, reproducing the landmark 1914 experiment of Franck and Hertz. Identify the periodic current drops caused by inelastic collisions to determine the energy of the first excited state of argon and confirm the discrete nature of atomic energy levels."
+  prelab: "/assets/docs/Lab15-prelab.pdf"
+  manual: "/assets/docs/Lab15-manual.pdf"
+  postlab: "/assets/docs/Lab15-postlab.pdf"
+  full: "/assets/docs/Lab15.pdf"
+  setup: "/setup/lab15.html"
+  videos:
+    - title: "Theory part 1"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=976fa114-5e8d-4a74-8150-acc200577edc&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+    - title: "Theory part 2"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=14e86de1-c662-436f-9282-acc200579f7f&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"
+    - title: "Experiment"
+      url: "https://rochester.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=5c86b804-b048-4c52-b1de-acc2004c2701&autoplay=false&offerviewer=true&showtitle=true&showbrand=false"

@@ -3,19 +3,10 @@ layout: statistics
 title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
 ---
 
-<link rel="stylesheet" href="/assets/css/ur-palette.css">
-<link rel="stylesheet" href="/assets/css/statistics.css">
+<link rel="stylesheet" href="{{ '/assets/css/ur-palette.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/statistics.css' | relative_url }}">
 
 
-
-  <!-- ── Intro overlay (fades on scroll) ──────────────────────── -->
-  <div class="intro-overlay" id="intro">
-    <h1>Statistics<br>&amp; <span>Error Analysis</span></h1>
-    <div class="intro-hint">
-      <span>Scroll to explore</span>
-      <div class="arrow"></div>
-    </div>
-  </div>
 
   <!-- ── Fixed top bar ──────────────────────────────────────────── -->
   <div class="top-bar">
@@ -33,7 +24,9 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
       <a href="#sec-poisson" title="Poisson Statistics"></a>
       <a href="#sec-sem"    title="Error in the Mean"></a>
       <a href="#sec-prop"   title="Error Propagation"></a>
+      <a href="#sec-sigfig" title="Reporting Results"></a>
       <a href="#sec-summary" title="Summary"></a>
+      <a href="#outro"      title="Finish"></a>
     </nav>
   </div>
   <div class="progress-bar" id="progress"></div>
@@ -127,10 +120,10 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
           <p class="section-tag">Why It Matters</p>
           <h2>Is 2024 really the hottest year on record?</h2>
           <p>Global average temperature in 2024 was reported as
-             $+1.60^\text{o}\text{C}$ above pre-industrial levels — about $0.12^\text{o}\text{C}$
+             $+1.60\,^\circ\text{C}$ above pre-industrial levels — about $0.12\,^\circ\text{C}$
              warmer than the previous record set in 2023.</p>
           <p>But the instrumental uncertainty in global temperature
-             averages is roughly $\pm0.10^\text{o}\text{C}$. That $0.12^\text{o}\text{C}$ difference
+             averages is roughly $\pm0.10\,^\circ\text{C}$. That $0.12\,^\circ\text{C}$ difference
              barely exceeds the measurement error.</p>
           <p>The record is likely real — but quantifying uncertainty
              is precisely how science makes that claim responsibly.</p>
@@ -158,8 +151,8 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
                 <div class="temp-bar" style="width:100%; background:var(--navy);">+1.60 ± 0.10 °C</div>
               </div>
             </div>
-            <p style="font-size:0.72rem; color:var(--charcoal); margin-top:10px;">
-              Source: Copernicus Climate Change Service, 2025
+            <p class="src-note">
+              Source: <a href="https://climate.copernicus.eu/global-climate-highlights-2025" target="_blank" rel="noopener">Copernicus Climate Change Service, 2025</a>
             </p>
           </div>
         </div>
@@ -176,41 +169,44 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
       <div class="card-pair">
 
         <!-- LEFT: SVG error bar diagram -->
-        <div class="panel graphic butter panel-left">
-          <svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg"
-               aria-label="Two measurements of g with overlapping error bars">
-            <line x1="60" y1="220" x2="300" y2="220" stroke="#001E5F" stroke-width="2"/>
-            <text x="80"  y="238" font-size="11" fill="#001E5F" text-anchor="middle">9.6</text>
-            <text x="140" y="238" font-size="11" fill="#001E5F" text-anchor="middle">9.7</text>
-            <text x="200" y="238" font-size="11" fill="#001E5F" text-anchor="middle">9.8</text>
-            <text x="260" y="238" font-size="11" fill="#001E5F" text-anchor="middle">9.9</text>
-            <text x="180" y="252" font-size="10" fill="#707070" text-anchor="middle">g (m/s²)</text>
-            <line x1="80"  y1="218" x2="80"  y2="222" stroke="#001E5F" stroke-width="1.5"/>
-            <line x1="140" y1="218" x2="140" y2="222" stroke="#001E5F" stroke-width="1.5"/>
-            <line x1="200" y1="218" x2="200" y2="222" stroke="#001E5F" stroke-width="1.5"/>
-            <line x1="260" y1="218" x2="260" y2="222" stroke="#001E5F" stroke-width="1.5"/>
-            <line x1="208" y1="30" x2="208" y2="220" stroke="#021BC3" stroke-width="1"
-                  stroke-dasharray="5,4" opacity="0.5"/>
-            <text x="212" y="44" font-size="10" fill="#021BC3" opacity="0.8">g = 9.81 (true)</text>
-            <!-- Student A: 9.85 ± 0.20 → cx=230, span 110–295 -->
-            <line x1="110" y1="100" x2="295" y2="100" stroke="#0066FD" stroke-width="2.5"/>
-            <line x1="110" y1="88"  x2="110" y2="112" stroke="#0066FD" stroke-width="2.5"/>
-            <line x1="295" y1="88"  x2="295" y2="112" stroke="#0066FD" stroke-width="2.5"/>
-            <circle cx="230" cy="100" r="7" fill="#0066FD"/>
-            <text x="48" y="104" font-size="10" fill="#001E5F" font-weight="600" text-anchor="middle">A</text>
-            <text x="48" y="116" font-size="9"  fill="#707070" text-anchor="middle">9.85±0.20</text>
-            <!-- Student B: 9.75 ± 0.15 → cx=170, span 80–260 -->
-            <line x1="80"  y1="155" x2="260" y2="155" stroke="#021BC3" stroke-width="2.5"/>
-            <line x1="80"  y1="143" x2="80"  y2="167" stroke="#021BC3" stroke-width="2.5"/>
-            <line x1="260" y1="143" x2="260" y2="167" stroke="#021BC3" stroke-width="2.5"/>
-            <circle cx="170" cy="155" r="7" fill="#021BC3"/>
-            <text x="48" y="159" font-size="10" fill="#001E5F" font-weight="600" text-anchor="middle">B</text>
-            <text x="48" y="171" font-size="9"  fill="#707070" text-anchor="middle">9.75±0.15</text>
-            <!-- Overlap highlight -->
-            <rect x="110" y="85" width="150" height="85" fill="#FFD82B" opacity="0.18" rx="3"/>
-            <text x="183" y="78" font-size="9.5" fill="#001E5F" text-anchor="middle"
-                  font-style="italic">ranges overlap</text>
-          </svg>
+        <div class="panel graphic sky panel-left">
+          <div class="temp-graphic">
+            <div class="tg-label">Measuring Gravitational Acceleration</div>
+            <svg viewBox="0 53 390 152" xmlns="http://www.w3.org/2000/svg" style="width:100%;"
+                 aria-label="Two measurements of g with overlapping error bars">
+              <!-- Axis line -->
+              <line x1="80" y1="160" x2="380" y2="160" stroke="#001E5F" stroke-width="1.5"/>
+              <!-- Tick marks -->
+              <line x1="80"  y1="156" x2="80"  y2="164" stroke="#001E5F" stroke-width="1.5"/>
+              <line x1="130" y1="156" x2="130" y2="164" stroke="#001E5F" stroke-width="1.5"/>
+              <line x1="180" y1="156" x2="180" y2="164" stroke="#001E5F" stroke-width="1.5"/>
+              <line x1="230" y1="156" x2="230" y2="164" stroke="#001E5F" stroke-width="1.5"/>
+              <line x1="280" y1="156" x2="280" y2="164" stroke="#001E5F" stroke-width="1.5"/>
+              <line x1="330" y1="156" x2="330" y2="164" stroke="#001E5F" stroke-width="1.5"/>
+              <line x1="380" y1="156" x2="380" y2="164" stroke="#001E5F" stroke-width="1.5"/>
+              <!-- Tick labels -->
+              <text x="80"  y="178" text-anchor="middle" font-size="11" fill="#001E5F" font-family="sans-serif">9.5</text>
+              <text x="130" y="178" text-anchor="middle" font-size="11" fill="#001E5F" font-family="sans-serif">9.6</text>
+              <text x="180" y="178" text-anchor="middle" font-size="11" fill="#001E5F" font-family="sans-serif">9.7</text>
+              <text x="230" y="178" text-anchor="middle" font-size="11" fill="#001E5F" font-family="sans-serif">9.8</text>
+              <text x="280" y="178" text-anchor="middle" font-size="11" fill="#001E5F" font-family="sans-serif">9.9</text>
+              <text x="330" y="178" text-anchor="middle" font-size="11" fill="#001E5F" font-family="sans-serif">10.0</text>
+              <text x="380" y="178" text-anchor="middle" font-size="11" fill="#001E5F" font-family="sans-serif">10.1</text>
+              <text x="230" y="200" text-anchor="middle" font-size="15" fill="#444" font-family="sans-serif">g (m/s²)</text>
+              <!-- Student A: 9.85±0.20 → cx=255, span 155..355, y=75 -->
+              <line x1="155" y1="75" x2="355" y2="75" stroke="#0066FD" stroke-width="3"/>
+              <line x1="155" y1="63" x2="155" y2="87" stroke="#0066FD" stroke-width="3"/>
+              <line x1="355" y1="63" x2="355" y2="87" stroke="#0066FD" stroke-width="3"/>
+              <circle cx="255" cy="75" r="7" fill="#0066FD"/>
+              <text x="103" y="80" text-anchor="end" font-size="16" fill="#0066FD" font-family="sans-serif" font-weight="bold">Student A</text>
+              <!-- Student B: 9.75±0.15 → cx=205, span 130..280, y=125 -->
+              <line x1="130" y1="125" x2="280" y2="125" stroke="#021BC3" stroke-width="3"/>
+              <line x1="130" y1="113" x2="130" y2="137" stroke="#021BC3" stroke-width="3"/>
+              <line x1="280" y1="113" x2="280" y2="137" stroke="#021BC3" stroke-width="3"/>
+              <circle cx="205" cy="125" r="7" fill="#021BC3"/>
+              <text x="103" y="130" text-anchor="end" font-size="16" fill="#021BC3" font-family="sans-serif" font-weight="bold">Student B</text>
+            </svg>
+          </div>
         </div>
 
         <!-- RIGHT: text -->
@@ -218,12 +214,12 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
           <div class="accent-bar"></div>
           <p class="section-tag">Why It Matters</p>
           <h2>Do these two measurements disagree?</h2>
-          <p>Student A measures \(g = 9.85 \pm 0.20 \ \text{m/s}^2\).
-             Student B measures \(g = 9.75 \pm 0.15 \ \text{m/s}^2\).</p>
+          <p>Student A measures $g = 9.85 \pm 0.20 \ \text{m/s}^2$.
+             Student B measures $g = 9.75 \pm 0.15 \ \text{m/s}^2$.</p>
           <p>The central values differ by 0.10 m/s² — but their
              uncertainty ranges overlap substantially. Both are
-             <em>consistent</em> with the true value
-             \(g = 9.81 \ \text{m/s}^2\).</p>
+             <em>consistent</em> with the accepted value
+             $g = 9.81 \ \text{m/s}^2$.</p>
           <p>Knowing the error is what lets you make that judgment.</p>
         </div>
 
@@ -238,8 +234,26 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
     <div class="sticky-frame">
       <div class="card-pair">
 
-        <!-- LEFT: scatter plot -->
-        <div class="panel graphic sky panel-left">
+        <!-- LEFT: text -->
+        <div class="panel white panel-left">
+          <div class="accent-bar"></div>
+          <p class="section-tag">Measurement Basics</p>
+          <h2>Why don't<br>measurements repeat?</h2>
+          <p>Measure the same pencil $10$ times with a ruler and you won't
+             get $12.7$ cm every time — you get $12.5$, $12.8$, $12.6$, $12.9$, etc.</p>
+          <p>This scatter isn't "bad" — it's <em>data</em>. Error does not mean
+             <em>blunder</em> (misreading the scale is a mistake, to be caught
+             and discarded); it is the irreducible spread that remains after
+             every precaution has been taken.</p>
+          <p><strong>Random error:</strong> discrete ruler markings, varying
+             eye position, varying pressure.</p>
+          <p><strong>Systematic error:</strong> a bent ruler always reads high;
+             a cold ruler contracts; one-sided parallax.</p>
+        </div>
+
+        <!-- RIGHT: scatter plot -->
+        <div class="panel graphic dandelion panel-right">
+          <div class="clipping">
           <!-- Scatter plot -->
           <svg viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg"
                aria-label="Repeated measurements of pencil length showing scatter"
@@ -287,33 +301,17 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
 
             <!-- Mean line (vertical) -->
             <line x1="195" y1="90" x2="195" y2="240" stroke="#021BC3" stroke-width="2" stroke-dasharray="6,4"/>
-            <text x="195" y="75" font-size="10" fill="#021BC3" font-weight="600" text-anchor="middle">12.7 cm±0.5 cm</text>
+            <text x="195" y="75" font-size="10" fill="#021BC3" font-weight="600" text-anchor="middle">x̄ = 12.7 cm</text>
 
-            <!-- Spread indicator (with ± label) -->
-            <g opacity="0.5">
-              <line x1="145" y1="115" x2="245" y2="115" stroke="#FFD82B" stroke-width="2"/>
-              <line x1="145" y1="105" x2="145" y2="125" stroke="#FFD82B" stroke-width="1.5"/>
-              <line x1="245" y1="105" x2="245" y2="125" stroke="#FFD82B" stroke-width="1.5"/>
+            <!-- Spread indicator (±s) -->
+            <g>
+              <line x1="158" y1="115" x2="233" y2="115" stroke="#021BC3" stroke-width="2"/>
+              <line x1="158" y1="105" x2="158" y2="125" stroke="#021BC3" stroke-width="1.5"/>
+              <line x1="233" y1="105" x2="233" y2="125" stroke="#021BC3" stroke-width="1.5"/>
+              <text x="245" y="119" font-size="10" fill="#021BC3" font-weight="600" text-anchor="start">±s</text>
             </g>
           </svg>
-        </div>
-
-        <!-- RIGHT: text -->
-        <div class="panel white panel-right">
-          <div class="accent-bar"></div>
-          <p class="section-tag">Measurement Basics</p>
-          <h2>Why don't<br>measurements repeat?</h2>
-          <p>When you measure the same pencil $10$ times with a ruler,
-             you don't get $12.7$ cm every time. You get $12.5$, $12.8$, $12.6$,
-             $12.9$, etc.</p>
-          <p>This scatter isn't "bad" — it's <em>data</em>. It tells you
-             about the limits of your measurement tool and technique.</p>
-          <p><strong>Random error:</strong> ruler markings are discrete,
-             your eye position varies, you press differently each time.</p>
-          <p><strong>Systematic error:</strong> a bent ruler always reads
-             high; a cold ruler contracts; parallax bias from one direction.</p>
-          <p>Both shape your result. Understanding which is which helps
-             you improve.</p>
+          </div>
         </div>
 
       </div>
@@ -328,93 +326,95 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
       <div class="card-pair">
 
         <!-- LEFT: 2×2 dartboard grid -->
-        <div class="panel graphic meliora panel-left">
+        <div class="panel graphic sky panel-left">
+          <div class="clipping">
           <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg"
                aria-label="Accuracy vs. Precision: 2x2 dartboard grid">
 
             <!-- Title -->
-            <text x="210" y="24" font-size="14" fill="#FFFFFF" font-weight="700" text-anchor="middle">
+            <text x="210" y="24" font-size="14" fill="#001E5F" font-weight="700" text-anchor="middle">
               Accuracy vs. Precision
             </text>
 
             <!-- Horizontal divider -->
-            <line x1="30" y1="210" x2="390" y2="210" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+            <line x1="30" y1="210" x2="390" y2="210" stroke="rgba(0,30,95,0.2)" stroke-width="2"/>
             <!-- Vertical divider -->
-            <line x1="210" y1="40" x2="210" y2="400" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+            <line x1="210" y1="40" x2="210" y2="400" stroke="rgba(0,30,95,0.2)" stroke-width="2"/>
 
             <!-- TOP LEFT: High Accuracy, High Precision -->
             <g id="quad-ha-hp">
-              <circle cx="105" cy="105" r="60" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <circle cx="105" cy="105" r="40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <circle cx="105" cy="105" r="20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <circle cx="105" cy="105" r="6" fill="#FFD82B"/>
+              <circle cx="105" cy="105" r="60" fill="none" stroke="rgba(0,30,95,0.35)" stroke-width="1"/>
+              <circle cx="105" cy="105" r="40" fill="none" stroke="rgba(0,30,95,0.35)" stroke-width="1"/>
+              <circle cx="105" cy="105" r="20" fill="none" stroke="rgba(0,30,95,0.35)" stroke-width="1"/>
+              <circle cx="105" cy="105" r="6" fill="#FFD82B" stroke="#001E5F" stroke-width="1"/>
               <!-- Darts clustered at center -->
-              <circle cx="104" cy="106" r="3.5" fill="#FFFFFF"/>
-              <circle cx="106" cy="103" r="3.5" fill="#FFFFFF"/>
-              <circle cx="102" cy="105" r="3.5" fill="#FFFFFF"/>
-              <circle cx="107" cy="108" r="3.5" fill="#FFFFFF"/>
-              <circle cx="103" cy="102" r="3.5" fill="#FFFFFF"/>
-              <text x="105" y="155" font-size="10" fill="#FFFFFF" font-weight="600" text-anchor="middle">High Accuracy</text>
-              <text x="105" y="170" font-size="10" fill="#FFFFFF" font-weight="600" text-anchor="middle">High Precision</text>
+              <circle cx="104" cy="106" r="3.5" fill="#0066FD"/>
+              <circle cx="106" cy="103" r="3.5" fill="#0066FD"/>
+              <circle cx="102" cy="105" r="3.5" fill="#0066FD"/>
+              <circle cx="107" cy="108" r="3.5" fill="#0066FD"/>
+              <circle cx="103" cy="102" r="3.5" fill="#0066FD"/>
+              <text x="105" y="155" font-size="10" fill="#001E5F" font-weight="600" text-anchor="middle">High Accuracy</text>
+              <text x="105" y="170" font-size="10" fill="#001E5F" font-weight="600" text-anchor="middle">High Precision</text>
             </g>
 
             <!-- TOP RIGHT: Low Accuracy, High Precision -->
             <g id="quad-la-hp">
-              <circle cx="315" cy="105" r="60" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <circle cx="315" cy="105" r="40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <circle cx="315" cy="105" r="20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <circle cx="315" cy="105" r="6" fill="#FFD82B"/>
+              <circle cx="315" cy="105" r="60" fill="none" stroke="rgba(0,30,95,0.35)" stroke-width="1"/>
+              <circle cx="315" cy="105" r="40" fill="none" stroke="rgba(0,30,95,0.35)" stroke-width="1"/>
+              <circle cx="315" cy="105" r="20" fill="none" stroke="rgba(0,30,95,0.35)" stroke-width="1"/>
+              <circle cx="315" cy="105" r="6" fill="#FFD82B" stroke="#001E5F" stroke-width="1"/>
               <!-- Darts clustered off-center (upper left of center) -->
-              <circle cx="285" cy="85" r="3.5" fill="#FFFFFF"/>
-              <circle cx="287" cy="82" r="3.5" fill="#FFFFFF"/>
-              <circle cx="283" cy="85" r="3.5" fill="#FFFFFF"/>
-              <circle cx="288" cy="88" r="3.5" fill="#FFFFFF"/>
-              <circle cx="284" cy="82" r="3.5" fill="#FFFFFF"/>
-              <text x="315" y="155" font-size="10" fill="#FFFFFF" font-weight="600" text-anchor="middle">Low Accuracy</text>
-              <text x="315" y="170" font-size="10" fill="#FFFFFF" font-weight="600" text-anchor="middle">High Precision</text>
+              <circle cx="285" cy="85" r="3.5" fill="#0066FD"/>
+              <circle cx="287" cy="82" r="3.5" fill="#0066FD"/>
+              <circle cx="283" cy="85" r="3.5" fill="#0066FD"/>
+              <circle cx="288" cy="88" r="3.5" fill="#0066FD"/>
+              <circle cx="284" cy="82" r="3.5" fill="#0066FD"/>
+              <text x="315" y="155" font-size="10" fill="#001E5F" font-weight="600" text-anchor="middle">Low Accuracy</text>
+              <text x="315" y="170" font-size="10" fill="#001E5F" font-weight="600" text-anchor="middle">High Precision</text>
             </g>
 
             <!-- BOTTOM LEFT: High Accuracy, Low Precision -->
             <g id="quad-ha-lp">
-              <circle cx="105" cy="315" r="60" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <circle cx="105" cy="315" r="40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <circle cx="105" cy="315" r="20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <circle cx="105" cy="315" r="6" fill="#FFD82B"/>
+              <circle cx="105" cy="315" r="60" fill="none" stroke="rgba(0,30,95,0.35)" stroke-width="1"/>
+              <circle cx="105" cy="315" r="40" fill="none" stroke="rgba(0,30,95,0.35)" stroke-width="1"/>
+              <circle cx="105" cy="315" r="20" fill="none" stroke="rgba(0,30,95,0.35)" stroke-width="1"/>
+              <circle cx="105" cy="315" r="6" fill="#FFD82B" stroke="#001E5F" stroke-width="1"/>
               <!-- Darts scattered around center -->
-              <circle cx="98" cy="310" r="3.5" fill="#FFFFFF"/>
-              <circle cx="115" cy="325" r="3.5" fill="#FFFFFF"/>
-              <circle cx="105" cy="340" r="3.5" fill="#FFFFFF"/>
-              <circle cx="92" cy="320" r="3.5" fill="#FFFFFF"/>
-              <circle cx="120" cy="305" r="3.5" fill="#FFFFFF"/>
-              <text x="105" y="365" font-size="10" fill="#FFFFFF" font-weight="600" text-anchor="middle">High Accuracy</text>
-              <text x="105" y="380" font-size="10" fill="#FFFFFF" font-weight="600" text-anchor="middle">Low Precision</text>
+              <circle cx="98" cy="310" r="3.5" fill="#0066FD"/>
+              <circle cx="115" cy="325" r="3.5" fill="#0066FD"/>
+              <circle cx="105" cy="340" r="3.5" fill="#0066FD"/>
+              <circle cx="92" cy="320" r="3.5" fill="#0066FD"/>
+              <circle cx="120" cy="305" r="3.5" fill="#0066FD"/>
+              <text x="105" y="365" font-size="10" fill="#001E5F" font-weight="600" text-anchor="middle">High Accuracy</text>
+              <text x="105" y="380" font-size="10" fill="#001E5F" font-weight="600" text-anchor="middle">Low Precision</text>
             </g>
 
             <!-- BOTTOM RIGHT: Low Accuracy, Low Precision -->
             <g id="quad-la-lp">
-              <circle cx="315" cy="315" r="60" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <circle cx="315" cy="315" r="40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <circle cx="315" cy="315" r="20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <circle cx="315" cy="315" r="6" fill="#FFD82B"/>
+              <circle cx="315" cy="315" r="60" fill="none" stroke="rgba(0,30,95,0.35)" stroke-width="1"/>
+              <circle cx="315" cy="315" r="40" fill="none" stroke="rgba(0,30,95,0.35)" stroke-width="1"/>
+              <circle cx="315" cy="315" r="20" fill="none" stroke="rgba(0,30,95,0.35)" stroke-width="1"/>
+              <circle cx="315" cy="315" r="6" fill="#FFD82B" stroke="#001E5F" stroke-width="1"/>
               <!-- Darts scattered everywhere -->
-              <circle cx="295" cy="295" r="3.5" fill="#FFFFFF"/>
-              <circle cx="335" cy="340" r="3.5" fill="#FFFFFF"/>
-              <circle cx="310" cy="360" r="3.5" fill="#FFFFFF"/>
-              <circle cx="285" cy="315" r="3.5" fill="#FFFFFF"/>
-              <circle cx="340" cy="280" r="3.5" fill="#FFFFFF"/>
-              <text x="315" y="365" font-size="10" fill="#FFFFFF" font-weight="600" text-anchor="middle">Low Accuracy</text>
-              <text x="315" y="380" font-size="10" fill="#FFFFFF" font-weight="600" text-anchor="middle">Low Precision</text>
+              <circle cx="295" cy="295" r="3.5" fill="#0066FD"/>
+              <circle cx="335" cy="340" r="3.5" fill="#0066FD"/>
+              <circle cx="310" cy="360" r="3.5" fill="#0066FD"/>
+              <circle cx="285" cy="315" r="3.5" fill="#0066FD"/>
+              <circle cx="340" cy="280" r="3.5" fill="#0066FD"/>
+              <text x="315" y="365" font-size="10" fill="#001E5F" font-weight="600" text-anchor="middle">Low Accuracy</text>
+              <text x="315" y="380" font-size="10" fill="#001E5F" font-weight="600" text-anchor="middle">Low Precision</text>
             </g>
 
             <!-- Legend at bottom -->
-            <text x="210" y="405" font-size="9" fill="rgba(255,255,255,0.6)" text-anchor="middle">
-              ● = target center  ○ = darts
+            <text x="210" y="405" font-size="9" fill="#707070" text-anchor="middle">
+              yellow = target center · blue = darts
             </text>
           </svg>
+          </div>
         </div>
 
         <!-- RIGHT: text -->
-        <div class="panel white panel-right">
+        <div class="panel navy panel-right">
           <div class="accent-bar"></div>
           <p class="section-tag">Accuracy vs. Precision</p>
           <h2>Two different<br>kinds of error</h2>
@@ -438,8 +438,29 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
     <div class="sticky-frame">
       <div class="card-pair">
 
-        <!-- LEFT: histogram with bell curve overlay -->
-        <div class="panel graphic sky panel-left">
+        <!-- LEFT: text -->
+        <div class="panel white panel-left">
+          <div class="accent-bar"></div>
+          <p class="section-tag">Distributions & Mean</p>
+          <h2>Where is your data clustered?</h2>
+          <p>Measure a pendulum's period $N=50$ times and plot the values as a
+             histogram — they cluster around $2.018$ s in a bell-shaped
+             (normal) distribution.</p>
+          <p><strong>The population mean $\mu$</strong> is the true period
+             (unknown). <strong>The sample mean $\bar{x}$</strong> is what you calculate
+             from your $N$ measurements:</p>
+          <p class="eq">
+             $\displaystyle  \bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i$
+          </p>
+          <p>The more measurements you take, the closer $\bar{x}$ gets to $\mu$.
+             The bell shape is no accident: many small independent errors sum
+             to an approximately Gaussian spread — the
+             <strong>central limit theorem</strong>.</p>
+        </div>
+
+        <!-- RIGHT: histogram with bell curve overlay -->
+        <div class="panel graphic dandelion panel-right">
+          <div class="clipping">
           <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"
                aria-label="Distribution of pendulum period measurements with normal curve">
 
@@ -489,12 +510,12 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
                   fill="none" stroke="#021BC3" stroke-width="2.5" opacity="0.9"/>
 
             <!-- Population mean line (vertical) at x = 2.00 s -->
-            <line x1="200" y1="40" x2="200" y2="240" stroke="#FFD82B" stroke-width="2.5" stroke-dasharray="5,4"/>
-            <text x="185" y="53" font-size="13" fill="#FFD82B" font-weight="700" text-anchor="end">μ = 2.00 s</text>
+            <line x1="200" y1="40" x2="200" y2="240" stroke="#001E5F" stroke-width="2.5" stroke-dasharray="5,4"/>
+            <text x="185" y="53" font-size="13" fill="#001E5F" font-weight="700" text-anchor="end">μ = 2.00 s</text>
 
             <!-- Sample mean line (vertical) at x ≈ 216 (≈2.018 s) -->
-            <line x1="216" y1="40" x2="216" y2="240" stroke="#FFC200" stroke-width="2" stroke-dasharray="4,3"/>
-            <text x="235" y="53" font-size="13" fill="#FFC200" font-weight="700" text-anchor="start">x̄ ≈ 2.018 s</text>
+            <line x1="216" y1="40" x2="216" y2="240" stroke="#707070" stroke-width="2" stroke-dasharray="4,3"/>
+            <text x="235" y="53" font-size="13" fill="#707070" font-weight="700" text-anchor="start">x̄ ≈ 2.018 s</text>
 
             <!-- Axis labels -->
             <text x="200" y="285" font-size="12" fill="#707070" text-anchor="middle">Period (seconds)</text>
@@ -509,25 +530,7 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
             <line x1="250" y1="90" x2="262" y2="90" stroke="#021BC3" stroke-width="2.5"/>
             <text x="270" y="98" font-size="11" fill="#001E5F">Population distribution</text>
           </svg>
-        </div>
-
-        <!-- RIGHT: text -->
-        <div class="panel white panel-right">
-          <div class="accent-bar"></div>
-          <p class="section-tag">Distributions & Mean</p>
-          <h2>Where is your data clustered?</h2>
-          <p>Measure a pendulum's period $N=50$ times. Each measurement has random
-             error. Plot all values as a histogram — they cluster around
-             $2.018$ seconds in a bell-shaped (normal) distribution.</p>
-          <p><strong>The population mean $μ$</strong> is the true period
-             (unknown). <strong>The sample mean $\bar{x}$</strong> is what you calculate
-             from your N measurements:</p>
-          <p style="text-align: center;">
-             $\displaystyle  \bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i$
-          </p>
-          <p>The more measurements you take, the closer $\bar{x}$ gets to $\mu$.
-             The bell curve shape is universal: most measurements cluster
-             near the true value, with fewer far away. This fact is known as the <strong> central limit theorem</strong></p>
+          </div>
         </div>
 
       </div>
@@ -543,79 +546,82 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
 
         <!-- LEFT: two overlapping histograms, different means and spreads -->
         <div class="panel graphic sky panel-left">
+          <div class="clipping">
           <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg"
-               aria-label="Two histograms with different means and spreads">
+               aria-label="Two distributions with the same mean but different spreads">
 
             <!-- Title -->
             <text x="210" y="20" font-size="13" fill="#001E5F" font-weight="700" text-anchor="middle">
-              Two datasets — different spread
+              Same mean — different spread
             </text>
 
-            <!-- Dataset A (navy, μ=5, σ=1) drawn first -->
-            <rect x="40.0"  y="250.0" width="14.2" height="0.0"   fill="#001E5F" opacity="0.85"/>
-            <rect x="55.0"  y="250.0" width="14.2" height="0.0"   fill="#001E5F" opacity="0.85"/>
-            <rect x="70.0"  y="250.0" width="14.2" height="0.0"   fill="#001E5F" opacity="0.85"/>
-            <rect x="85.0"  y="249.8" width="14.2" height="0.2"   fill="#001E5F" opacity="0.85"/>
-            <rect x="100.0" y="248.4" width="14.2" height="1.6"   fill="#001E5F" opacity="0.85"/>
-            <rect x="115.0" y="241.1" width="14.2" height="8.9"   fill="#001E5F" opacity="0.85"/>
-            <rect x="130.0" y="222.2" width="14.2" height="27.8"  fill="#001E5F" opacity="0.85"/>
-            <rect x="145.0" y="148.2" width="14.2" height="101.8" fill="#001E5F" opacity="0.85"/>
-            <rect x="160.0" y="107.1" width="14.2" height="142.9" fill="#001E5F" opacity="0.85"/>
-            <rect x="175.0" y="47.6"  width="14.2" height="202.4" fill="#001E5F" opacity="0.85"/>
-            <rect x="190.0" y="49.1"  width="14.2" height="200.9" fill="#001E5F" opacity="0.85"/>
-            <rect x="205.0" y="130.8" width="14.2" height="119.2" fill="#001E5F" opacity="0.85"/>
-            <rect x="220.0" y="204.4" width="14.2" height="45.6"  fill="#001E5F" opacity="0.85"/>
-            <rect x="235.0" y="239.3" width="14.2" height="10.7"  fill="#001E5F" opacity="0.85"/>
-            <rect x="250.0" y="247.8" width="14.2" height="2.2"   fill="#001E5F" opacity="0.85"/>
-            <rect x="265.0" y="249.8" width="14.2" height="0.2"   fill="#001E5F" opacity="0.85"/>
+            <!-- Large σ (azure, drawn first) -->
+            <rect x="40"  y="247.3" width="14.2" height="2.7"  fill="#0066FD" opacity="0.55"/>
+            <rect x="55"  y="245.2" width="14.2" height="4.8"  fill="#0066FD" opacity="0.55"/>
+            <rect x="70"  y="242.0" width="14.2" height="8.0"  fill="#0066FD" opacity="0.55"/>
+            <rect x="85"  y="237.1" width="14.2" height="12.9" fill="#0066FD" opacity="0.55"/>
+            <rect x="100" y="230.4" width="14.2" height="19.6" fill="#0066FD" opacity="0.55"/>
+            <rect x="115" y="221.7" width="14.2" height="28.3" fill="#0066FD" opacity="0.55"/>
+            <rect x="130" y="210.9" width="14.2" height="39.1" fill="#0066FD" opacity="0.55"/>
+            <rect x="145" y="198.8" width="14.2" height="51.2" fill="#0066FD" opacity="0.55"/>
+            <rect x="160" y="186.0" width="14.2" height="64.0" fill="#0066FD" opacity="0.55"/>
+            <rect x="175" y="173.9" width="14.2" height="76.1" fill="#0066FD" opacity="0.55"/>
+            <rect x="190" y="163.9" width="14.2" height="86.1" fill="#0066FD" opacity="0.55"/>
+            <rect x="205" y="157.3" width="14.2" height="92.7" fill="#0066FD" opacity="0.55"/>
+            <rect x="220" y="155.0" width="14.2" height="95.0" fill="#0066FD" opacity="0.55"/>
+            <rect x="235" y="157.3" width="14.2" height="92.7" fill="#0066FD" opacity="0.55"/>
+            <rect x="250" y="163.9" width="14.2" height="86.1" fill="#0066FD" opacity="0.55"/>
+            <rect x="265" y="173.9" width="14.2" height="76.1" fill="#0066FD" opacity="0.55"/>
+            <rect x="280" y="186.0" width="14.2" height="64.0" fill="#0066FD" opacity="0.55"/>
+            <rect x="295" y="198.8" width="14.2" height="51.2" fill="#0066FD" opacity="0.55"/>
+            <rect x="310" y="210.9" width="14.2" height="39.1" fill="#0066FD" opacity="0.55"/>
+            <rect x="325" y="221.7" width="14.2" height="28.3" fill="#0066FD" opacity="0.55"/>
+            <rect x="340" y="230.4" width="14.2" height="19.6" fill="#0066FD" opacity="0.55"/>
+            <rect x="355" y="237.1" width="14.2" height="12.9" fill="#0066FD" opacity="0.55"/>
+            <rect x="370" y="242.0" width="14.2" height="8.0"  fill="#0066FD" opacity="0.55"/>
+            <rect x="385" y="245.2" width="14.2" height="4.8"  fill="#0066FD" opacity="0.55"/>
 
-            <!-- Dataset B (dandelion, μ=8, σ=2) -->
-            <rect x="40.0"  y="250.0" width="14.2" height="0.0"   fill="#FFD82B" opacity="0.85"/>
-            <rect x="55.0"  y="250.0" width="14.2" height="0.0"   fill="#FFD82B" opacity="0.85"/>
-            <rect x="70.0"  y="249.9" width="14.2" height="0.1"   fill="#FFD82B" opacity="0.85"/>
-            <rect x="85.0"  y="249.6" width="14.2" height="0.4"   fill="#FFD82B" opacity="0.85"/>
-            <rect x="100.0" y="249.0" width="14.2" height="1.0"   fill="#FFD82B" opacity="0.85"/>
-            <rect x="115.0" y="247.6" width="14.2" height="2.4"   fill="#FFD82B" opacity="0.85"/>
-            <rect x="130.0" y="244.1" width="14.2" height="5.9"   fill="#FFD82B" opacity="0.85"/>
-            <rect x="145.0" y="238.2" width="14.2" height="11.8"  fill="#FFD82B" opacity="0.85"/>
-            <rect x="160.0" y="233.6" width="14.2" height="16.4"  fill="#FFD82B" opacity="0.85"/>
-            <rect x="175.0" y="216.8" width="14.2" height="33.2"  fill="#FFD82B" opacity="0.85"/>
-            <rect x="190.0" y="196.3" width="14.2" height="53.7"  fill="#FFD82B" opacity="0.85"/>
-            <rect x="205.0" y="180.5" width="14.2" height="69.5"  fill="#FFD82B" opacity="0.85"/>
-            <rect x="220.0" y="150.3" width="14.2" height="99.7"  fill="#FFD82B" opacity="0.85"/>
-            <rect x="235.0" y="118.4" width="14.2" height="131.6" fill="#FFD82B" opacity="0.85"/>
-            <rect x="250.0" y="120.2" width="14.2" height="129.8" fill="#FFD82B" opacity="0.85"/>
-            <rect x="265.0" y="152.5" width="14.2" height="97.5"  fill="#FFD82B" opacity="0.85"/>
-            <rect x="280.0" y="159.6" width="14.2" height="90.4"  fill="#FFD82B" opacity="0.85"/>
-            <rect x="295.0" y="176.9" width="14.2" height="73.1"  fill="#FFD82B" opacity="0.85"/>
-            <rect x="310.0" y="205.8" width="14.2" height="44.2"  fill="#FFD82B" opacity="0.85"/>
-            <rect x="325.0" y="213.5" width="14.2" height="36.5"  fill="#FFD82B" opacity="0.85"/>
-            <rect x="340.0" y="231.0" width="14.2" height="19.0"  fill="#FFD82B" opacity="0.85"/>
-            <rect x="355.0" y="242.0" width="14.2" height="8.0"   fill="#FFD82B" opacity="0.85"/>
-            <rect x="370.0" y="244.7" width="14.2" height="5.3"   fill="#FFD82B" opacity="0.85"/>
-            <rect x="385.0" y="248.1" width="14.2" height="1.9"   fill="#FFD82B" opacity="0.85"/>
+            <!-- Small σ (meliora blue, drawn on top) -->
+            <rect x="130" y="249.2" width="14.2" height="0.8"   fill="#021BC3" opacity="0.8"/>
+            <rect x="145" y="245.6" width="14.2" height="4.4"   fill="#021BC3" opacity="0.8"/>
+            <rect x="160" y="232.2" width="14.2" height="17.8"  fill="#021BC3" opacity="0.8"/>
+            <rect x="175" y="197.6" width="14.2" height="52.4"  fill="#021BC3" opacity="0.8"/>
+            <rect x="190" y="136.7" width="14.2" height="113.3" fill="#021BC3" opacity="0.8"/>
+            <rect x="205" y="70.0"  width="14.2" height="180.0" fill="#021BC3" opacity="0.8"/>
+            <rect x="220" y="40.0"  width="14.2" height="210.0" fill="#021BC3" opacity="0.8"/>
+            <rect x="235" y="70.0"  width="14.2" height="180.0" fill="#021BC3" opacity="0.8"/>
+            <rect x="250" y="136.7" width="14.2" height="113.3" fill="#021BC3" opacity="0.8"/>
+            <rect x="265" y="197.6" width="14.2" height="52.4"  fill="#021BC3" opacity="0.8"/>
+            <rect x="280" y="232.2" width="14.2" height="17.8"  fill="#021BC3" opacity="0.8"/>
+            <rect x="295" y="245.6" width="14.2" height="4.4"   fill="#021BC3" opacity="0.8"/>
+            <rect x="310" y="249.2" width="14.2" height="0.8"   fill="#021BC3" opacity="0.8"/>
+
+            <!-- Shared mean line -->
+            <line x1="227.1" y1="32" x2="227.1" y2="250" stroke="#001E5F" stroke-width="1.5" stroke-dasharray="5,4"/>
+            <text x="227.1" y="288" font-size="11" fill="#001E5F" font-weight="700" text-anchor="middle">x̄</text>
 
             <!-- X-axis -->
             <line x1="40" y1="250" x2="400" y2="250" stroke="#001E5F" stroke-width="2"/>
 
             <!-- Legend -->
-            <rect x="44"  y="264" width="12" height="10" fill="#001E5F" rx="2"/>
-            <text x="60"  y="273" font-size="10" fill="#001E5F">small σ</text>
-            <rect x="130" y="264" width="12" height="10" fill="#FFD82B" rx="2"/>
-            <text x="146" y="273" font-size="10" fill="#001E5F">large σ</text>
+            <rect x="44"  y="264" width="12" height="10" fill="#021BC3" opacity="0.8" rx="2"/>
+            <text x="60"  y="273" font-size="10" fill="#001E5F">small s</text>
+            <rect x="130" y="264" width="12" height="10" fill="#0066FD" opacity="0.55" rx="2"/>
+            <text x="146" y="273" font-size="10" fill="#001E5F">large s</text>
           </svg>
+          </div>
         </div>
 
         <!-- RIGHT: text -->
-        <div class="panel white panel-right">
+        <div class="panel navy panel-right">
           <div class="accent-bar"></div>
           <p class="section-tag">Standard Deviation</p>
           <h2>How clustered is your data?</h2>
-          <p>The <strong>population standard deviation</strong>, $\sigma$, is how spread out the population is. $\sigma^2$ is called the <strong>population variance</strong>. The spread in your data reflects the spread in the population. <strong>Sample variance</strong> is computed:</p>
-          <p style="text-align: center;">
-             $\displaystyle  \bar{s}^2 = \frac{1}{N-1} \sum_{i=1}^{N} (x_i - \bar{x})^2$
+          <p>The <strong>population standard deviation</strong>, $\sigma$, is how spread out the population is. $\sigma^2$ is called the <strong>population variance</strong>. The spread in your data reflects the spread in the population. The <strong>sample standard deviation</strong> $s$ estimates it:</p>
+          <p class="eq">
+             $\displaystyle  s^2 = \frac{1}{N-1} \sum_{i=1}^{N} (x_i - \bar{x})^2$
           </p>
-          <p> Data with a larger value of $\bar{s}$ is more spread out than data with a small value of $\bar{s}$. The more measurements you take, the closer $\bar{s}$ gets to $\sigma$.</p>
+          <p>We divide by $N-1$, not $N$, because $\bar{x}$ itself was estimated from the data; dividing by $N$ would systematically underestimate the spread. For a Gaussian distribution, about 68% of measurements fall within $\bar{x} \pm s$. The more measurements you take, the closer $s$ gets to $\sigma$.</p>
         </div>
 
       </div>
@@ -623,93 +629,85 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
   </div>
 
   <!-- ══════════════════════════════════════════════════════════════
-       STOP 9 — Poisson Statistics (counting experiments)
+       STOP 8 — Poisson Statistics (counting experiments)
   ═══════════════════════════════════════════════════════════════ -->
   <div class="stop" id="sec-poisson">
     <div class="sticky-frame">
       <div class="card-pair">
 
         <!-- LEFT: histogram of wait times sampled from Poisson(λ=3) -->
-        <div class="panel graphic sky panel-left">
+        <div class="panel graphic dandelion panel-left">
+          <div class="clipping">
           <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg"
-               aria-label="Histogram of 100 train wait times sampled from Poisson distribution with mean 3">
+               aria-label="Spam email counts by day and night with Poisson error bars">
 
             <!-- Title -->
-            <text x="210" y="20" font-size="13" fill="#001E5F" font-weight="700" text-anchor="middle">
-              Wait time for a train (100 samples, λ=3 min)
+            <text x="235" y="20" font-size="13" fill="#001E5F" font-weight="700" text-anchor="middle">
+              1595 spam emails: day vs. night
             </text>
 
-            <!-- Bars -->
-            <rect x="55.0" y="203.7" width="41.1" height="41.3" fill="#021BC3" opacity="0.8"/>
-            <rect x="98.1" y="162.3" width="41.1" height="82.7" fill="#021BC3" opacity="0.8"/>
-            <rect x="141.2" y="71.3" width="41.1" height="173.7" fill="#021BC3" opacity="0.8"/>
-            <rect x="184.4" y="30.0" width="41.1" height="215.0" fill="#021BC3" opacity="0.8"/>
-            <rect x="227.5" y="63.1" width="41.1" height="181.9" fill="#021BC3" opacity="0.8"/>
-            <rect x="270.6" y="162.3" width="41.1" height="82.7" fill="#021BC3" opacity="0.8"/>
-            <rect x="313.8" y="220.2" width="41.1" height="24.8" fill="#021BC3" opacity="0.8"/>
-            <rect x="356.9" y="220.2" width="41.1" height="24.8" fill="#021BC3" opacity="0.8"/>
-
-            <!-- X-axis -->
-            <line x1="55" y1="245" x2="400" y2="245" stroke="#001E5F" stroke-width="2"/>
             <!-- Y-axis -->
-            <line x1="55" y1="30" x2="55" y2="245" stroke="#001E5F" stroke-width="2"/>
-
-            <!-- X-axis labels -->
-            <text x="76.6" y="259" font-size="11" fill="#001E5F" text-anchor="middle">0</text>
-            <text x="119.7" y="259" font-size="11" fill="#001E5F" text-anchor="middle">1</text>
-            <text x="162.8" y="259" font-size="11" fill="#001E5F" text-anchor="middle">2</text>
-            <text x="205.9" y="259" font-size="11" fill="#001E5F" text-anchor="middle">3</text>
-            <text x="249.1" y="259" font-size="11" fill="#001E5F" text-anchor="middle">4</text>
-            <text x="292.2" y="259" font-size="11" fill="#001E5F" text-anchor="middle">5</text>
-            <text x="335.3" y="259" font-size="11" fill="#001E5F" text-anchor="middle">6</text>
-            <text x="378.4" y="259" font-size="11" fill="#001E5F" text-anchor="middle">7</text>
+            <line x1="70" y1="40" x2="70" y2="260" stroke="#001E5F" stroke-width="2"/>
+            <!-- X-axis -->
+            <line x1="70" y1="260" x2="400" y2="260" stroke="#001E5F" stroke-width="2"/>
 
             <!-- Y-axis ticks and labels -->
-            <line x1="51" y1="245.0" x2="55" y2="245.0" stroke="#001E5F" stroke-width="1.5"/>
-            <text x="48" y="249.0" font-size="10" fill="#001E5F" text-anchor="end">0</text>
-            <line x1="51" y1="162.3" x2="55" y2="162.3" stroke="#001E5F" stroke-width="1.5"/>
-            <text x="48" y="166.3" font-size="10" fill="#001E5F" text-anchor="end">10</text>
-            <line x1="51" y1="79.6" x2="55" y2="79.6" stroke="#001E5F" stroke-width="1.5"/>
-            <text x="48" y="83.6" font-size="10" fill="#001E5F" text-anchor="end">20</text>
+            <line x1="66" y1="260.0" x2="70" y2="260.0" stroke="#001E5F" stroke-width="1.5"/>
+            <text x="62" y="264" font-size="10" fill="#001E5F" text-anchor="end">740</text>
+            <line x1="66" y1="223.3" x2="70" y2="223.3" stroke="#001E5F" stroke-width="1.5"/>
+            <text x="62" y="227" font-size="10" fill="#001E5F" text-anchor="end">760</text>
+            <line x1="66" y1="186.7" x2="70" y2="186.7" stroke="#001E5F" stroke-width="1.5"/>
+            <text x="62" y="191" font-size="10" fill="#001E5F" text-anchor="end">780</text>
+            <line x1="66" y1="150.0" x2="70" y2="150.0" stroke="#001E5F" stroke-width="1.5"/>
+            <text x="62" y="154" font-size="10" fill="#001E5F" text-anchor="end">800</text>
+            <line x1="66" y1="113.3" x2="70" y2="113.3" stroke="#001E5F" stroke-width="1.5"/>
+            <text x="62" y="117" font-size="10" fill="#001E5F" text-anchor="end">820</text>
+            <line x1="66" y1="76.7" x2="70" y2="76.7" stroke="#001E5F" stroke-width="1.5"/>
+            <text x="62" y="81" font-size="10" fill="#001E5F" text-anchor="end">840</text>
 
-            <!-- Poisson PMF overlay (dandelion) -->
-            <polyline points="76.6,203.8 119.7,121.5 162.8,59.7 205.9,59.7 249.1,106.1 292.2,161.6 335.3,203.3 378.4,227.1" fill="none" stroke="#FFD82B" stroke-width="2" stroke-linejoin="round"/>
-            <circle cx="76.6" cy="203.8" r="3" fill="#FFD82B"/>
-            <circle cx="119.7" cy="121.5" r="3" fill="#FFD82B"/>
-            <circle cx="162.8" cy="59.7" r="3" fill="#FFD82B"/>
-            <circle cx="205.9" cy="59.7" r="3" fill="#FFD82B"/>
-            <circle cx="249.1" cy="106.1" r="3" fill="#FFD82B"/>
-            <circle cx="292.2" cy="161.6" r="3" fill="#FFD82B"/>
-            <circle cx="335.3" cy="203.3" r="3" fill="#FFD82B"/>
-            <circle cx="378.4" cy="227.1" r="3" fill="#FFD82B"/>
+            <!-- Day: 784 ± 28 -->
+            <line x1="180" y1="128.0" x2="180" y2="230.7" stroke="#0066FD" stroke-width="3"/>
+            <line x1="168" y1="128.0" x2="192" y2="128.0" stroke="#0066FD" stroke-width="3"/>
+            <line x1="168" y1="230.7" x2="192" y2="230.7" stroke="#0066FD" stroke-width="3"/>
+            <circle cx="180" cy="179.3" r="7" fill="#0066FD"/>
+            <text x="180" y="281" font-size="12" fill="#001E5F" font-weight="700" text-anchor="middle">Day</text>
+            <text x="204" y="183" font-size="11" fill="#0066FD" font-weight="600" text-anchor="start">784 ± 28</text>
 
-            <!-- Axis labels -->
-            <text x="227" y="278" font-size="11" fill="#707070" text-anchor="middle">Minutes waited</text>
-            <text x="14" y="140" font-size="11" fill="#707070" text-anchor="middle" transform="rotate(-90 14 140)">Count</text>
+            <!-- Night: 811 ± 28 -->
+            <line x1="300" y1="78.5" x2="300" y2="181.1" stroke="#021BC3" stroke-width="3"/>
+            <line x1="288" y1="78.5" x2="312" y2="78.5" stroke="#021BC3" stroke-width="3"/>
+            <line x1="288" y1="181.1" x2="312" y2="181.1" stroke="#021BC3" stroke-width="3"/>
+            <circle cx="300" cy="129.8" r="7" fill="#021BC3"/>
+            <text x="300" y="281" font-size="12" fill="#001E5F" font-weight="700" text-anchor="middle">Night</text>
+            <text x="324" y="133" font-size="11" fill="#021BC3" font-weight="600" text-anchor="start">811 ± 28</text>
 
-            <!-- Legend -->
-            <rect x="270" y="32" width="10" height="10" fill="#021BC3" opacity="0.8" rx="1"/>
-            <text x="284" y="41" font-size="10" fill="#001E5F">samples</text>
-            <circle cx="275" cy="55" r="3" fill="#FFD82B"/>
-            <text x="284" y="59" font-size="10" fill="#001E5F">Poisson PMF</text>
+            <!-- Axis label -->
+            <text x="20" y="150" font-size="11" fill="#707070" text-anchor="middle" transform="rotate(-90 20 150)">Emails counted</text>
+
+            <!-- Caption -->
+            <text x="235" y="298" font-size="10" fill="#707070" text-anchor="middle" font-style="italic">
+              Difference (27) ≈ uncertainty (28): no significant preference
+            </text>
           </svg>
+          </div>
         </div>
 
         <!-- RIGHT: text -->
-        <div class="panel white panel-right">
+        <div class="panel navy panel-right">
           <div class="accent-bar"></div>
           <p class="section-tag">Poisson Statistics</p>
           <h2>Counting has its<br>own special rule</h2>
-          <p>When you count discrete events (radioactive decays, photons, particles),
-             the results follow a Poisson distribution with a unique property:</p>
-          <p style="text-align: center;">
-             \(\sigma = \sqrt{\lambda} = \sqrt{N}\)
+          <p>When you count discrete events (radioactive decays, photons, particles,
+             spam emails), the results follow a Poisson distribution with a unique property:</p>
+          <p class="eq">
+             $\Delta n = \sqrt{n}$
           </p>
-          <p>The standard deviation equals the square root of the count itself.
-             If you observe 100 decays, σ ≈ 10. If you observe 10,000, σ ≈ 100.</p>
-          <p>This is <em>not</em> a coincidence — it emerges naturally from the random
-             process of counting independent events. Poisson statistics apply whenever
-             you're counting things with random, constant rates.</p>
+          <p>The statistical uncertainty in a count equals the square root of the count itself.
+             Observe 100 decays and $\Delta n = 10$; observe 10,000 and $\Delta n = 100$.
+             When the expected count is unknown, use the measured count as the estimate.</p>
+          <p>Of 1595 spam emails, 784 arrive by day and 811 by night — each count uncertain
+             by $\sqrt{n} \approx 28$. The difference (27) is comparable to the uncertainty,
+             so there is no statistically significant preference.</p>
         </div>
 
       </div>
@@ -718,173 +716,173 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
 
 
   <!-- ══════════════════════════════════════════════════════════════
-       STOP 8 — Error in the Mean (multiple samples & standard error)
+       STOP 9 — Error in the Mean (multiple samples & standard error)
   ═══════════════════════════════════════════════════════════════ -->
   <div class="stop" id="sec-sem">
     <div class="sticky-frame">
       <div class="card-pair">
 
-        <!-- LEFT: 5 stacked histograms with dashed mean lines -->
-        <div class="panel graphic sky panel-left">
-          <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg"
-               aria-label="Five stacked histograms with dashed mean lines">
-
-            <!-- Arrowheads definition -->
-            <defs>
-              <marker id="arr-l" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto">
-                <path d="M6,0 L0,3 L6,6" fill="none" stroke="#001E5F" stroke-width="1.2"/>
-              </marker>
-              <marker id="arr-r" markerWidth="6" markerHeight="6" refX="0" refY="3" orient="auto">
-                <path d="M0,0 L6,3 L0,6" fill="none" stroke="#001E5F" stroke-width="1.2"/>
-              </marker>
-            </defs>
-
-            <!-- Inward arrows squeezing the dashed lines at the top -->
-            <line x1="170" y1="8" x2="200" y2="8" stroke="#001E5F" stroke-width="1.5" marker-end="url(#arr-r)"/>
-            <line x1="270" y1="8" x2="240" y2="8" stroke="#001E5F" stroke-width="1.5" marker-end="url(#arr-r)"/>
-
-            <!-- sample 1 seed=13 baseline=78.0 -->
-            <rect x="40.0" y="77.7" width="15.8" height="0.3" fill="#021BC3" opacity="0.75"/>
-            <rect x="56.4" y="77.1" width="15.8" height="0.9" fill="#021BC3" opacity="0.75"/>
-            <rect x="72.7" y="76.5" width="15.8" height="1.5" fill="#021BC3" opacity="0.75"/>
-            <rect x="89.1" y="75.3" width="15.8" height="2.7" fill="#021BC3" opacity="0.75"/>
-            <rect x="105.5" y="71.1" width="15.8" height="6.9" fill="#021BC3" opacity="0.75"/>
-            <rect x="121.8" y="65.4" width="15.8" height="12.6" fill="#021BC3" opacity="0.75"/>
-            <rect x="138.2" y="58.7" width="15.8" height="19.3" fill="#021BC3" opacity="0.75"/>
-            <rect x="154.5" y="49.6" width="15.8" height="28.4" fill="#021BC3" opacity="0.75"/>
-            <rect x="170.9" y="43.4" width="15.8" height="34.6" fill="#021BC3" opacity="0.75"/>
-            <rect x="187.3" y="39.0" width="15.8" height="39.0" fill="#021BC3" opacity="0.75"/>
-            <rect x="203.6" y="36.2" width="15.8" height="41.8" fill="#021BC3" opacity="0.75"/>
-            <rect x="220.0" y="33.0" width="15.8" height="45.0" fill="#021BC3" opacity="0.75"/>
-            <rect x="236.4" y="37.8" width="15.8" height="40.2" fill="#021BC3" opacity="0.75"/>
-            <rect x="252.7" y="38.6" width="15.8" height="39.4" fill="#021BC3" opacity="0.75"/>
-            <rect x="269.1" y="49.1" width="15.8" height="28.9" fill="#021BC3" opacity="0.75"/>
-            <rect x="285.5" y="62.5" width="15.8" height="15.5" fill="#021BC3" opacity="0.75"/>
-            <rect x="301.8" y="65.2" width="15.8" height="12.8" fill="#021BC3" opacity="0.75"/>
-            <rect x="318.2" y="71.3" width="15.8" height="6.7" fill="#021BC3" opacity="0.75"/>
-            <rect x="334.5" y="73.9" width="15.8" height="4.1" fill="#021BC3" opacity="0.75"/>
-            <rect x="350.9" y="76.0" width="15.8" height="2.0" fill="#021BC3" opacity="0.75"/>
-            <rect x="367.3" y="77.2" width="15.8" height="0.8" fill="#021BC3" opacity="0.75"/>
-            <rect x="383.6" y="77.8" width="15.8" height="0.2" fill="#021BC3" opacity="0.75"/>
-            <line x1="40" y1="78.0" x2="400" y2="78.0" stroke="#001E5F" stroke-width="1" opacity="0.4"/>
-            <line x1="220.6" y1="5" x2="220.6" y2="78.0" stroke="#FFD82B" stroke-width="1.5" stroke-dasharray="4,3"/>
-            <!-- sample 2 seed=42 baseline=131.0 -->
-            <rect x="40.0" y="130.8" width="15.8" height="0.2" fill="#021BC3" opacity="0.75"/>
-            <rect x="56.4" y="130.4" width="15.8" height="0.6" fill="#021BC3" opacity="0.75"/>
-            <rect x="72.7" y="129.6" width="15.8" height="1.4" fill="#021BC3" opacity="0.75"/>
-            <rect x="89.1" y="127.7" width="15.8" height="3.3" fill="#021BC3" opacity="0.75"/>
-            <rect x="105.5" y="125.4" width="15.8" height="5.6" fill="#021BC3" opacity="0.75"/>
-            <rect x="121.8" y="123.1" width="15.8" height="7.9" fill="#021BC3" opacity="0.75"/>
-            <rect x="138.2" y="114.7" width="15.8" height="16.3" fill="#021BC3" opacity="0.75"/>
-            <rect x="154.5" y="109.2" width="15.8" height="21.8" fill="#021BC3" opacity="0.75"/>
-            <rect x="170.9" y="102.1" width="15.8" height="28.9" fill="#021BC3" opacity="0.75"/>
-            <rect x="187.3" y="94.8" width="15.8" height="36.2" fill="#021BC3" opacity="0.75"/>
-            <rect x="203.6" y="90.7" width="15.8" height="40.3" fill="#021BC3" opacity="0.75"/>
-            <rect x="220.0" y="86.0" width="15.8" height="45.0" fill="#021BC3" opacity="0.75"/>
-            <rect x="236.4" y="92.3" width="15.8" height="38.7" fill="#021BC3" opacity="0.75"/>
-            <rect x="252.7" y="100.9" width="15.8" height="30.1" fill="#021BC3" opacity="0.75"/>
-            <rect x="269.1" y="110.6" width="15.8" height="20.4" fill="#021BC3" opacity="0.75"/>
-            <rect x="285.5" y="117.4" width="15.8" height="13.6" fill="#021BC3" opacity="0.75"/>
-            <rect x="301.8" y="120.8" width="15.8" height="10.2" fill="#021BC3" opacity="0.75"/>
-            <rect x="318.2" y="124.3" width="15.8" height="6.7" fill="#021BC3" opacity="0.75"/>
-            <rect x="334.5" y="128.0" width="15.8" height="3.0" fill="#021BC3" opacity="0.75"/>
-            <rect x="350.9" y="129.6" width="15.8" height="1.4" fill="#021BC3" opacity="0.75"/>
-            <rect x="367.3" y="130.3" width="15.8" height="0.7" fill="#021BC3" opacity="0.75"/>
-            <rect x="383.6" y="130.8" width="15.8" height="0.2" fill="#021BC3" opacity="0.75"/>
-            <line x1="40" y1="131.0" x2="400" y2="131.0" stroke="#001E5F" stroke-width="1" opacity="0.4"/>
-            <line x1="220.5" y1="5" x2="220.5" y2="131.0" stroke="#FFD82B" stroke-width="1.5" stroke-dasharray="4,3"/>
-            <!-- sample 3 seed=7 baseline=184.0 -->
-            <rect x="40.0" y="183.7" width="15.8" height="0.3" fill="#021BC3" opacity="0.75"/>
-            <rect x="56.4" y="183.3" width="15.8" height="0.7" fill="#021BC3" opacity="0.75"/>
-            <rect x="72.7" y="182.5" width="15.8" height="1.5" fill="#021BC3" opacity="0.75"/>
-            <rect x="89.1" y="180.9" width="15.8" height="3.1" fill="#021BC3" opacity="0.75"/>
-            <rect x="105.5" y="178.5" width="15.8" height="5.5" fill="#021BC3" opacity="0.75"/>
-            <rect x="121.8" y="173.5" width="15.8" height="10.5" fill="#021BC3" opacity="0.75"/>
-            <rect x="138.2" y="164.4" width="15.8" height="19.6" fill="#021BC3" opacity="0.75"/>
-            <rect x="154.5" y="157.9" width="15.8" height="26.1" fill="#021BC3" opacity="0.75"/>
-            <rect x="170.9" y="147.1" width="15.8" height="36.9" fill="#021BC3" opacity="0.75"/>
-            <rect x="187.3" y="143.6" width="15.8" height="40.4" fill="#021BC3" opacity="0.75"/>
-            <rect x="203.6" y="138.9" width="15.8" height="45.0" fill="#021BC3" opacity="0.75"/>
-            <rect x="220.0" y="140.1" width="15.8" height="43.9" fill="#021BC3" opacity="0.75"/>
-            <rect x="236.4" y="153.4" width="15.8" height="30.6" fill="#021BC3" opacity="0.75"/>
-            <rect x="252.7" y="147.9" width="15.8" height="36.1" fill="#021BC3" opacity="0.75"/>
-            <rect x="269.1" y="157.7" width="15.8" height="26.3" fill="#021BC3" opacity="0.75"/>
-            <rect x="285.5" y="165.8" width="15.8" height="18.2" fill="#021BC3" opacity="0.75"/>
-            <rect x="301.8" y="175.6" width="15.8" height="8.4" fill="#021BC3" opacity="0.75"/>
-            <rect x="318.2" y="179.2" width="15.8" height="4.8" fill="#021BC3" opacity="0.75"/>
-            <rect x="334.5" y="181.1" width="15.8" height="2.9" fill="#021BC3" opacity="0.75"/>
-            <rect x="350.9" y="182.5" width="15.8" height="1.5" fill="#021BC3" opacity="0.75"/>
-            <rect x="367.3" y="183.3" width="15.8" height="0.7" fill="#021BC3" opacity="0.75"/>
-            <rect x="383.6" y="183.7" width="15.8" height="0.3" fill="#021BC3" opacity="0.75"/>
-            <line x1="40" y1="184.0" x2="400" y2="184.0" stroke="#001E5F" stroke-width="1" opacity="0.4"/>
-            <line x1="218.2" y1="5" x2="218.2" y2="184.0" stroke="#FFD82B" stroke-width="1.5" stroke-dasharray="4,3"/>
-            <!-- sample 4 seed=99 baseline=237.0 -->
-            <rect x="40.0" y="236.7" width="15.8" height="0.3" fill="#021BC3" opacity="0.75"/>
-            <rect x="56.4" y="236.2" width="15.8" height="0.8" fill="#021BC3" opacity="0.75"/>
-            <rect x="72.7" y="235.3" width="15.8" height="1.7" fill="#021BC3" opacity="0.75"/>
-            <rect x="89.1" y="233.3" width="15.8" height="3.7" fill="#021BC3" opacity="0.75"/>
-            <rect x="105.5" y="230.5" width="15.8" height="6.5" fill="#021BC3" opacity="0.75"/>
-            <rect x="121.8" y="226.9" width="15.8" height="10.1" fill="#021BC3" opacity="0.75"/>
-            <rect x="138.2" y="221.8" width="15.8" height="15.2" fill="#021BC3" opacity="0.75"/>
-            <rect x="154.5" y="207.9" width="15.8" height="29.1" fill="#021BC3" opacity="0.75"/>
-            <rect x="170.9" y="213.2" width="15.8" height="23.8" fill="#021BC3" opacity="0.75"/>
-            <rect x="187.3" y="199.3" width="15.8" height="37.7" fill="#021BC3" opacity="0.75"/>
-            <rect x="203.6" y="198.4" width="15.8" height="38.6" fill="#021BC3" opacity="0.75"/>
-            <rect x="220.0" y="191.9" width="15.8" height="45.0" fill="#021BC3" opacity="0.75"/>
-            <rect x="236.4" y="199.1" width="15.8" height="37.9" fill="#021BC3" opacity="0.75"/>
-            <rect x="252.7" y="205.1" width="15.8" height="31.9" fill="#021BC3" opacity="0.75"/>
-            <rect x="269.1" y="208.6" width="15.8" height="28.4" fill="#021BC3" opacity="0.75"/>
-            <rect x="285.5" y="220.5" width="15.8" height="16.5" fill="#021BC3" opacity="0.75"/>
-            <rect x="301.8" y="227.4" width="15.8" height="9.6" fill="#021BC3" opacity="0.75"/>
-            <rect x="318.2" y="229.7" width="15.8" height="7.3" fill="#021BC3" opacity="0.75"/>
-            <rect x="334.5" y="233.2" width="15.8" height="3.8" fill="#021BC3" opacity="0.75"/>
-            <rect x="350.9" y="235.1" width="15.8" height="1.9" fill="#021BC3" opacity="0.75"/>
-            <rect x="367.3" y="236.2" width="15.8" height="0.8" fill="#021BC3" opacity="0.75"/>
-            <rect x="383.6" y="236.7" width="15.8" height="0.3" fill="#021BC3" opacity="0.75"/>
-            <line x1="40" y1="237.0" x2="400" y2="237.0" stroke="#001E5F" stroke-width="1" opacity="0.4"/>
-            <line x1="221.5" y1="5" x2="221.5" y2="237.0" stroke="#FFD82B" stroke-width="1.5" stroke-dasharray="4,3"/>
-            <!-- sample 5 seed=31 baseline=290.0 -->
-            <rect x="40.0" y="289.7" width="15.8" height="0.3" fill="#021BC3" opacity="0.75"/>
-            <rect x="56.4" y="289.3" width="15.8" height="0.7" fill="#021BC3" opacity="0.75"/>
-            <rect x="72.7" y="288.7" width="15.8" height="1.3" fill="#021BC3" opacity="0.75"/>
-            <rect x="89.1" y="286.4" width="15.8" height="3.6" fill="#021BC3" opacity="0.75"/>
-            <rect x="105.5" y="283.6" width="15.8" height="6.4" fill="#021BC3" opacity="0.75"/>
-            <rect x="121.8" y="278.8" width="15.8" height="11.2" fill="#021BC3" opacity="0.75"/>
-            <rect x="138.2" y="272.7" width="15.8" height="17.3" fill="#021BC3" opacity="0.75"/>
-            <rect x="154.5" y="260.4" width="15.8" height="29.6" fill="#021BC3" opacity="0.75"/>
-            <rect x="170.9" y="253.9" width="15.8" height="36.1" fill="#021BC3" opacity="0.75"/>
-            <rect x="187.3" y="244.9" width="15.8" height="45.0" fill="#021BC3" opacity="0.75"/>
-            <rect x="203.6" y="249.4" width="15.8" height="40.6" fill="#021BC3" opacity="0.75"/>
-            <rect x="220.0" y="250.3" width="15.8" height="39.7" fill="#021BC3" opacity="0.75"/>
-            <rect x="236.4" y="256.8" width="15.8" height="33.2" fill="#021BC3" opacity="0.75"/>
-            <rect x="252.7" y="259.0" width="15.8" height="31.0" fill="#021BC3" opacity="0.75"/>
-            <rect x="269.1" y="274.7" width="15.8" height="15.3" fill="#021BC3" opacity="0.75"/>
-            <rect x="285.5" y="269.3" width="15.8" height="20.7" fill="#021BC3" opacity="0.75"/>
-            <rect x="301.8" y="279.1" width="15.8" height="10.9" fill="#021BC3" opacity="0.75"/>
-            <rect x="318.2" y="283.8" width="15.8" height="6.2" fill="#021BC3" opacity="0.75"/>
-            <rect x="334.5" y="286.4" width="15.8" height="3.6" fill="#021BC3" opacity="0.75"/>
-            <rect x="350.9" y="288.5" width="15.8" height="1.5" fill="#021BC3" opacity="0.75"/>
-            <rect x="367.3" y="289.3" width="15.8" height="0.7" fill="#021BC3" opacity="0.75"/>
-            <rect x="383.6" y="289.7" width="15.8" height="0.3" fill="#021BC3" opacity="0.75"/>
-            <line x1="40" y1="290.0" x2="400" y2="290.0" stroke="#001E5F" stroke-width="1" opacity="0.4"/>
-            <line x1="216.9" y1="5" x2="216.9" y2="290.0" stroke="#FFD82B" stroke-width="1.5" stroke-dasharray="4,3"/>
-          </svg>
-        </div>
-
-        <!-- RIGHT: text -->
-        <div class="panel white panel-right">
+        <!-- LEFT: text -->
+        <div class="panel white panel-left">
           <div class="accent-bar"></div>
           <p class="section-tag">Error in the Mean</p>
           <h2>Combining Samples</h2>
-          <p>Each data sample will have its own mean, $\bar{x}$ and standard deviation, $\bar{s}_x$.
-             When you combine multiple samples, you will get a distribution of sample means. </p>
+          <p>Each data sample has its own mean $\bar{x}$ and standard deviation $s$.
+             Repeat the whole experiment many times and the sample means themselves
+             form a distribution — much narrower than the data.</p>
           <p>The standard error of the mean (SEM) is:</p>
-          <p style="text-align: center;">
-             $\bar{s}_{\bar{x}} = \frac{\sigma}{\sqrt{N}}$
+          <p class="eq">
+             $\displaystyle \sigma_{\bar{x}} = \frac{s}{\sqrt{N}}$
           </p>
-          <p>Each time you double N, the error shrinks by √2. Taking 10 measurements
-             reduces error by √10 ≈ 3.16×. This is why experiments repeat measurements:
-             averaging is powerful.</p>
+          <p>Report a series of $N$ measurements as $\bar{x} \pm \sigma_{\bar{x}}$;
+             there is a 68% probability that the true mean lies in this interval.
+             Each time you double $N$, the error shrinks by $\sqrt{2}$.
+             This is why experiments repeat measurements: averaging is powerful.</p>
+        </div>
+
+        <!-- RIGHT: 5 stacked histograms with dashed mean lines -->
+        <div class="panel graphic sky panel-right">
+          <div class="clipping">
+          <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg"
+               aria-label="Five stacked histograms with dashed mean lines">
+
+            <!-- Caption -->
+            <text x="220" y="12" font-size="11" fill="#001E5F" font-weight="700" text-anchor="middle">
+              Five samples — the means (dashed) cluster near μ
+            </text>
+
+            <!-- sample 1 seed=13 baseline=78.0 -->
+            <rect x="40.0" y="77.7" width="15.8" height="0.3" fill="#0066FD" opacity="0.6"/>
+            <rect x="56.4" y="77.1" width="15.8" height="0.9" fill="#0066FD" opacity="0.6"/>
+            <rect x="72.7" y="76.5" width="15.8" height="1.5" fill="#0066FD" opacity="0.6"/>
+            <rect x="89.1" y="75.3" width="15.8" height="2.7" fill="#0066FD" opacity="0.6"/>
+            <rect x="105.5" y="71.1" width="15.8" height="6.9" fill="#0066FD" opacity="0.6"/>
+            <rect x="121.8" y="65.4" width="15.8" height="12.6" fill="#0066FD" opacity="0.6"/>
+            <rect x="138.2" y="58.7" width="15.8" height="19.3" fill="#0066FD" opacity="0.6"/>
+            <rect x="154.5" y="49.6" width="15.8" height="28.4" fill="#0066FD" opacity="0.6"/>
+            <rect x="170.9" y="43.4" width="15.8" height="34.6" fill="#0066FD" opacity="0.6"/>
+            <rect x="187.3" y="39.0" width="15.8" height="39.0" fill="#0066FD" opacity="0.6"/>
+            <rect x="203.6" y="36.2" width="15.8" height="41.8" fill="#0066FD" opacity="0.6"/>
+            <rect x="220.0" y="33.0" width="15.8" height="45.0" fill="#0066FD" opacity="0.6"/>
+            <rect x="236.4" y="37.8" width="15.8" height="40.2" fill="#0066FD" opacity="0.6"/>
+            <rect x="252.7" y="38.6" width="15.8" height="39.4" fill="#0066FD" opacity="0.6"/>
+            <rect x="269.1" y="49.1" width="15.8" height="28.9" fill="#0066FD" opacity="0.6"/>
+            <rect x="285.5" y="62.5" width="15.8" height="15.5" fill="#0066FD" opacity="0.6"/>
+            <rect x="301.8" y="65.2" width="15.8" height="12.8" fill="#0066FD" opacity="0.6"/>
+            <rect x="318.2" y="71.3" width="15.8" height="6.7" fill="#0066FD" opacity="0.6"/>
+            <rect x="334.5" y="73.9" width="15.8" height="4.1" fill="#0066FD" opacity="0.6"/>
+            <rect x="350.9" y="76.0" width="15.8" height="2.0" fill="#0066FD" opacity="0.6"/>
+            <rect x="367.3" y="77.2" width="15.8" height="0.8" fill="#0066FD" opacity="0.6"/>
+            <rect x="383.6" y="77.8" width="15.8" height="0.2" fill="#0066FD" opacity="0.6"/>
+            <line x1="40" y1="78.0" x2="400" y2="78.0" stroke="#001E5F" stroke-width="1" opacity="0.4"/>
+            <text x="42" y="72" font-size="9" fill="#001E5F" opacity="0.7">Sample 1</text>
+            <line x1="220.6" y1="22" x2="220.6" y2="78.0" stroke="#021BC3" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <!-- sample 2 seed=42 baseline=131.0 -->
+            <rect x="40.0" y="130.8" width="15.8" height="0.2" fill="#0066FD" opacity="0.6"/>
+            <rect x="56.4" y="130.4" width="15.8" height="0.6" fill="#0066FD" opacity="0.6"/>
+            <rect x="72.7" y="129.6" width="15.8" height="1.4" fill="#0066FD" opacity="0.6"/>
+            <rect x="89.1" y="127.7" width="15.8" height="3.3" fill="#0066FD" opacity="0.6"/>
+            <rect x="105.5" y="125.4" width="15.8" height="5.6" fill="#0066FD" opacity="0.6"/>
+            <rect x="121.8" y="123.1" width="15.8" height="7.9" fill="#0066FD" opacity="0.6"/>
+            <rect x="138.2" y="114.7" width="15.8" height="16.3" fill="#0066FD" opacity="0.6"/>
+            <rect x="154.5" y="109.2" width="15.8" height="21.8" fill="#0066FD" opacity="0.6"/>
+            <rect x="170.9" y="102.1" width="15.8" height="28.9" fill="#0066FD" opacity="0.6"/>
+            <rect x="187.3" y="94.8" width="15.8" height="36.2" fill="#0066FD" opacity="0.6"/>
+            <rect x="203.6" y="90.7" width="15.8" height="40.3" fill="#0066FD" opacity="0.6"/>
+            <rect x="220.0" y="86.0" width="15.8" height="45.0" fill="#0066FD" opacity="0.6"/>
+            <rect x="236.4" y="92.3" width="15.8" height="38.7" fill="#0066FD" opacity="0.6"/>
+            <rect x="252.7" y="100.9" width="15.8" height="30.1" fill="#0066FD" opacity="0.6"/>
+            <rect x="269.1" y="110.6" width="15.8" height="20.4" fill="#0066FD" opacity="0.6"/>
+            <rect x="285.5" y="117.4" width="15.8" height="13.6" fill="#0066FD" opacity="0.6"/>
+            <rect x="301.8" y="120.8" width="15.8" height="10.2" fill="#0066FD" opacity="0.6"/>
+            <rect x="318.2" y="124.3" width="15.8" height="6.7" fill="#0066FD" opacity="0.6"/>
+            <rect x="334.5" y="128.0" width="15.8" height="3.0" fill="#0066FD" opacity="0.6"/>
+            <rect x="350.9" y="129.6" width="15.8" height="1.4" fill="#0066FD" opacity="0.6"/>
+            <rect x="367.3" y="130.3" width="15.8" height="0.7" fill="#0066FD" opacity="0.6"/>
+            <rect x="383.6" y="130.8" width="15.8" height="0.2" fill="#0066FD" opacity="0.6"/>
+            <line x1="40" y1="131.0" x2="400" y2="131.0" stroke="#001E5F" stroke-width="1" opacity="0.4"/>
+            <text x="42" y="125" font-size="9" fill="#001E5F" opacity="0.7">Sample 2</text>
+            <line x1="220.5" y1="22" x2="220.5" y2="131.0" stroke="#021BC3" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <!-- sample 3 seed=7 baseline=184.0 -->
+            <rect x="40.0" y="183.7" width="15.8" height="0.3" fill="#0066FD" opacity="0.6"/>
+            <rect x="56.4" y="183.3" width="15.8" height="0.7" fill="#0066FD" opacity="0.6"/>
+            <rect x="72.7" y="182.5" width="15.8" height="1.5" fill="#0066FD" opacity="0.6"/>
+            <rect x="89.1" y="180.9" width="15.8" height="3.1" fill="#0066FD" opacity="0.6"/>
+            <rect x="105.5" y="178.5" width="15.8" height="5.5" fill="#0066FD" opacity="0.6"/>
+            <rect x="121.8" y="173.5" width="15.8" height="10.5" fill="#0066FD" opacity="0.6"/>
+            <rect x="138.2" y="164.4" width="15.8" height="19.6" fill="#0066FD" opacity="0.6"/>
+            <rect x="154.5" y="157.9" width="15.8" height="26.1" fill="#0066FD" opacity="0.6"/>
+            <rect x="170.9" y="147.1" width="15.8" height="36.9" fill="#0066FD" opacity="0.6"/>
+            <rect x="187.3" y="143.6" width="15.8" height="40.4" fill="#0066FD" opacity="0.6"/>
+            <rect x="203.6" y="138.9" width="15.8" height="45.0" fill="#0066FD" opacity="0.6"/>
+            <rect x="220.0" y="140.1" width="15.8" height="43.9" fill="#0066FD" opacity="0.6"/>
+            <rect x="236.4" y="153.4" width="15.8" height="30.6" fill="#0066FD" opacity="0.6"/>
+            <rect x="252.7" y="147.9" width="15.8" height="36.1" fill="#0066FD" opacity="0.6"/>
+            <rect x="269.1" y="157.7" width="15.8" height="26.3" fill="#0066FD" opacity="0.6"/>
+            <rect x="285.5" y="165.8" width="15.8" height="18.2" fill="#0066FD" opacity="0.6"/>
+            <rect x="301.8" y="175.6" width="15.8" height="8.4" fill="#0066FD" opacity="0.6"/>
+            <rect x="318.2" y="179.2" width="15.8" height="4.8" fill="#0066FD" opacity="0.6"/>
+            <rect x="334.5" y="181.1" width="15.8" height="2.9" fill="#0066FD" opacity="0.6"/>
+            <rect x="350.9" y="182.5" width="15.8" height="1.5" fill="#0066FD" opacity="0.6"/>
+            <rect x="367.3" y="183.3" width="15.8" height="0.7" fill="#0066FD" opacity="0.6"/>
+            <rect x="383.6" y="183.7" width="15.8" height="0.3" fill="#0066FD" opacity="0.6"/>
+            <line x1="40" y1="184.0" x2="400" y2="184.0" stroke="#001E5F" stroke-width="1" opacity="0.4"/>
+            <text x="42" y="178" font-size="9" fill="#001E5F" opacity="0.7">Sample 3</text>
+            <line x1="218.2" y1="22" x2="218.2" y2="184.0" stroke="#021BC3" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <!-- sample 4 seed=99 baseline=237.0 -->
+            <rect x="40.0" y="236.7" width="15.8" height="0.3" fill="#0066FD" opacity="0.6"/>
+            <rect x="56.4" y="236.2" width="15.8" height="0.8" fill="#0066FD" opacity="0.6"/>
+            <rect x="72.7" y="235.3" width="15.8" height="1.7" fill="#0066FD" opacity="0.6"/>
+            <rect x="89.1" y="233.3" width="15.8" height="3.7" fill="#0066FD" opacity="0.6"/>
+            <rect x="105.5" y="230.5" width="15.8" height="6.5" fill="#0066FD" opacity="0.6"/>
+            <rect x="121.8" y="226.9" width="15.8" height="10.1" fill="#0066FD" opacity="0.6"/>
+            <rect x="138.2" y="221.8" width="15.8" height="15.2" fill="#0066FD" opacity="0.6"/>
+            <rect x="154.5" y="207.9" width="15.8" height="29.1" fill="#0066FD" opacity="0.6"/>
+            <rect x="170.9" y="213.2" width="15.8" height="23.8" fill="#0066FD" opacity="0.6"/>
+            <rect x="187.3" y="199.3" width="15.8" height="37.7" fill="#0066FD" opacity="0.6"/>
+            <rect x="203.6" y="198.4" width="15.8" height="38.6" fill="#0066FD" opacity="0.6"/>
+            <rect x="220.0" y="191.9" width="15.8" height="45.0" fill="#0066FD" opacity="0.6"/>
+            <rect x="236.4" y="199.1" width="15.8" height="37.9" fill="#0066FD" opacity="0.6"/>
+            <rect x="252.7" y="205.1" width="15.8" height="31.9" fill="#0066FD" opacity="0.6"/>
+            <rect x="269.1" y="208.6" width="15.8" height="28.4" fill="#0066FD" opacity="0.6"/>
+            <rect x="285.5" y="220.5" width="15.8" height="16.5" fill="#0066FD" opacity="0.6"/>
+            <rect x="301.8" y="227.4" width="15.8" height="9.6" fill="#0066FD" opacity="0.6"/>
+            <rect x="318.2" y="229.7" width="15.8" height="7.3" fill="#0066FD" opacity="0.6"/>
+            <rect x="334.5" y="233.2" width="15.8" height="3.8" fill="#0066FD" opacity="0.6"/>
+            <rect x="350.9" y="235.1" width="15.8" height="1.9" fill="#0066FD" opacity="0.6"/>
+            <rect x="367.3" y="236.2" width="15.8" height="0.8" fill="#0066FD" opacity="0.6"/>
+            <rect x="383.6" y="236.7" width="15.8" height="0.3" fill="#0066FD" opacity="0.6"/>
+            <line x1="40" y1="237.0" x2="400" y2="237.0" stroke="#001E5F" stroke-width="1" opacity="0.4"/>
+            <text x="42" y="231" font-size="9" fill="#001E5F" opacity="0.7">Sample 4</text>
+            <line x1="221.5" y1="22" x2="221.5" y2="237.0" stroke="#021BC3" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <!-- sample 5 seed=31 baseline=290.0 -->
+            <rect x="40.0" y="289.7" width="15.8" height="0.3" fill="#0066FD" opacity="0.6"/>
+            <rect x="56.4" y="289.3" width="15.8" height="0.7" fill="#0066FD" opacity="0.6"/>
+            <rect x="72.7" y="288.7" width="15.8" height="1.3" fill="#0066FD" opacity="0.6"/>
+            <rect x="89.1" y="286.4" width="15.8" height="3.6" fill="#0066FD" opacity="0.6"/>
+            <rect x="105.5" y="283.6" width="15.8" height="6.4" fill="#0066FD" opacity="0.6"/>
+            <rect x="121.8" y="278.8" width="15.8" height="11.2" fill="#0066FD" opacity="0.6"/>
+            <rect x="138.2" y="272.7" width="15.8" height="17.3" fill="#0066FD" opacity="0.6"/>
+            <rect x="154.5" y="260.4" width="15.8" height="29.6" fill="#0066FD" opacity="0.6"/>
+            <rect x="170.9" y="253.9" width="15.8" height="36.1" fill="#0066FD" opacity="0.6"/>
+            <rect x="187.3" y="244.9" width="15.8" height="45.0" fill="#0066FD" opacity="0.6"/>
+            <rect x="203.6" y="249.4" width="15.8" height="40.6" fill="#0066FD" opacity="0.6"/>
+            <rect x="220.0" y="250.3" width="15.8" height="39.7" fill="#0066FD" opacity="0.6"/>
+            <rect x="236.4" y="256.8" width="15.8" height="33.2" fill="#0066FD" opacity="0.6"/>
+            <rect x="252.7" y="259.0" width="15.8" height="31.0" fill="#0066FD" opacity="0.6"/>
+            <rect x="269.1" y="274.7" width="15.8" height="15.3" fill="#0066FD" opacity="0.6"/>
+            <rect x="285.5" y="269.3" width="15.8" height="20.7" fill="#0066FD" opacity="0.6"/>
+            <rect x="301.8" y="279.1" width="15.8" height="10.9" fill="#0066FD" opacity="0.6"/>
+            <rect x="318.2" y="283.8" width="15.8" height="6.2" fill="#0066FD" opacity="0.6"/>
+            <rect x="334.5" y="286.4" width="15.8" height="3.6" fill="#0066FD" opacity="0.6"/>
+            <rect x="350.9" y="288.5" width="15.8" height="1.5" fill="#0066FD" opacity="0.6"/>
+            <rect x="367.3" y="289.3" width="15.8" height="0.7" fill="#0066FD" opacity="0.6"/>
+            <rect x="383.6" y="289.7" width="15.8" height="0.3" fill="#0066FD" opacity="0.6"/>
+            <line x1="40" y1="290.0" x2="400" y2="290.0" stroke="#001E5F" stroke-width="1" opacity="0.4"/>
+            <text x="42" y="284" font-size="9" fill="#001E5F" opacity="0.7">Sample 5</text>
+            <line x1="216.9" y1="22" x2="216.9" y2="290.0" stroke="#021BC3" stroke-width="1.5" stroke-dasharray="4,3"/>
+          </svg>
+          </div>
         </div>
 
       </div>
@@ -892,7 +890,7 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
   </div>
 
   <!-- ══════════════════════════════════════════════════════════════
-       STOP 8 — Error Propagation (using measured quantities)
+       STOP 10 — Error Propagation (using measured quantities)
   ═══════════════════════════════════════════════════════════════ -->
   <div class="stop" id="sec-prop">
     <div class="sticky-frame">
@@ -900,67 +898,46 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
 
         <!-- LEFT: diagram of input measurement flowing through function to output -->
         <div class="panel graphic dandelion panel-left">
+          <div class="clipping">
           <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"
-               aria-label="Error propagation: measuring radius with uncertainty and computing area">
+               aria-label="Error propagation: an uncertainty in radius maps through the curve A equals pi r squared to a wider uncertainty in area">
 
             <!-- Title -->
-            <text x="200" y="22" font-size="14" fill="#001E5F" font-weight="700" text-anchor="middle">
+            <text x="210" y="22" font-size="14" fill="#001E5F" font-weight="700" text-anchor="middle">
               From measurement to result
             </text>
 
-            <!-- INPUT SIDE: radius measurement with error band -->
-            <text x="70" y="50" font-size="11" fill="#001E5F" font-weight="700">Input</text>
+            <!-- Axes -->
+            <line x1="50" y1="250" x2="375" y2="250" stroke="#001E5F" stroke-width="2"/>
+            <line x1="50" y1="35"  x2="50"  y2="250" stroke="#001E5F" stroke-width="2"/>
+            <text x="368" y="268" font-size="12" fill="#001E5F" font-style="italic">r</text>
+            <text x="36"  y="44"  font-size="12" fill="#001E5F" font-style="italic">A</text>
 
-            <!-- Measurement label -->
-            <text x="70" y="80" font-size="10" fill="#001E5F" text-anchor="middle">radius r</text>
+            <!-- Curve A = πr² -->
+            <path d="M 50 250 L 75 248.5 L 100 244.1 L 125 236.7 L 150 226.4 L 175 213.2 L 200 197.0 L 225 177.8 L 250 155.8 L 275 130.7 L 300 102.7 L 325 71.8 L 350 38.0"
+                  fill="none" stroke="#021BC3" stroke-width="2.5"/>
+            <text x="290" y="82" font-size="12" fill="#021BC3" font-weight="700">A = πr²</text>
 
-            <!-- Central radius value line -->
-            <line x1="70" y1="95" x2="70" y2="175" stroke="#001E5F" stroke-width="2"/>
+            <!-- Guides: input interval mapped through the curve -->
+            <line x1="225" y1="250" x2="225" y2="177.8" stroke="#001E5F" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.6"/>
+            <line x1="275" y1="250" x2="275" y2="130.7" stroke="#001E5F" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.6"/>
+            <line x1="50" y1="177.8" x2="225" y2="177.8" stroke="#001E5F" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.6"/>
+            <line x1="50" y1="130.7" x2="275" y2="130.7" stroke="#001E5F" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.6"/>
 
-            <!-- Uncertainty band (light blue) -->
-            <rect x="50" y="95" width="40" height="80" fill="#B7D3FF" opacity="0.4"/>
+            <!-- Input band on r-axis -->
+            <rect x="225" y="245" width="50" height="10" fill="#0066FD" opacity="0.55"/>
+            <text x="250" y="272" font-size="11" fill="#0066FD" font-weight="700" text-anchor="middle">r ± Δr</text>
 
-            <!-- Label for uncertainty -->
-            <text x="70" y="200" font-size="9" fill="#001E5F" text-anchor="middle">r ± σ_r</text>
+            <!-- Output band on A-axis (wider) -->
+            <rect x="45" y="130.7" width="10" height="47.1" fill="#021BC3" opacity="0.65"/>
+            <text x="70" y="122" font-size="11" fill="#021BC3" font-weight="700" text-anchor="start">A ± ΔA</text>
 
-            <!-- Arrow from input to formula -->
-            <path d="M 110 135 L 150 135" stroke="#707070" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
-
-            <!-- Formula in middle -->
-            <rect x="150" y="110" width="100" height="50" fill="#FFF3B1" stroke="#001E5F" stroke-width="1.5" rx="4"/>
-            <text x="200" y="140" font-size="12" fill="#001E5F" font-weight="700" text-anchor="middle">A = πr²</text>
-
-            <!-- Arrow from formula to output -->
-            <path d="M 250 135 L 290 135" stroke="#707070" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
-
-            <!-- OUTPUT SIDE: area with propagated error band -->
-            <text x="330" y="50" font-size="11" fill="#001E5F" font-weight="700">Output</text>
-
-            <!-- Area label -->
-            <text x="330" y="80" font-size="10" fill="#001E5F" text-anchor="middle">area A</text>
-
-            <!-- Central area value (wider because of nonlinearity) -->
-            <line x1="330" y1="95" x2="330" y2="175" stroke="#001E5F" stroke-width="2"/>
-
-            <!-- Expanded uncertainty band (sky blue) -->
-            <rect x="310" y="85" width="40" height="100" fill="#0066FD" opacity="0.3"/>
-
-            <!-- Label for propagated uncertainty -->
-            <text x="330" y="200" font-size="9" fill="#001E5F" text-anchor="middle">A ± σ_A</text>
-
-            <!-- Arrow marker definition -->
-            <defs>
-              <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                <polygon points="0 0, 10 3, 0 6" fill="#707070"/>
-              </marker>
-            </defs>
-
-            <!-- Key insight: the output band is wider -->
-            <text x="200" y="260" font-size="10" fill="#707070" text-anchor="middle" font-style="italic">
-              Nonlinear functions stretch errors unevenly
+            <!-- Caption -->
+            <text x="210" y="292" font-size="10" fill="#707070" text-anchor="middle" font-style="italic">
+              The local slope stretches the input uncertainty into the output
             </text>
-
           </svg>
+          </div>
         </div>
 
         <!-- RIGHT: text explanation -->
@@ -968,15 +945,19 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
           <div class="accent-bar"></div>
           <p class="section-tag">Error Propagation</p>
           <h2>How errors flow<br>through calculations</h2>
-          <p>Once you've measured something with uncertainty, what happens when you use that measurement in a formula?</p>
-          <p>For a small uncertainty δx in your measurement, the uncertainty in the result is:</p>
-          <p style="text-align: center;">
-            \(\sigma_f \approx \left| \frac{df}{dx} \right| \sigma_x\)
+          <p>For a small uncertainty $\sigma_x$, the uncertainty in a computed result $f(x)$ is:</p>
+          <p class="eq">
+            $\sigma_f \approx \left| \frac{df}{dx} \right| \sigma_x$
           </p>
-          <p>The derivative <span style="font-style: italic;">amplifies</span> or <span style="font-style: italic;">dampens</span> the input error.
-             If the derivative is small, errors shrink. If it's large, errors grow.</p>
-          <p>This is why careful measurement at the right scale matters: a small error in radius becomes
-             a <em>larger</em> relative error in area, because area depends on r².</p>
+          <p>The derivative amplifies or dampens the error — area inherits
+             twice the relative error of radius, since $A \propto r^2$.</p>
+          <p>Several <em>independent</em> measurements combine in quadrature:</p>
+          <p class="eq">
+            $\displaystyle \Delta Z = \sqrt{ \left(\frac{\partial Z}{\partial A}\,\Delta A\right)^{2} + \left(\frac{\partial Z}{\partial B}\,\Delta B\right)^{2} }$
+          </p>
+          <p><strong>Pitfall:</strong> if the same quantity appears twice
+             (e.g. $Z = A^2$), the inputs are not independent —
+             differentiate directly: $\Delta Z = 2A\,\Delta A$.</p>
         </div>
 
       </div>
@@ -985,84 +966,122 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
 
 
   <!-- ══════════════════════════════════════════════════════════════
-       STOP 9 — Summary of Equations (quick reference)
+       STOP 11 — Reporting Results (significant figures & rounding)
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="stop" id="sec-sigfig">
+    <div class="sticky-frame">
+      <div class="card-pair">
+
+        <!-- LEFT: correct vs. incorrect examples -->
+        <div class="panel graphic sky panel-left">
+          <div class="clipping sig-card">
+            <div class="tg-label">Matching result to uncertainty</div>
+            <div class="sig-col">
+              <div class="sig-head sig-good">✓ Correct</div>
+              <p class="eq">$g = 9.82 \pm 0.02 \ \text{m/s}^2$</p>
+              <p class="eq">$T = 10.0 \pm 1.5 \ \text{s}$</p>
+              <p class="eq">$N = 4 \pm 1$</p>
+            </div>
+            <div class="sig-col">
+              <div class="sig-head sig-bad">✗ Incorrect</div>
+              <p class="eq">$g = 9.82 \pm 0.02385 \ \text{m/s}^2$</p>
+              <p class="eq">$T = 10.0 \pm 2 \ \text{s}$</p>
+              <p class="eq">$N = 4 \pm 0.5$</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: text -->
+        <div class="panel navy panel-right">
+          <div class="accent-bar"></div>
+          <p class="section-tag">Reporting Results</p>
+          <h2>Round to<br>what you know</h2>
+          <p>The last significant figure of a result should sit in the same
+             decimal place as its uncertainty. Round the uncertainty to one or
+             two significant figures first, then match the result to it.</p>
+          <p>Leading zeros are never significant; trailing zeros after a decimal
+             point always are. Write $4 \times 10^2$ (or $400.$) when trailing
+             zeros are ambiguous.</p>
+          <p>Adding or subtracting: keep the largest last significant place
+             ($89.332 + 1.1 \to 90.4$). Multiplying or dividing: keep the fewest
+             significant figures ($2.80 \times 4.5039 \to 12.6$).</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       STOP 12 — Summary of Equations (quick reference)
   ═══════════════════════════════════════════════════════════════ -->
   <div class="stop" id="sec-summary">
     <div class="sticky-frame">
       <div class="card-pair">
 
-        <!-- LEFT: Graphical summary card showing all formulas in a grid -->
-        <div class="panel graphic sky panel-left">
-          <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg"
-               aria-label="Quick reference card for all error analysis formulas">
-
-            <!-- Title -->
-            <text x="200" y="28" font-size="16" fill="#001E5F" font-weight="700" text-anchor="middle">
-              Equation Reference
-            </text>
-
-            <!-- Divider -->
-            <line x1="40" y1="38" x2="360" y2="38" stroke="#001E5F" stroke-width="1"/>
-
-            <!-- Row 1: Mean -->
-            <text x="40" y="65" font-size="11" fill="#001E5F" font-weight="700">Sample Mean:</text>
-            <rect x="40" y="72" width="320" height="22" fill="#B7D3FF" opacity="0.3" rx="3"/>
-            <text x="200" y="88" font-size="10" fill="#001E5F" text-anchor="middle" font-family="monospace">
-              x̄ = (1/N) Σ xᵢ
-            </text>
-
-            <!-- Row 2: Standard Deviation -->
-            <text x="40" y="115" font-size="11" fill="#001E5F" font-weight="700">Standard Deviation:</text>
-            <rect x="40" y="122" width="320" height="22" fill="#B7D3FF" opacity="0.3" rx="3"/>
-            <text x="200" y="138" font-size="10" fill="#001E5F" text-anchor="middle" font-family="monospace">
-              σ = √[ (1/N) Σ(xᵢ - x̄)² ]
-            </text>
-
-            <!-- Row 3: Standard Error of the Mean -->
-            <text x="40" y="165" font-size="11" fill="#001E5F" font-weight="700">Standard Error (SEM):</text>
-            <rect x="40" y="172" width="320" height="22" fill="#B7D3FF" opacity="0.3" rx="3"/>
-            <text x="200" y="188" font-size="10" fill="#001E5F" text-anchor="middle" font-family="monospace">
-              σ_x̄ = σ / √N
-            </text>
-
-            <!-- Row 4: Poisson -->
-            <text x="40" y="215" font-size="11" fill="#001E5F" font-weight="700">Poisson Statistics:</text>
-            <rect x="40" y="222" width="320" height="22" fill="#B7D3FF" opacity="0.3" rx="3"/>
-            <text x="200" y="238" font-size="10" fill="#001E5F" text-anchor="middle" font-family="monospace">
-              σ = √N  (for counting)
-            </text>
-
-            <!-- Row 5: Error Propagation -->
-            <text x="40" y="265" font-size="11" fill="#001E5F" font-weight="700">Error Propagation:</text>
-            <rect x="40" y="272" width="320" height="22" fill="#B7D3FF" opacity="0.3" rx="3"/>
-            <text x="200" y="288" font-size="10" fill="#001E5F" text-anchor="middle" font-family="monospace">
-              σ_f ≈ |df/dx| σ_x
-            </text>
-
-            <!-- Footer -->
-            <text x="200" y="315" font-size="9" fill="#707070" text-anchor="middle" font-style="italic">
-              Keep these formulas close when designing experiments
-            </text>
-
-          </svg>
-        </div>
-
-        <!-- RIGHT: text wrap-up -->
-        <div class="panel navy panel-right">
+        <!-- LEFT: text wrap-up -->
+        <div class="panel navy panel-left">
           <div class="accent-bar"></div>
           <p class="section-tag">Summary</p>
           <h2>You now have<br>the tools</h2>
           <p>This is your toolkit for understanding and quantifying measurement uncertainty.</p>
           <p><strong>Always ask:</strong> How big is my error? Does my measurement answer the question? Do my results agree with others?</p>
           <p>Error analysis turns raw data into reliable conclusions. When you report a result, report its uncertainty too. That's how science works.</p>
-          <p style="margin-top: 28px; font-size: 0.95rem; opacity: 0.7;">
-            <em>Ready to measure?</em>
-          </p>
         </div>
+
+        <!-- RIGHT: equation reference card (MathJax) -->
+        <div class="panel graphic sky panel-right">
+          <div class="clipping eq-card">
+            <div class="tg-label">Equation Reference</div>
+            <div class="eq-row">
+              <span class="eq-label">Sample mean</span>
+              <span class="eq-formula">$\bar{x} = \frac{1}{N}\sum_{i=1}^{N} x_i$</span>
+            </div>
+            <div class="eq-row">
+              <span class="eq-label">Standard deviation</span>
+              <span class="eq-formula">$s = \sqrt{\frac{1}{N-1}\sum_{i=1}^{N}(x_i-\bar{x})^2}$</span>
+            </div>
+            <div class="eq-row">
+              <span class="eq-label">Standard error (SEM)</span>
+              <span class="eq-formula">$\sigma_{\bar{x}} = s/\sqrt{N}$</span>
+            </div>
+            <div class="eq-row">
+              <span class="eq-label">Poisson counting</span>
+              <span class="eq-formula">$\Delta n = \sqrt{n}$</span>
+            </div>
+            <div class="eq-row">
+              <span class="eq-label">Propagation (one variable)</span>
+              <span class="eq-formula">$\sigma_f \approx \left|\frac{df}{dx}\right|\sigma_x$</span>
+            </div>
+            <div class="eq-row eq-row-stack">
+              <span class="eq-label">Propagation (independent)</span>
+              <span class="eq-formula">$\Delta Z = \sqrt{\left(\frac{\partial Z}{\partial A}\Delta A\right)^2 + \left(\frac{\partial Z}{\partial B}\Delta B\right)^2}$</span>
+            </div>
+            <p class="src-note">
+              Full derivations and worked examples:
+              <a href="{{ '/assets/docs/SEtutorial.pdf' | relative_url }}" target="_blank" rel="noopener">Statistics &amp; Error Propagation Tutorial (PDF)</a>
+            </p>
+          </div>
+        </div>
+
 
       </div>
     </div>
   </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       OUTRO — mirrors the hero
+  ═══════════════════════════════════════════════════════════════ -->
+  <section class="hero outro" id="outro">
+    <p class="eyebrow">Error Analysis &amp; Statistics</p>
+    <h1>Ready to<br><span>measure?</span></h1>
+    <p>Take the full tutorial with you — every formula, rule,
+       and worked example from this page in one printable document.</p>
+    <div class="outro-actions">
+      <a class="btn-primary" href="{{ '/assets/docs/SEtutorial.pdf' | relative_url }}" download>Download the tutorial (PDF)</a>
+      <a class="btn-secondary" href="index.html">← Back to Physics Labs</a>
+    </div>
+  </section>
 
 
   <!-- ══════════════════════════════════════════════════════════════
@@ -1077,11 +1096,9 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
   ═══════════════════════════════════════════════════════════════ -->
   <script>
     const progressBar = document.getElementById('progress');
-    const stage = document.querySelector('.stage');
     const stops = Array.from(document.querySelectorAll('.stop'));
 
-    // ── Progress bar + scroll hint fade + background color ──────
-    let hasScrolled = false;
+    // ── Progress bar ────────────────────────────────────────────
     window.addEventListener('scroll', onScroll, { passive: true });
 
     function onScroll() {
@@ -1089,32 +1106,6 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
       const maxScroll = document.body.scrollHeight - window.innerHeight;
       progressBar.style.width = (scrolled / maxScroll * 100) + '%';
       updateCards(scrolled);
-
-      // Hide scroll hint after any scroll
-      if (!hasScrolled && scrolled > 10) {
-        hasScrolled = true;
-        document.body.classList.add('has-scrolled');
-      }
-
-      // Change stage background based on active stop
-      updateStageBackground(scrolled);
-    }
-
-    function updateStageBackground(scrollY) {
-      // Determine which stop is currently in view
-      let activeClass = 'bg-sec-why';  // default to first section
-
-      stops.forEach(stop => {
-        // If we've scrolled past this stop's top, mark it as the active one
-        if (scrollY >= stop.offsetTop) {
-          activeClass = 'bg-' + stop.id;
-        }
-      });
-
-      // Update stage classes
-      if (stage) {
-        stage.className = 'stage ' + activeClass;
-      }
     }
 
     // ── Activate stops (slide cards in) ───────────────────────
@@ -1168,26 +1159,9 @@ title: "Error Analysis & Statistics — Physics Labs, University of Rochester"
     // Run once on load to set initial state
     updateCards(window.scrollY);
 
-    // ── Ruler jiggle animation trigger ──────────────────────────
-    // Once measurement scene becomes active, start the jiggle
-    const rulerImg = document.getElementById('ruler-img');
-    const measStop = document.getElementById('sec-meas');
-    if (rulerImg && measStop) {
-      const rulerObserver = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            rulerImg.classList.add('jiggle');
-          } else {
-            rulerImg.classList.remove('jiggle');
-          }
-        });
-      }, { threshold: 0.3 });
-      rulerObserver.observe(measStop);
-    }
-
     // ── Dot nav highlighting ───────────────────────────────────
     const dots = document.querySelectorAll('.section-dots a');
-    const dotIds = ['hero', 'sec-why', 'sec-temp', 'sec-grav', 'sec-meas', 'sec-acc', 'sec-dist', 'sec-std', 'sec-poisson', 'sec-sem', 'sec-prop', 'sec-summary'];
+    const dotIds = ['hero', 'sec-why', 'sec-temp', 'sec-grav', 'sec-meas', 'sec-acc', 'sec-dist', 'sec-std', 'sec-poisson', 'sec-sem', 'sec-prop', 'sec-sigfig', 'sec-summary', 'outro'];
     const dotObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {

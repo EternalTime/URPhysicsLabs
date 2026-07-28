@@ -1,0 +1,34 @@
+calendar:
+  semester: "Fall"
+  pdf: ""
+  start: "2026-08-31"
+  end:   "2026-12-23"
+  holidays:
+    - name: "Labor Day"
+      start: "2026-09-07"
+    - name: "Autumn Break"
+      start: "2026-10-12"
+      end:   "2026-10-13"
+    - name: "Thanksgiving Break"
+      start: "2026-11-25"
+      end:   "2026-11-27"
+    
+    - name: "Reading Period"
+      start: "2026-12-15"
+      end:   "2026-12-17"
+  ab_cycles:
+    - 1A: "2026-09-13"
+    - 1B: 
+    - 2A: 
+    - 2B: 
+    - 3A: 
+    - 3B: 
+    - 4A: 
+    - 4B: 
+    - 5A: 
+    - 5B: 
+  finals:
+    - name: "Finals Week"
+      start: "2026-12-18"
+      end:   "2026-12-23"
+
