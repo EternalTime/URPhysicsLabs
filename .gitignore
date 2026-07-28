@@ -1,15 +1,26 @@
+# Jekyll build output and caches
 _site
 .sass-cache
 .jekyll-cache
 .jekyll-metadata
 vendor
+
+# LaTeX lab sources and their build noise live untracked in localOnly/.
+# This repo publishes only the compiled PDFs under assets/docs/.
 localOnly/
 *.aux
 *.log
 *.out
+
 .DS_Store
+
+# Personal or unrelated files that sit in this directory but must never reach
+# the public site. Also listed in _config.yml's exclude.
 CLAUDE.md
 TASKS.md
 dashboard.html
 test_*.pdf
+
+# Lab videos are far past GitHub's 100 MiB file limit, so they are never staged.
+# Link externally hosted media instead (see _data/labs.yml).
 assets/videos/*.mp4

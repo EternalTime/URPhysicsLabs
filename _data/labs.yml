@@ -2,7 +2,10 @@
 # prelab/manual/postlab: student-facing PDFs (leave blank if unused)
 # full: complete writeup PDF, linked only on the TA/TI page
 # setup: TA/TI lab-setup page (leave blank if unused)
-# videos: optional list of { title, url }; url must be the host's embed URL (or a local .mp4/.webm path). Omit if none.
+# videos: optional list of { title, url }. A url containing .mp4/.webm renders in a native
+#   player, anything else renders in an iframe and must be the host's embed URL. Video files
+#   are not tracked here (see .gitignore), so point .mp4/.webm at externally hosted media.
+#   Omit if none.
 # links: optional list of { title, url } for external resource pages. Omit if none.
 
 - id: lab01

@@ -26,6 +26,8 @@ collections:
 plugins:
   - jekyll-feed
 
+# Jekyll copies any file it finds on disk into _site, whether or not git tracks it,
+# so everything gitignored that must not be published has to be repeated here.
 exclude:
   - Gemfile
   - Gemfile.lock
