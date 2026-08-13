@@ -417,6 +417,19 @@ ul.content-list li { margin-bottom: 0.35em; }
 .cal-cell.mb-left   { border-left:   3px solid var(--ur-navy); }
 .cal-cell.mb-right  { border-right:  3px solid var(--ur-navy); }
 
+.cal-cell.today {
+  position: relative;
+}
+
+.cal-cell.today::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border: 3px solid var(--ur-navy);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
 .cal-cell.holiday {
   background: var(--ur-butter);
   color: var(--ur-navy);

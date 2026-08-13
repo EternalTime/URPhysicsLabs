@@ -198,6 +198,8 @@
       else if (finalsName)   classes.push('finals');
       else if (isWeekend)    classes.push('weekend');
 
+      if (dateKey(day) === dateKey(new Date())) classes.push('today');
+
       if (holidayName) cell.title = holidayName;
       if (finalsName)  cell.title = finalsName;
 
