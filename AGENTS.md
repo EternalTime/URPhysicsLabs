@@ -6,9 +6,12 @@ This file is the project's committed home for project-intrinsic agent knowledge:
 
 ## Lab PDFs
 
-`assets/docs/LabNN*.pdf` are build outputs. Their LaTeX sources live outside this repo, in the maintainer's local, untracked tree at `ur-physics-labs/localOnly/UofR_Lab_Documentation/Lab NN: <Title>/` (`writeup.pdf` is the combined `LabNN.pdf`). That tree stays local and read-only to agents; publish by copying built PDFs in, not by recompiling (it was built with TeX Live 2025).
+`assets/docs/LabNN*.pdf` are build outputs.
+Their LaTeX sources live outside version control, in the untracked `localOnly/` tree at the repo root, under `localOnly/UofR_Lab_Documentation/Lab NN: <Title>/` (`writeup.pdf` is the combined `LabNN.pdf`).
+That tree stays local and read-only to agents; publish by copying built PDFs in, not by recompiling (it was built with TeX Live 2025).
 
-Each lab publishes four PDFs — combined (`LabNN.pdf`, linked only from the TA/TI page via `_data/labs.yml`) plus `-manual`, `-prelab`, `-postlab`. Publish all four from the same build so their PDF `CreationDate` values agree.
+Each lab publishes four PDFs - combined (`LabNN.pdf`, linked only from the TA/TI page via `_data/labs.yml`) plus `-manual`, `-prelab`, `-postlab`.
+Publish all four from the same build so their PDF `CreationDate` values agree.
 
 ## Maintaining this file
 
