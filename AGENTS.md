@@ -8,7 +8,8 @@ This file is the project's committed home for project-intrinsic agent knowledge:
 
 `assets/docs/LabNN*.pdf` are build outputs.
 Their LaTeX sources live outside version control, in the untracked `localOnly/` tree at the repo root, under `localOnly/UofR_Lab_Documentation/Lab NN: <Title>/` (`writeup.pdf` is the combined `LabNN.pdf`).
-That tree stays local and read-only to agents; publish by copying built PDFs in, not by recompiling (it was built with TeX Live 2025).
+That tree stays local and read-only to agents; publish by copying its already-built PDFs into `assets/docs/`, not by recompiling.
+The published PDFs were produced with TeX Live 2025, so rebuilding on a machine with a different TeX version churns every artifact for no benefit.
 
 Each lab publishes four PDFs - combined (`LabNN.pdf`, linked only from the TA/TI page via `_data/labs.yml`) plus `-manual`, `-prelab`, `-postlab`.
 Publish all four from the same build so their PDF `CreationDate` values agree.
